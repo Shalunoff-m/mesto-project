@@ -146,6 +146,9 @@
   align-items: baseline;
   transition: background-size 1s;
 }
+.elements__item:hover .elements__image {
+  background-size: 200%;
+}
 .elements__image {
   width: 100%;
   object-fit: cover;
