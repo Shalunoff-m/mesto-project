@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Проект "Место РОССИЯ"</title>
+    <link rel="stylesheet" href="pages/index.css" />
+  </head>
+  <body class="main show">
+    <div class="page show">
+      <header class="page__header header">
+        <img src="images/logo_white.svg" class="header__logo" alt="Логотип" />
+      </header>
 
-</body>
+      <main class="page__content content show">
+        <section
+          class="page__profile profile"
+          aria-label="Профиль пользователя"
+        >
+          <img
+            src="images/Kusto.jpg"
+            class="profile__photo"
+            alt="Фото Профиля"
+          />
+          <div class="profile__profile-info">
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <a href="#" class="profile__edit-button"></a>
+            <p class="profile__job">Исследователь</p>
+          </div>
+          <a href="#" class="profile__add-button"></a>
+        </section>
+
+        <section class="page__elements elements" aria-label="Галерея элементов">
+          <ul class="elements__list">
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_carachaevo.jpg"
+                alt="Карачаево-Черкессии"
+              />
+              <p class="elements__caption">Карачаевск</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_elbrus.jpg"
+                alt="Гора Эльбрус"
+              />
+              <p class="elements__caption">Гора Эльбрус</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_donbai.jpg"
+                alt="Домбай"
+              />
+              <p class="elements__caption">Домбай</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_carachaevo.jpg"
+                alt="Карачаево-Черкессии"
+              />
+              <p class="elements__caption">Карачаевск</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_elbrus.jpg"
+                alt="Гора Эльбрус"
+              />
+              <p class="elements__caption">Гора Эльбрус</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="images/Cards/card_donbai.jpg"
+                alt="Домбай"
+              />
+              <p class="elements__caption">Домбай</p>
+              <a href="#" class="elements__like-button"></a>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+      </footer>
+    </div>
+  </body>
 </html>

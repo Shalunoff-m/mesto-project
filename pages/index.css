@@ -1,0 +1,202 @@
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts.css");
+@import url("../vendor/Glyphter.css");
+.main {
+  background-color: black;
+  font-family: "Inter", Verdana, sans-serif;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+.icon-logo_white:before {
+  font-size: 200px;
+  color: white;
+  line-height: 0.25;
+}
+
+.page {
+  max-width: 880px;
+  padding: 45px 19px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.page__header {
+  margin-bottom: 40px;
+}
+.page__profile {
+  margin-bottom: 50px;
+}
+.page__elements {
+  margin-bottom: 66px;
+}
+
+.header {
+  flex-grow: 1;
+  border-bottom: 1px solid rgb(84, 84, 84);
+}
+.header__logo {
+  margin: 0;
+  padding: 0;
+  width: 142px;
+  margin-bottom: 41px;
+}
+
+.content {
+  font-family: "Inter", Verdana, sans-serif;
+  color: white;
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+}
+
+.profile {
+  flex-basis: 100%;
+  display: grid;
+  grid-template-columns: 120px 1fr 150px;
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 30px;
+}
+.profile__photo {
+  max-width: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile__profile-info {
+  max-width: 336px;
+  justify-content: space-between;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.profile__name {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+}
+.profile__edit-button {
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url(../images/Edit_normal.svg);
+  background-position: center center;
+  background-color: transparent;
+  border: 0;
+  transition: opacity 0.5s;
+}
+.profile__edit-button:hover {
+  opacity: 60%;
+}
+.profile__job {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  background-image: url(../images/Add_normal.svg);
+  background-position: center center;
+  background-color: transparent;
+  background-size: contain;
+  border: 0;
+  transition: opacity 0.5s;
+}
+.profile__add-button:hover {
+  opacity: 60%;
+}
+
+.elements {
+  flex-basis: 100%;
+}
+.elements__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  column-gap: 17px;
+  row-gap: 20px;
+}
+.elements__item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: baseline;
+  transition: background-size 1s;
+}
+.elements__image {
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.elements__caption {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Verdana, sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  flex-basis: 200px;
+  flex-shrink: 10;
+  padding: 21px 0;
+  margin-left: 25px;
+}
+.elements__like-button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+  width: 22px;
+  height: 19px;
+  background-image: url(../images/Like_state_normal.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  grid-area: like;
+  transition: background-image 0.5s;
+}
+.elements__like-button:hover {
+  background-image: url(../images/Like_state_hover.svg);
+}
+.elements__like-button:active {
+  background-image: url(../images/Like_state_active.svg);
+}
+
+.footer {
+  margin-right: auto;
+  margin-left: 0;
+}
+.footer__copyright {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Verdana, sans-serif;
+  color: rgb(84, 84, 84);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+/*# sourceMappingURL=index.css.map */
