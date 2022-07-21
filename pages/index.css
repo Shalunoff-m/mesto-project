@@ -1,6 +1,6 @@
 @import url("../vendor/normalize.css");
 @import url("../vendor/fonts.css");
-@import url("../vendor/Glyphter.css");
+
 .main {
   background-color: black;
   font-family: "Inter", Verdana, sans-serif;
@@ -11,12 +11,6 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-}
-
-.icon-logo_white:before {
-  font-size: 200px;
-  color: white;
-  line-height: 0.25;
 }
 
 .page {

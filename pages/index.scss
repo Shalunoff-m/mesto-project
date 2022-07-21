@@ -1,6 +1,6 @@
 $color1: black;
 $color2: white;
-// Претиущественно для ховер-состояний
+// Преимущественно для ховер-состояний
 $color3: rgba(84, 84, 84, 0.7);
 // Фон для всплывашки
 $color4: rgba(0, 0, 0, 0.5);
@@ -116,6 +116,7 @@ $color5: gray;
 
   &__name {
     @include margin-0();
+    @include font-base();
     font-style: normal;
     font-weight: 500;
     font-size: 42px;
