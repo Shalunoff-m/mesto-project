@@ -7,13 +7,13 @@
     <title>Проект "Место РОССИЯ"</title>
     <link rel="stylesheet" href="pages/index.css" />
   </head>
-  <body class="main show">
-    <div class="page show">
+  <body class="main">
+    <div class="page">
       <header class="page__header header">
         <img src="images/logo_white.svg" class="header__logo" alt="Логотип" />
       </header>
 
-      <main class="page__content content show">
+      <main class="page__content content">
         <section
           class="page__profile profile"
           aria-label="Профиль пользователя"
@@ -24,9 +24,11 @@
             alt="Фото Профиля"
           />
           <div class="profile__profile-info">
-            <p class="profile__name">Жак-Ив Кусто</p>
-            <a href="#" class="profile__edit-button"></a>
-            <p class="profile__job">Исследователь</p>
+            <p class="profile__name">
+              Жак-Ив Кусто <a href="#" class="profile__edit-button"></a>
+            </p>
+
+            <p class="profile__job">Исследователь океана</p>
           </div>
           <a href="#" class="profile__add-button"></a>
         </section>
@@ -91,9 +93,36 @@
         </section>
       </main>
 
-      <footer class="footer">
+      <footer class="footer page__footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
+    </div>
+    <div class="popup">
+    <!-- <div class="popup popup_show"> -->
+      <!-- Можно дописать класс popup_show чтобы модальное окно показало себя -->
+      <div class="popup__window">
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <form class="popup__form" action="#">
+          <fieldset class="popup__user-info user-info">
+            <input
+              type="text"
+              class="user-info__input"
+              name="name"
+              value="Жак-Ив Кусто"
+              placeholder="Введите Имя и Фамилию"
+            />
+            <input
+              type="text"
+              class="user-info__input"
+              name="job"
+              value="Исследователь океана"
+              placeholder="Введите род деятельности"
+            />
+          </fieldset>
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+        <a href="#" class="popup__close"></a>
+      </div>
     </div>
   </body>
 </html>
