@@ -1,0 +1,21 @@
+.elements__caption {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Verdana, sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  flex-basis: 200px;
+  flex-shrink: 10;
+  padding: 26px 0;
+  margin-left: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media screen and (max-width: 480px) {
+  .elements__caption {
+    padding: 25px 0;
+  }
+}

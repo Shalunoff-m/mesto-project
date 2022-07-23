@@ -1,0 +1,18 @@
+.profile__profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 700px) {
+  .profile__profile-info {
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 480px) {
+  .profile__profile-info {
+    justify-content: center;
+    align-items: center;
+  }
+}

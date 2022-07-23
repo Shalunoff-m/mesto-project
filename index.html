@@ -23,12 +23,12 @@
             alt="Фото Профиля"
           />
           <div class="profile__profile-info">
-            <p class="profile__name">
-              Жак-Ив Кусто <a href="#" class="profile__edit-button"></a>
-            </p>
+            <h1 class="profile__name">
+              Жак-Ив Кусто <button class="profile__edit-button"></button>
+            </h1>
             <p class="profile__job">Исследователь океана</p>
           </div>
-          <a href="#" class="profile__add-button"></a>
+          <button class="profile__add-button"></button>
         </section>
         <section class="page__elements elements" aria-label="Галерея элементов">
           <ul class="elements__list">
@@ -39,7 +39,7 @@
                 alt="Карачаево-Черкессии"
               />
               <p class="elements__caption">Карачаевск</p>
-              <a href="#" class="elements__like-button"></a>
+              <button class="elements__like-button"></button>
             </li>
             <li class="elements__item">
               <img
@@ -48,7 +48,7 @@
                 alt="Гора Эльбрус"
               />
               <p class="elements__caption">Гора Эльбрус</p>
-              <a href="#" class="elements__like-button"></a>
+              <button class="elements__like-button"></button>
             </li>
             <li class="elements__item">
               <img
@@ -57,34 +57,34 @@
                 alt="Домбай"
               />
               <p class="elements__caption">Домбай</p>
-              <a href="#" class="elements__like-button"></a>
+              <button class="elements__like-button"></button>
             </li>
             <li class="elements__item">
               <img
                 class="elements__image"
-                src="images/Cards/card_carachaevo.jpg"
-                alt="Карачаево-Черкессии"
+                src="images/Cards/card_baikal.jpg"
+                alt="Байкал"
               />
-              <p class="elements__caption">Карачаевск</p>
-              <a href="#" class="elements__like-button"></a>
+              <p class="elements__caption">Байкал</p>
+              <button class="elements__like-button"></button>
             </li>
             <li class="elements__item">
               <img
                 class="elements__image"
-                src="images/Cards/card_elbrus.jpg"
-                alt="Гора Эльбрус"
+                src="images/Cards/card_Sary-kum.jpg"
+                alt="Сарыкум"
               />
-              <p class="elements__caption">Гора Эльбрус</p>
-              <a href="#" class="elements__like-button"></a>
+              <p class="elements__caption">Сарыкум</p>
+              <button class="elements__like-button"></button>
             </li>
             <li class="elements__item">
               <img
                 class="elements__image"
-                src="images/Cards/card_donbai.jpg"
-                alt="Домбай"
+                src="images/Cards/card_Sochi.jpg"
+                alt="Сочи"
               />
-              <p class="elements__caption">Домбай</p>
-              <a href="#" class="elements__like-button"></a>
+              <p class="elements__caption">Сочи</p>
+              <button class="elements__like-button"></button>
             </li>
           </ul>
         </section>
@@ -94,9 +94,9 @@
       </footer>
     </div>
     <div class="popup">
-      <!-- <div class="popup popup_show"> -->
-      <!-- Можно дописать класс popup_show чтобы модальное окно показало себя -->
-      <div class="popup__window">
+      <!-- <div class="popup popup_opened"> -->
+      <!-- Можно дописать класс popup_opened чтобы модальное окно показало себя -->
+      <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
         <form class="popup__form" action="#">
           <fieldset class="popup__user-info user-info">
@@ -117,7 +117,7 @@
           </fieldset>
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
-        <a href="#" class="popup__close"></a>
+        <button class="popup__close"></button>
       </div>
     </div>
   </body>

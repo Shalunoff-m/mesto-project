@@ -1,0 +1,7 @@
+.content {
+  font-family: "Inter", Verdana, sans-serif;
+  color: white;
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+}

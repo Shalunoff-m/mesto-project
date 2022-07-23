@@ -1,0 +1,14 @@
+.elements__item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: baseline;
+}

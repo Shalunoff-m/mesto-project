@@ -39,19 +39,19 @@ $mediaMobil: 480px;
   flex-wrap: wrap;
   justify-content: center;
   transition: padding 1s;
-  @media screen and (max-width: $mediaMobil){
+  @media screen and (max-width: $mediaMobil) {
     padding: 28px 0 36px;
   }
   // .page__header
   &__header {
     margin-bottom: 40px;
-    @media screen and (max-width: $mediaMobil){
+    @media screen and (max-width: $mediaMobil) {
       margin-bottom: 42px;
     }
   }
   // .page__profile
   &__content {
-    @media screen and (max-width: $mediaMobil){
+    @media screen and (max-width: $mediaMobil) {
       padding: 0 19px;
     }
   }
@@ -64,18 +64,17 @@ $mediaMobil: 480px;
   // .page__elements
   &__elements {
     margin-bottom: 66px;
-    @media screen and (max-width: $mediaMobil){
+    @media screen and (max-width: $mediaMobil) {
       margin-bottom: 49px;
     }
   }
   &__footer {
-    margin: 0 19px;
-    // margin-left: 19px;
-    // margin-right: 19px;
-    @media screen and (max-width: $mediaMobil){
+    margin-right: auto;
+    margin-left: 0;
+    @media screen and (max-width: $mediaMobil) {
       padding: 0 19px;
     }
-    }
+  }
 }
 .header {
   flex-grow: 1;
@@ -174,7 +173,8 @@ $mediaMobil: 480px;
     background-color: transparent;
     background-size: cover;
     border: 0;
-    transition: opacity 0.5s, width 1s, height 1s;
+    cursor: pointer;
+    transition: opacity 0.5s, width 1s, height 1s, scale 0.85s;
     @media screen and (max-width: $mediaMobil) {
       position: absolute;
       right: -28px;
@@ -185,6 +185,9 @@ $mediaMobil: 480px;
     }
     &:hover {
       opacity: 60%;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
   // .profile__job
@@ -213,13 +216,17 @@ $mediaMobil: 480px;
     background-size: auto;
     border: 2px solid white;
     border-radius: 2px;
-    transition: opacity 0.5s;
+    transition: opacity 0.5s, transform 0.3s;
     justify-self: end;
+    cursor: pointer;
     @media screen and (max-width: $mediaMobil) {
       margin-top: 7px;
     }
     &:hover {
       opacity: 60%;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
 }
@@ -232,7 +239,7 @@ $mediaMobil: 480px;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     column-gap: 17px;
     row-gap: 18px;
-    @media screen and (max-width: $mediaMobil){
+    @media screen and (max-width: $mediaMobil) {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       row-gap: 20px;
     }
@@ -252,7 +259,7 @@ $mediaMobil: 480px;
   }
   &__image {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center center;
   }
   // .element__caption
@@ -266,7 +273,10 @@ $mediaMobil: 480px;
     flex-shrink: 10;
     padding: 26px 0;
     margin-left: 22px;
-    @media screen and (max-width: $mediaMobil){
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    @media screen and (max-width: $mediaMobil) {
       padding: 25px 0;
     }
   }
@@ -276,12 +286,14 @@ $mediaMobil: 480px;
     @include margin-0();
     margin-right: 20px;
     width: 22px;
+    border: none;
     height: 19px;
     background-image: url(../images/Like_state_normal.svg);
     background-repeat: no-repeat;
     background-position: center center;
     grid-area: like;
     transition: background-image 0.5s;
+    cursor: pointer;
     &:hover {
       background-image: url(../images/Like_state_hover.svg);
     }
@@ -291,8 +303,6 @@ $mediaMobil: 480px;
   }
 }
 .footer {
-  margin-right: auto;
-  margin-left: 0;
   // .footer__copyright
   &__copyright {
     @include margin-0();
@@ -320,10 +330,10 @@ $mediaMobil: 480px;
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
-  &_show {
+  &_opened {
     display: flex;
   }
-  &__window {
+  &__container {
     // margin: auto;
     position: relative;
     margin: 19px;
@@ -363,6 +373,9 @@ $mediaMobil: 480px;
   &__close {
     display: block;
     position: absolute;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
     right: -40px;
     top: -40px;
     width: 32px;
@@ -371,7 +384,7 @@ $mediaMobil: 480px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    transition: opacity 0.3s, right 1s, height 1s, width 1s;
+    transition: opacity 0.3s, right 1s, height 1s, width 1s, scale 0.85s;
     @media screen and (max-width: $mediaTablet) {
       width: 20px;
       height: 20px;
@@ -379,6 +392,9 @@ $mediaMobil: 480px;
     }
     &:hover {
       opacity: 60%;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
   &__submit {
@@ -389,7 +405,7 @@ $mediaMobil: 480px;
     color: #fff;
     padding: 14px 14px;
     font-size: 16px;
-    transition: opacity 1s;
+    transition: opacity 1s, scale 0.85s;
     @media screen and (max-width: $mediaMobil) {
       font-size: 14px;
       line-height: 17px;
@@ -397,6 +413,9 @@ $mediaMobil: 480px;
     &:hover {
       cursor: pointer;
       opacity: 80%;
+    }
+    &:active {
+      transform: scale(0.99);
     }
   }
 }
@@ -412,7 +431,11 @@ $mediaMobil: 480px;
     padding-bottom: 13px;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
- transition: font-size 1s;
+    transition: font-size 1s, border 0.3s;
+      &:focus{
+        outline: none;
+        border-bottom: 1px solid black;
+      }
     @media screen and (max-width: $mediaMobil) {
       font-size: 14px;
       line-height: 17px;

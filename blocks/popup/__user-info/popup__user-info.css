@@ -1,0 +1,10 @@
+.popup__user-info {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 47px;
+}
+@media screen and (max-width: 480px) {
+  .popup__user-info {
+    margin-bottom: 44px;
+  }
+}

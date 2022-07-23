@@ -1,0 +1,14 @@
+.page {
+  max-width: 880px;
+  padding: 45px 19px 60px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: padding 1s;
+}
+@media screen and (max-width: 480px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}
