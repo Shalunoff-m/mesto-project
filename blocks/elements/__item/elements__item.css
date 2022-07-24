@@ -10,5 +10,5 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-start;
-  align-items: baseline;
+  align-items: center;
 }
