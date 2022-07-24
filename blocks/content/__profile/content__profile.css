@@ -1,8 +1,8 @@
-.page__profile {
-  margin-bottom: 50px;
+.content__profile {
+  margin-bottom: 51px;
 }
 @media screen and (max-width: 480px) {
-  .page__profile {
+  .content__profile {
     margin-bottom: 36px;
   }
 }
