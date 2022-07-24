@@ -10,10 +10,14 @@
   font-size: 42px;
   line-height: 48px;
   transition: font-size 1s, margin 1s;
+  display: inline-flex;
+  align-items: center;
 }
 @media screen and (max-width: 700px) {
   .profile__name {
     margin-bottom: 14px;
+    position: relative;
+    right: -13px;
   }
 }
 @media screen and (max-width: 480px) {
@@ -22,5 +26,7 @@
     line-height: 33px;
     text-align: center;
     margin-bottom: 7px;
+    position: relative;
+    right: -13px;
   }
 }

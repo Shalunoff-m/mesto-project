@@ -14,7 +14,7 @@
       </header>
       <main class="page__content content">
         <section
-          class="page__profile profile"
+          class="content__profile profile"
           aria-label="Профиль пользователя"
         >
           <img
@@ -24,115 +24,104 @@
           />
           <div class="profile__profile-info">
             <h1 class="profile__name">
-              Жак-Ив Кусто <button class="profile__edit-button"></button>
+              Жак-Ив Кусто
+              <button type="button" class="profile__edit-button"></button>
             </h1>
             <p class="profile__job">Исследователь океана</p>
           </div>
-          <button class="profile__add-button"></button>
+          <button type="button" class="profile__add-button"></button>
         </section>
-        <section class="page__elements elements" aria-label="Галерея элементов">
+        <section class="content__elements elements" aria-label="Галерея элементов">
           <ul class="elements__list">
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_carachaevo/card_carachaevo_397.jpg   397w,
-                    images/Cards/_carachaevo/card_carachaevo_827.jpg   827w,
-                    images/Cards/_carachaevo/card_carachaevo_1128.jpg 1128w
-                  "
-                  src="images/Cards/_carachaevo/card_carachaevo_1128.jpg"
-                  alt="Карачаево"
-                />
-              </picture>
-              <h3 class="elements__caption">Карачаево</h3>
-              <button class="elements__like-button"></button>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_carachaevo/card_carachaevo_397.jpg   397w,
+                  images/Cards/_carachaevo/card_carachaevo_827.jpg   827w,
+                  images/Cards/_carachaevo/card_carachaevo_1128.jpg 1128w
+                "
+                src="images/Cards/_carachaevo/card_carachaevo_1128.jpg"
+                alt="Карачаево"
+              />
+              <h3 class="elements__caption">Карачаевск</h3>
+              <button type="button" class="elements__like-button elements__like-button_active"></button>
             </li>
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_elbrus/card_elbrus_397.jpg   397w,
-                    images/Cards/_elbrus/card_elbrus_827.jpg   827w,
-                    images/Cards/_elbrus/card_elbrus_1128.jpg 1128w
-                  "
-                  src="images/Cards/_elbrus/card_elbrus_1128.jpg"
-                  alt="Эльбрус"
-                />
-              </picture>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_elbrus/card_elbrus_397.jpg   397w,
+                  images/Cards/_elbrus/card_elbrus_827.jpg   827w,
+                  images/Cards/_elbrus/card_elbrus_1128.jpg 1128w
+                "
+                src="images/Cards/_elbrus/card_elbrus_1128.jpg"
+                alt="Эльбрус"
+              />
               <h3 class="elements__caption">Гора Эльбрус</h3>
-              <button class="elements__like-button"></button>
+              <button type="button" class="elements__like-button"></button>
             </li>
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_donbai/card_donbai_397.jpg   397w,
-                    images/Cards/_donbai/card_donbai_827.jpg   827w,
-                    images/Cards/_donbai/card_donbai_1128.jpg 1128w
-                  "
-                  src="images/Cards/_donbai/card_donbai_1128.jpg"
-                  alt="Домбай"
-                />
-              </picture>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_donbai/card_donbai_397.jpg   397w,
+                  images/Cards/_donbai/card_donbai_827.jpg   827w,
+                  images/Cards/_donbai/card_donbai_1128.jpg 1128w
+                "
+                src="images/Cards/_donbai/card_donbai_1128.jpg"
+                alt="Домбай"
+              />
               <h3 class="elements__caption">Домбай</h3>
-              <button class="elements__like-button"></button>
+              <button type="button" class="elements__like-button"></button>
             </li>
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_baikal/card_baikal_397.jpg   397w,
-                    images/Cards/_baikal/card_baikal_827.jpg   827w,
-                    images/Cards/_baikal/card_baikal_1128.jpg 1128w
-                  "
-                  src="images/Cards/_baikal/card_baikal_1128.jpg"
-                  alt="Байкал"
-                />
-              </picture>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_baikal/card_baikal_397.jpg   397w,
+                  images/Cards/_baikal/card_baikal_827.jpg   827w,
+                  images/Cards/_baikal/card_baikal_1128.jpg 1128w
+                "
+                src="images/Cards/_baikal/card_baikal_1128.jpg"
+                alt="Байкал"
+              />
               <h3 class="elements__caption">Байкал</h3>
-              <button class="elements__like-button"></button>
+              <button type="button" class="elements__like-button"></button>
             </li>
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_Sary-kum/card_Sary-kum_397.jpg   397w,
-                    images/Cards/_Sary-kum/card_Sary-kum_827.jpg   827w,
-                    images/Cards/_Sary-kum/card_Sary-kum_1128.jpg 1128w
-                  "
-                  src="images/Cards/_Sary-kum/card_Sary-kum_1128.jpg"
-                  alt="Сарыкум"
-                />
-              </picture>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_Sary-kum/card_Sary-kum_397.jpg   397w,
+                  images/Cards/_Sary-kum/card_Sary-kum_827.jpg   827w,
+                  images/Cards/_Sary-kum/card_Sary-kum_1128.jpg 1128w
+                "
+                src="images/Cards/_Sary-kum/card_Sary-kum_1128.jpg"
+                alt="Сарыкум"
+              />
               <h3 class="elements__caption">Сарыкум</h3>
-              <button class="elements__like-button"></button>
+              <button type="button" class="elements__like-button"></button>
             </li>
             <li class="elements__item">
-              <picture>
-                <img
-                  class="elements__image"
-                  sizes="(max-width: 1380px) 100vw, 1380px"
-                  srcset="
-                    images/Cards/_Sochi/card_Sochi_397.jpg   397w,
-                    images/Cards/_Sochi/card_Sochi_827.jpg   827w,
-                    images/Cards/_Sochi/card_Sochi_1128.jpg 1128w
-                  "
-                  src="images/Cards/_Sochi/card_Sochi_1128.jpg"
-                  alt="Сочи"
-                />
-              </picture>
+              <img
+                class="elements__image"
+                sizes="(max-width: 1380px) 100vw, 1380px"
+                srcset="
+                  images/Cards/_Sochi/card_Sochi_397.jpg   397w,
+                  images/Cards/_Sochi/card_Sochi_827.jpg   827w,
+                  images/Cards/_Sochi/card_Sochi_1128.jpg 1128w
+                "
+                src="images/Cards/_Sochi/card_Sochi_1128.jpg"
+                alt="Сочи"
+              />
               <h3 class="elements__caption">Сочи</h3>
-              <button class="elements__like-button"></button>
+              <button type="button" class="elements__like-button"></button>
             </li>
           </ul>
         </section>
@@ -146,7 +135,7 @@
       <!-- Можно дописать класс popup_opened чтобы модальное окно показало себя -->
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="popup__form" action="#">
+        <form name="user-info" class="popup__form" action="#">
           <fieldset class="popup__user-info user-info">
             <input
               type="text"
@@ -165,7 +154,7 @@
           </fieldset>
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
-        <button class="popup__close"></button>
+        <button type="button" class="popup__close"></button>
       </div>
     </div>
   </body>

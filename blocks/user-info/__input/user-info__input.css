@@ -14,9 +14,3 @@
   outline: none;
   border-bottom: 1px solid black;
 }
-@media screen and (max-width: 480px) {
-  .user-info__input {
-    font-size: 14px;
-    line-height: 17px;
-  }
-}
