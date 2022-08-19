@@ -25,45 +25,100 @@ const initialCards = [
   },
 ];
 
-//Инициализация страницы
+const $popupEditJob = {
+  // текстовые данные
+  jobBlock: {},
+  professionText: "",
+  nameText: "",
+  // Интерактивные элементы
+  editButton: {},
+  // Подтягиваем элементы соответствующего popup
+  popupWindow: {},
+  popupForm: {},
+  popupName: {},
+  popupJob: {},
+  closeButton: {},
+  saveButton: {},
+  init: function () {
+    $popupEditJob.jobBlock = document.querySelector(".profile");
+    $popupEditJob.professionText =
+      $popupEditJob.jobBlock.querySelector(".profile__job");
+    $popupEditJob.nameText =
+      $popupEditJob.jobBlock.querySelector(".profile__name");
+    // Интерактивные элементы
+    $popupEditJob.editButton = $popupEditJob.jobBlock.querySelector(
+      ".profile__edit-button"
+    );
+    // Собираем объекты формы Редактирования профиля
+    $popupEditJob.popupWindow = document.querySelector("#popup-edit-job");
+    $popupEditJob.popupForm =
+      $popupEditJob.popupWindow.querySelector("#popupEditForm");
+    $popupEditJob.popupName =
+      $popupEditJob.popupWindow.querySelector("#popupEditname");
+    $popupEditJob.popupJob =
+      $popupEditJob.popupWindow.querySelector("#popupEditjob");
+    $popupEditJob.closeButton =
+      $popupEditJob.popupWindow.querySelector(".popup__close");
+    $popupEditJob.saveButton =
+      $popupEditJob.popupWindow.querySelector(".popup__submit");
+
+    // Событие открытия окна
+    $popupEditJob.editButton.addEventListener("click", (evt) => {
+      $popupEditJob.closeOpen();
+      $popupEditJob.popupName.value = $popupEditJob.nameText.textContent;
+      $popupEditJob.popupJob.value = $popupEditJob.professionText.textContent;
+    });
+    // Событие закрытия окна
+    $popupEditJob.closeButton.addEventListener("click", (evt) => {
+      $popupEditJob.closeOpen();
+    });
+    // Событие записи результатов
+    $popupEditJob.saveButton.addEventListener("click", (evt) => {
+      // debugger
+      evt.preventDefault();
+      $popupEditJob.professionText.textContent = $popupEditJob.popupJob.value;
+      $popupEditJob.nameText.textContent = $popupEditJob.popupName.value;
+      $popupEditJob.closeOpen();
+    });
+  },
+  closeOpen: function(){
+    $popupEditJob.popupWindow.classList.toggle("popup_opened");
+  },
+
+};
+
+//Основные вызовы страницы MAINSCRIPT
 initialCards.forEach((element) => {
   cardCreate(element);
 });
+// debugger;
+$popupEditJob.init();
 
-// Инициализация popup для редактирования профессии
-const $jobBlock = document.querySelector(".profile");
-const $profession = $jobBlock.querySelector(".profile__name");
-const $name = $jobBlock.querySelector(".profile__job");
-const $editButton = $jobBlock.querySelector(".profile__edit-button");
+// Создаем объект со всем необходимым для оперирования данными
 
-// Собираем объекты формы
-const $popupEditWindow = document.querySelector("#popup-edit-job");
-const $popupEditForm = document.querySelector("#popupEditForm");
-const $popupClose = $popupEditWindow.querySelector(".popup__close");
-const $popupName = $popupEditWindow.querySelector("#popupEditname");
-const $popupjob = $popupEditWindow.querySelector("#popupEditjob");
-const $popupSave = $popupEditWindow.querySelector(".popup__submit");
+/* // Инициализация popup для редактирования профессии
+$editButton.
 
-$editButton.addEventListener("click", (evt) => {
+  // Собираем объекты формы Редактирования профиля
+
   $popupEditWindow.classList.toggle("popup_opened");
   $popupName.value = $name.textContent;
   $popupjob.value = $profession.textContent;
-});
 
-$popupClose.addEventListener("click", (evt) => {
-  $popupEditWindow.classList.toggle("popup_opened");
-});
+  $popupClose.addEventListener("click", (evt) => {
+    $popupEditWindow.classList.toggle("popup_opened");
+  });
 
-$popupSave.addEventListener("click", (evt) => {
-  // debugger
-  debugger
-  evt.preventDefault();
-  $name.textContent = $popupName.value;
-  $profession.textContent = $popupjob.value;
-  $popupEditWindow.classList.toggle("popup_opened");
-  $popupEditForm.addEventListener('submit', formSubmitHandler);
-  // FIXME Здесь почему-то ошибка в консоли
-});
+  $popupSave.addEventListener("click", (evt) => {
+    // debugger
+    evt.preventDefault();
+    $name.textContent = $popupName.value;
+    $profession.textContent = $popupjob.value;
+    $popupEditWindow.classList.toggle("popup_opened");
+    // $popupEditForm.addEventListener('submit', formSubmitHandler);
+    // FIXME Здесь почему-то ошибка в консоли
+  });
+}); */
 
 function cardCreate(cardItem) {
   const $templateCard = document.querySelector("#card").content;

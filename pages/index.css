@@ -17,6 +17,9 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__job/profile__job.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+
+@import url(../blocks/profile/__row/profile__row.css);
+
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
 @import url(../blocks/elements/__item/elements__item.css);
@@ -32,9 +35,13 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__header/popup__header.css);
-@import url(../blocks/popup/__user-info/popup__user-info.css);
+@import url(../blocks/popup/__basic-data-input/popup__basic-data-input.css);
 @import url(../blocks/popup/__form/popup__form.css);
-@import url(../blocks/user-info/user-info.css);
-@import url(../blocks/user-info/__input/user-info__input.css);
+@import url(../blocks/basic-data-input/basic-data-input.css);
+@import url(../blocks/basic-data-input/__input/basic-data-input__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__close/popup__close.css);
+
+.show * {
+  outline: 1px blue solid;
+}

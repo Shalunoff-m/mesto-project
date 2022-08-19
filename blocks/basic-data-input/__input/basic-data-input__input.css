@@ -1,4 +1,4 @@
-.user-info__input {
+.basic-data-input__input {
   margin: 0;
   padding: 0;
   font-weight: 400;
@@ -10,7 +10,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   transition: font-size 1s, border 0.3s;
 }
-.user-info__input:focus {
+.basic-data-input__input:focus {
   outline: none;
   border-bottom: 1px solid black;
 }

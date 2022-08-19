@@ -13,6 +13,8 @@
         <img src="images/logo_white.svg" class="header__logo" alt="Логотип" />
       </header>
       <main class="page__content content">
+
+
         <section
           class="content__profile profile"
           aria-label="Профиль пользователя"
@@ -32,6 +34,7 @@
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
+
 
         <section
           class="content__elements elements"
@@ -66,11 +69,11 @@
     <div class="popup" id="popup-edit-job">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form id ="popupEditForm" name="user-info" class="popup__form" action="#">
-          <fieldset class="popup__user-info user-info">
+        <form id ="popupEditForm" name="basic-data-input" class="popup__form" action="#">
+          <fieldset class="popup__basic-data-input basic-data-input">
             <input
               type="text"
-              class="user-info__input"
+              class="basic-data-input__input"
               name="name"
               id="popupEditname"
               value="Жак-Ив Кусто"
@@ -78,7 +81,7 @@
             />
             <input
               type="text"
-              class="user-info__input"
+              class="basic-data-input__input"
               name="job"
               id="popupEditjob"
               value="Исследователь океана"
@@ -91,7 +94,36 @@
       </div>
     </div>
 
-    
+    <div class="popup" id="popup-new-place">
+      <div class="popup__container">
+        <h2 class="popup__header">Новое место</h2>
+        <form id ="popupNewPlace" name="basic-data-input" class="popup__form" action="#">
+          <fieldset class="popup__basic-data-input basic-data-input">
+            <input
+              type="text"
+              class="basic-data-input__input"
+              name="popupPlaceName"
+              id="popupPlaceName"
+              value=""
+              placeholder="Название"
+            />
+            <input
+              type="text"
+              class="basic-data-input__input"
+              name="LinkToImage"
+              id="LinkToImage"
+              value=""
+              placeholder="Ссылка на картинку"
+            />
+          </fieldset>
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </div>
+    </div>
+
+
+
 
     <template id="card">
       <li class="elements__item">
