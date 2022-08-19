@@ -23,14 +23,16 @@
             alt="Фото Профиля"
           />
           <div class="profile__profile-info">
-            <h1 class="profile__name">
-              Жак-Ив Кусто
+            <!-- FIXME Проверить по PP -->
+            <div class="profile__row">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button type="button" class="profile__edit-button"></button>
-            </h1>
+            </div>
             <p class="profile__job">Исследователь океана</p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
+
         <section
           class="content__elements elements"
           aria-label="Галерея элементов"
@@ -61,7 +63,7 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup">
+    <div class="popup" id="popup-edit-job">
       <!-- <div class="popup popup_opened"> -->
       <!-- Можно дописать класс popup_opened чтобы модальное окно показало себя -->
       <div class="popup__container">
@@ -72,6 +74,7 @@
               type="text"
               class="user-info__input"
               name="name"
+              id="popupEditname"
               value="Жак-Ив Кусто"
               placeholder="Введите Имя и Фамилию"
             />
@@ -79,6 +82,7 @@
               type="text"
               class="user-info__input"
               name="job"
+              id="popupEditjob"
               value="Исследователь океана"
               placeholder="Введите род деятельности"
             />

@@ -1,7 +1,9 @@
 .popup {
   font-family: "Inter", Verdana, sans-serif;
   color: black;
-  display: none;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -10,4 +12,7 @@
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
+  transition: opacity 0.5s, visibility 0.5s;
+
+  /* FIXME нужно сделать чтобы попап не появлялся при открытии страницы */
 }

@@ -30,9 +30,36 @@ initialCards.forEach((element) => {
   cardCreate(element);
 });
 
+// Инициализация popup для редактирования профессии
+const $jobBlock = document.querySelector(".profile");
+const $profession = $jobBlock.querySelector(".profile__name");
+const $name = $jobBlock.querySelector(".profile__job");
+const $editButton = $jobBlock.querySelector(".profile__edit-button");
 
+const $popupEditForm = document.querySelector("#popup-edit-job");
+const $popupClose = $popupEditForm.querySelector(".popup__close");
+const $popupName = $popupEditForm.querySelector("#popupEditname");
+const $popupjob = $popupEditForm.querySelector("#popupEditjob");
+const $popupSave = $popupEditForm.querySelector(".popup__submit");
 
+$editButton.addEventListener("click", (evt) => {
+  $popupEditForm.classList.toggle("popup_opened");
+  $popupName.value = $name.textContent;
+  $popupjob.value = $profession.textContent;
+});
 
+$popupClose.addEventListener("click", (evt) => {
+  $popupEditForm.classList.toggle("popup_opened");
+});
+
+$popupSave.addEventListener("click", (evt) => {
+  // debugger
+  evt.preventDefault();
+  $name.textContent = $popupName.value;
+  $profession.textContent = $popupjob.value;
+  $popupEditForm.classList.toggle("popup_opened");
+  formElement.addEventListener('submit', formSubmitHandler);
+});
 
 function cardCreate(cardItem) {
   const $templateCard = document.querySelector("#card").content;
@@ -58,7 +85,7 @@ function cardCreate(cardItem) {
   $cardLike.addEventListener("click", (event) => {
     // debugger;
     const $likeClick = event.target;
-    $likeClick.classList.toggle('elements__like-button_active');
+    $likeClick.classList.toggle("elements__like-button_active");
   });
 
   //Добавляем в DOM
