@@ -64,11 +64,9 @@
       </footer>
     </div>
     <div class="popup" id="popup-edit-job">
-      <!-- <div class="popup popup_opened"> -->
-      <!-- Можно дописать класс popup_opened чтобы модальное окно показало себя -->
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form name="user-info" class="popup__form" action="#">
+        <form id ="popupEditForm" name="user-info" class="popup__form" action="#">
           <fieldset class="popup__user-info user-info">
             <input
               type="text"
@@ -92,6 +90,8 @@
         <button type="button" class="popup__close"></button>
       </div>
     </div>
+
+    
 
     <template id="card">
       <li class="elements__item">

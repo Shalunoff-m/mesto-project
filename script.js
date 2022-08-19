@@ -36,29 +36,33 @@ const $profession = $jobBlock.querySelector(".profile__name");
 const $name = $jobBlock.querySelector(".profile__job");
 const $editButton = $jobBlock.querySelector(".profile__edit-button");
 
-const $popupEditForm = document.querySelector("#popup-edit-job");
-const $popupClose = $popupEditForm.querySelector(".popup__close");
-const $popupName = $popupEditForm.querySelector("#popupEditname");
-const $popupjob = $popupEditForm.querySelector("#popupEditjob");
-const $popupSave = $popupEditForm.querySelector(".popup__submit");
+// Собираем объекты формы
+const $popupEditWindow = document.querySelector("#popup-edit-job");
+const $popupEditForm = document.querySelector("#popupEditForm");
+const $popupClose = $popupEditWindow.querySelector(".popup__close");
+const $popupName = $popupEditWindow.querySelector("#popupEditname");
+const $popupjob = $popupEditWindow.querySelector("#popupEditjob");
+const $popupSave = $popupEditWindow.querySelector(".popup__submit");
 
 $editButton.addEventListener("click", (evt) => {
-  $popupEditForm.classList.toggle("popup_opened");
+  $popupEditWindow.classList.toggle("popup_opened");
   $popupName.value = $name.textContent;
   $popupjob.value = $profession.textContent;
 });
 
 $popupClose.addEventListener("click", (evt) => {
-  $popupEditForm.classList.toggle("popup_opened");
+  $popupEditWindow.classList.toggle("popup_opened");
 });
 
 $popupSave.addEventListener("click", (evt) => {
   // debugger
+  debugger
   evt.preventDefault();
   $name.textContent = $popupName.value;
   $profession.textContent = $popupjob.value;
-  $popupEditForm.classList.toggle("popup_opened");
-  formElement.addEventListener('submit', formSubmitHandler);
+  $popupEditWindow.classList.toggle("popup_opened");
+  $popupEditForm.addEventListener('submit', formSubmitHandler);
+  // FIXME Здесь почему-то ошибка в консоли
 });
 
 function cardCreate(cardItem) {
