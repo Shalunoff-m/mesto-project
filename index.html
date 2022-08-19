@@ -31,9 +31,12 @@
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
-        <section class="content__elements elements" aria-label="Галерея элементов">
+        <section
+          class="content__elements elements"
+          aria-label="Галерея элементов"
+        >
           <ul class="elements__list">
-            <li class="elements__item">
+            <!--  <li class="elements__item">
               <img
                 class="elements__image"
                 sizes="(max-width: 1380px) 100vw, 1380px"
@@ -46,83 +49,11 @@
                 alt="Карачаево"
               />
               <h3 class="elements__caption">Карачаевск</h3>
-              <button type="button" class="elements__like-button elements__like-button_active"></button>
-            </li>
-            <li class="elements__item">
-              <img
-                class="elements__image"
-                sizes="(max-width: 1380px) 100vw, 1380px"
-                srcset="
-                  images/Cards/_elbrus/card_elbrus_397.jpg   397w,
-                  images/Cards/_elbrus/card_elbrus_827.jpg   827w,
-                  images/Cards/_elbrus/card_elbrus_1128.jpg 1128w
-                "
-                src="images/Cards/_elbrus/card_elbrus_1128.jpg"
-                alt="Эльбрус"
-              />
-              <h3 class="elements__caption">Гора Эльбрус</h3>
-              <button type="button" class="elements__like-button"></button>
-            </li>
-            <li class="elements__item">
-              <img
-                class="elements__image"
-                sizes="(max-width: 1380px) 100vw, 1380px"
-                srcset="
-                  images/Cards/_donbai/card_donbai_397.jpg   397w,
-                  images/Cards/_donbai/card_donbai_827.jpg   827w,
-                  images/Cards/_donbai/card_donbai_1128.jpg 1128w
-                "
-                src="images/Cards/_donbai/card_donbai_1128.jpg"
-                alt="Домбай"
-              />
-              <h3 class="elements__caption">Домбай</h3>
-              <button type="button" class="elements__like-button"></button>
-            </li>
-            <li class="elements__item">
-              <img
-                class="elements__image"
-                sizes="(max-width: 1380px) 100vw, 1380px"
-                srcset="
-                  images/Cards/_baikal/card_baikal_397.jpg   397w,
-                  images/Cards/_baikal/card_baikal_827.jpg   827w,
-                  images/Cards/_baikal/card_baikal_1128.jpg 1128w
-                "
-                src="images/Cards/_baikal/card_baikal_1128.jpg"
-                alt="Байкал"
-              />
-              <h3 class="elements__caption">Байкал</h3>
-              <button type="button" class="elements__like-button"></button>
-            </li>
-            <li class="elements__item">
-              <img
-                class="elements__image"
-                sizes="(max-width: 1380px) 100vw, 1380px"
-                srcset="
-                  images/Cards/_Sary-kum/card_Sary-kum_397.jpg   397w,
-                  images/Cards/_Sary-kum/card_Sary-kum_827.jpg   827w,
-                  images/Cards/_Sary-kum/card_Sary-kum_1128.jpg 1128w
-                "
-                src="images/Cards/_Sary-kum/card_Sary-kum_1128.jpg"
-                alt="Сарыкум"
-              />
-              <h3 class="elements__caption">Сарыкум</h3>
-              <button type="button" class="elements__like-button"></button>
-            </li>
-            <li class="elements__item">
-              <img
-                class="elements__image"
-                sizes="(max-width: 1380px) 100vw, 1380px"
-                srcset="
-                  images/Cards/_Sochi/card_Sochi_397.jpg   397w,
-                  images/Cards/_Sochi/card_Sochi_827.jpg   827w,
-                  images/Cards/_Sochi/card_Sochi_1128.jpg 1128w
-                "
-                src="images/Cards/_Sochi/card_Sochi_1128.jpg"
-                alt="Сочи"
-              />
-              <h3 class="elements__caption">Сочи</h3>
-              <button type="button" class="elements__like-button"></button>
-            </li>
+              <button
+                type="button"
+                class="elements__like-button elements__like-button_active"
+              ></button>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -157,5 +88,18 @@
         <button type="button" class="popup__close"></button>
       </div>
     </div>
+
+    <template id="card">
+      <li class="elements__item">
+        <div class="elements__image-Container">
+          <img class="elements__image" src="" alt="" />
+        </div>
+        <h3 class="elements__caption"></h3>
+        <button type="button" class="elements__like-button"></button>
+        <button type="button" class="elements__delete-button"></button>
+      </li>
+    </template>
+
+    <script src="script.js"></script>
   </body>
 </html>

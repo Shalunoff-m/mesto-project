@@ -22,7 +22,9 @@
 @import url(../blocks/elements/__item/elements__item.css);
 @import url(../blocks/elements/__caption/elements__caption.css);
 @import url(../blocks/elements/__image/elements__image.css);
+@import url(../blocks/elements/__image-Container/elements__image-Container.css);
 @import url(../blocks/elements/__like-button/elements__like-button.css);
+@import url(../blocks/elements/__delete-button/elements__delete-button.css);
 @import url(../blocks/elements/__like-button/_active/elements__like-button_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

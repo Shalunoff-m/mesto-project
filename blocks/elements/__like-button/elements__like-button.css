@@ -11,11 +11,11 @@
   background-position: center center;
   background-color: transparent;
   grid-area: like;
-  transition: background-image 0.5s, transform 0.1s;
+  transition: opacity 0.5s, transform 0.1s;
   cursor: pointer;
 }
 .elements__like-button:hover {
-  background-image: url(../../../images/Like_state_hover.svg);
+  opacity: 80%;
 }
 .elements__like-button:active {
   transform: scale(0.9);
