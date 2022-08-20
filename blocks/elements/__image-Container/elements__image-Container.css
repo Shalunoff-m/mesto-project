@@ -2,4 +2,10 @@
   position: relative;
   width: 100%;
   padding-bottom: 100%;
+  transition: outline 0.3s;
+}
+
+.elements__image-Container:hover {
+  box-sizing: border-box;
+  outline: 5px solid rgb(209, 209, 209);
 }

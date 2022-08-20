@@ -13,10 +13,13 @@
   background-position: center center;
   /* background-size: cover; */
   background-color: transparent;
-    transition: background-image 0.5s, transform 0.1s;
+    transition: background-image 0.5s, transform 0.1s, opacity 0.3s;
   cursor: pointer;
 }
 
 .elements__delete-button:hover {
+  opacity: 60%;
+}
+.elements__delete-button:active {
   transform: scale(0.9);
 }

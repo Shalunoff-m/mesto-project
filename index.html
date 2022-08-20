@@ -13,8 +13,6 @@
         <img src="images/logo_white.svg" class="header__logo" alt="Логотип" />
       </header>
       <main class="page__content content">
-
-
         <section
           class="content__profile profile"
           aria-label="Профиль пользователя"
@@ -25,7 +23,6 @@
             alt="Фото Профиля"
           />
           <div class="profile__profile-info">
-            <!-- FIXME Проверить по PP -->
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button type="button" class="profile__edit-button"></button>
@@ -35,14 +32,11 @@
           <button type="button" class="profile__add-button"></button>
         </section>
 
-
         <section
           class="content__elements elements"
           aria-label="Галерея элементов"
         >
-          <ul class="elements__list">
-
-          </ul>
+          <ul class="elements__list"></ul>
         </section>
       </main>
       <footer class="footer page__footer">
@@ -52,7 +46,12 @@
     <div class="popup" id="popup-edit-job">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form id ="popupEditForm" name="basic-data-input" class="popup__form" action="#">
+        <form
+          id="popupEditForm"
+          name="basic-data-input"
+          class="popup__form"
+          action="#"
+        >
           <fieldset class="popup__basic-data-input basic-data-input">
             <input
               type="text"
@@ -80,7 +79,12 @@
     <div class="popup" id="popup-new-place">
       <div class="popup__container">
         <h2 class="popup__header">Новое место</h2>
-        <form id ="popupNewPlace" name="basic-data-input" class="popup__form" action="#">
+        <form
+          id="popupNewPlace"
+          name="basic-data-input"
+          class="popup__form"
+          action="#"
+        >
           <fieldset class="popup__basic-data-input basic-data-input">
             <input
               type="text"
@@ -99,7 +103,7 @@
               placeholder="Ссылка на картинку"
             />
           </fieldset>
-          <button type="submit" class="popup__submit">Сохранить</button>
+          <button type="submit" class="popup__submit">Создать</button>
         </form>
         <button type="button" class="popup__close"></button>
       </div>
@@ -107,7 +111,11 @@
 
     <div class="popup" id="view-image">
       <div class="popup__image-container">
-        <img src="https://images.unsplash.com/photo-1656841839959-d7afd55a9cac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" class="popup__image" alt="Какое-то место">
+        <img
+          src="https://images.unsplash.com/photo-1656841839959-d7afd55a9cac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+          class="popup__image"
+          alt="Какое-то место"
+        />
         <p class="popup__imageName">Новое место</p>
         <button type="button" class="popup__close"></button>
       </div>

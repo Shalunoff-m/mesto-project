@@ -5,5 +5,9 @@
   object-fit: cover;
   object-position: center center;
   cursor: pointer;
-  transition: background-color 1s;
+  transition: background-color 1s, transform 0.3s;
+}
+
+.elements__image:active{
+  transform: scale(1.05);
 }
