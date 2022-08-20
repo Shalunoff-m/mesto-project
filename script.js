@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+// Объект для работы с формой Жака Кусто
 const $popupEditJob = {
   // текстовые данные
   jobBlock: {},
@@ -87,39 +88,69 @@ const $popupEditJob = {
 
 };
 
-//Основные вызовы страницы MAINSCRIPT
+// Объект для работы с формой нового места
+const $popupNewPlace = {
+  // Интерактивные элементы
+  addButton: {},
+  // Подтягиваем элементы соответствующего popup
+  popupWindow: {},
+  popupForm: {},
+  popupPlace: {},
+  popupLink: {},
+  closeButton: {},
+  saveButton: {},
+  closeOpen: function(){
+    $popupNewPlace.popupWindow.classList.toggle('popup_opened');
+  },
+
+  init: function () {
+    $popupNewPlace.addButton = document.querySelector('.profile__add-button');
+    $popupNewPlace.popupWindow = document.querySelector('#popup-new-place');
+    $popupNewPlace.popupForm = $popupNewPlace.popupWindow.querySelector('#popupNewPlace');
+    $popupNewPlace.popupPlace = $popupNewPlace.popupWindow.querySelector('#popupPlaceName');
+    $popupNewPlace.popupLink = $popupNewPlace.popupWindow.querySelector('#LinkToImage');
+    $popupNewPlace.closeButton = $popupNewPlace.popupWindow.querySelector('.popup__close');
+    $popupNewPlace.saveButton = $popupNewPlace.popupWindow.querySelector('.popup__submit');
+
+    //Описываем события
+    $popupNewPlace.addButton.addEventListener("click", (evt) => {
+      $popupNewPlace.closeOpen();
+    });
+
+    // Событие закрытия окна
+    $popupNewPlace.closeButton.addEventListener("click", (evt) => {
+      $popupNewPlace.closeOpen();
+    });
+
+    // Событие записи результатов
+    $popupNewPlace.saveButton.addEventListener("click", (evt) => {
+      // debugger
+      evt.preventDefault();
+      const newCard = {};
+      newCard.name = $popupNewPlace.popupPlace.value;
+      newCard.link = $popupNewPlace.popupLink.value;
+      cardCreate(newCard);
+      $popupNewPlace.closeOpen();
+
+    });
+  },
+  closeOpen: function(){
+    $popupNewPlace.popupWindow.classList.toggle("popup_opened");
+  },
+
+};
+
+
+//Основные вызовы скрипты
 initialCards.forEach((element) => {
   cardCreate(element);
 });
 // debugger;
 $popupEditJob.init();
+$popupNewPlace.init();
 
-// Создаем объект со всем необходимым для оперирования данными
 
-/* // Инициализация popup для редактирования профессии
-$editButton.
-
-  // Собираем объекты формы Редактирования профиля
-
-  $popupEditWindow.classList.toggle("popup_opened");
-  $popupName.value = $name.textContent;
-  $popupjob.value = $profession.textContent;
-
-  $popupClose.addEventListener("click", (evt) => {
-    $popupEditWindow.classList.toggle("popup_opened");
-  });
-
-  $popupSave.addEventListener("click", (evt) => {
-    // debugger
-    evt.preventDefault();
-    $name.textContent = $popupName.value;
-    $profession.textContent = $popupjob.value;
-    $popupEditWindow.classList.toggle("popup_opened");
-    // $popupEditForm.addEventListener('submit', formSubmitHandler);
-    // FIXME Здесь почему-то ошибка в консоли
-  });
-}); */
-
+// Функция создания карточки
 function cardCreate(cardItem) {
   const $templateCard = document.querySelector("#card").content;
   const $cardli = $templateCard.cloneNode(true);
@@ -148,5 +179,5 @@ function cardCreate(cardItem) {
   });
 
   //Добавляем в DOM
-  $cardContainer.append($cardli);
+  $cardContainer.prepend($cardli);
 }
