@@ -140,14 +140,53 @@ const $popupNewPlace = {
 
 };
 
+// Объект для работы с изображением
+const $popupImageShow = {
+  img: '',
+  imgName: '',
+  popupWindow: {},
+  popupImage: {},
+  popupTextImage: {},
+  popupCloseButton: {},
 
-//Основные вызовы скрипты
+  init: function(){
+    $popupImageShow.popupWindow = document.querySelector('#view-image');
+    $popupImageShow.popupImage =  $popupImageShow.popupWindow.querySelector('.popup__image');
+    $popupImageShow.popupTextImage =  $popupImageShow.popupWindow.querySelector('.popup__imageName');
+    $popupImageShow.popupCloseButton =  $popupImageShow.popupWindow.querySelector('.popup__close');
+
+    // Событие закрытия
+    $popupImageShow.popupCloseButton.addEventListener('click', evt=>{
+      $popupImageShow.closeOpen();
+    });
+  },
+
+  receiveObject: function(cardClick){
+    $popupImageShow.img = cardClick.querySelector('.elements__image').getAttribute('src');
+    $popupImageShow.imgName = cardClick.querySelector('.elements__caption').textContent;
+    $popupImageShow.popupImage.setAttribute('src',$popupImageShow.img);
+    $popupImageShow.popupImage.setAttribute('alt',$popupImageShow.imgName);
+    $popupImageShow.popupTextImage.textContent = $popupImageShow.imgName;
+    $popupImageShow.closeOpen();
+
+  },
+  closeOpen: function(){
+    $popupImageShow.popupWindow.classList.toggle('popup_opened');
+  }
+
+
+}
+
+/////////////////////////////
+//Основные вызовы
 initialCards.forEach((element) => {
   cardCreate(element);
 });
-// debugger;
+
 $popupEditJob.init();
 $popupNewPlace.init();
+$popupImageShow.init();
+/////////////////////////////
 
 
 // Функция создания карточки
@@ -166,16 +205,22 @@ function cardCreate(cardItem) {
 
   // Событие клика - удаление карты
   $cardDelete.addEventListener("click", (event) => {
-    // debugger;
+
     const $deletecardli = $cardDelete.closest(".elements__item");
     $deletecardli.remove();
   });
 
   // событие клика - установка лайка
   $cardLike.addEventListener("click", (event) => {
-    // debugger;
+
     const $likeClick = event.target;
     $likeClick.classList.toggle("elements__like-button_active");
+  });
+
+  // Открытие просмотра изображения на полный экран
+  $cardImage.addEventListener('click', evt =>{
+    const imageClick = $cardImage.closest('.elements__item')
+    $popupImageShow.receiveObject(imageClick);
   });
 
   //Добавляем в DOM

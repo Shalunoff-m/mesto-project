@@ -45,3 +45,33 @@
 .show * {
   outline: 1px blue solid;
 }
+
+.popup__image-container {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.popup__image {
+  max-width: 75vw;
+  max-height: 75vh;
+
+  object-fit: contain;
+  object-position: center;
+}
+
+.popup__imageName {
+  display: block;
+  /* min-height: 50px; */
+  margin: 0;
+  padding: 10px 0 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+}
