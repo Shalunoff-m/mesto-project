@@ -74,8 +74,7 @@ const $popupEditJob = {
       closePopup($popupEditJob.popupWindow);
     });
     // Событие записи результатов
-    $popupEditJob.saveButton.addEventListener("click", (evt) => {
-      // debugger
+    $popupEditJob.popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       $popupEditJob.professionText.textContent = $popupEditJob.popupJob.value;
       $popupEditJob.nameText.textContent = $popupEditJob.popupName.value;
@@ -120,8 +119,7 @@ const $popupNewPlace = {
     });
 
     // Событие записи результатов
-    $popupNewPlace.saveButton.addEventListener("click", (evt) => {
-      // debugger
+    $popupNewPlace.popupWindow.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const newCard = {};
       newCard.name = $popupNewPlace.popupPlace.value;
@@ -132,10 +130,7 @@ const $popupNewPlace = {
       $popupNewPlace.popupPlace.value = "";
       $popupNewPlace.popupLink.value = "";
     });
-  },
-  closeOpen: function () {
-    $popupNewPlace.popupWindow.classList.toggle("popup_opened");
-  },
+  }
 };
 
 // Объект для работы с изображением
