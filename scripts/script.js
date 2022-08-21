@@ -180,25 +180,28 @@ function closePopup(popupWindow) {
 
 function createCards() {
   $cardContainer.innerHTML = "";
-  initialCards.forEach((element) => {
-    appendCard(element);
-  });
+  for (let i = 0; i < initialCards.length; i++) {
+    appendCard(initialCards[i], i);
+  }
 }
 
-function appendCard(cardItem) {
-  const $cardli = createCard(cardItem);
+function appendCard(cardItem, index) {
+  const $cardli = createCard(cardItem, index);
   $cardContainer.append($cardli);
 }
 
 // Функция создания карточки
-function createCard(cardItem) {
+function createCard(cardItem, index) {
   // Клонируем элементы шаблона
   const $cardli = $templateCard.cloneNode(true);
   const $cardName = $cardli.querySelector(".elements__caption");
   const $cardImage = $cardli.querySelector(".elements__image");
   const $cardLike = $cardli.querySelector(".elements__like-button");
   const $cardDelete = $cardli.querySelector(".elements__delete-button");
+  const $cardNumber = $cardli.querySelector(".elements__item");
+
   // Назначаем параметры
+  $cardNumber.setAttribute("id", index);
   $cardName.textContent = cardItem.name;
   $cardImage.setAttribute("src", cardItem.link);
   $cardImage.setAttribute("alt", cardItem.name);
@@ -206,13 +209,8 @@ function createCard(cardItem) {
   // Событие клика - удаление карты
   $cardDelete.addEventListener("click", () => {
     const $deleteCard = $cardDelete.closest(".elements__item");
-    const deleteCardName =
-      $deleteCard.querySelector(".elements__caption").textContent;
-    const deleteCardUrl = $deleteCard
-      .querySelector(".elements__image")
-      .getAttribute("src");
-    const deleteCardNum = getClickNumber(deleteCardName, deleteCardUrl);
-    initialCards.splice(deleteCardNum, 1);
+    const cardNumber = $deleteCard.getAttribute('id');
+    initialCards.splice(cardNumber, 1);
     createCards();
   });
 
@@ -232,20 +230,6 @@ function createCard(cardItem) {
     $popupImageShow.receiveObject(cardName, cardUrl);
   });
   return $cardli;
-}
-
-function getClickNumber(deleteCardName, deleteCardUrl) {
-  let deleteCardNum = -1;
-
-  for (let i = 0; i < initialCards.length; i++) {
-    if (
-      initialCards[i].name === deleteCardName &&
-      initialCards[i].link === deleteCardUrl
-    ) {
-      deleteCardNum = i;
-    }
-  }
-  return deleteCardNum;
 }
 
 createCards();
