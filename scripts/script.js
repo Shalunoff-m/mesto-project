@@ -194,7 +194,7 @@ function closePopup(popupWindow) {
 
 // Функция создания карточки
 function createCard(cardItem) {
-  // Ищем элементы шаблона
+  // Клонируем элементы шаблона
   const $cardli = $templateCard.cloneNode(true);
   const $cardName = $cardli.querySelector(".elements__caption");
   const $cardImage = $cardli.querySelector(".elements__image");
