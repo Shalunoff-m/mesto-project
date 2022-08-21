@@ -39,7 +39,6 @@ const $popupEditJob = {
   popupForm: {},
   popupName: {},
   popupJob: {},
-  closeButton: {},
   saveButton: {},
 };
 
@@ -52,7 +51,6 @@ const $popupNewPlace = {
   popupForm: {},
   popupPlace: {},
   popupLink: {},
-  closeButton: {},
   saveButton: {},
 };
 
@@ -63,16 +61,10 @@ const $popupImageShow = {
   popupWindow: {},
   popupImage: {},
   popupTextImage: {},
-  closePopupButton: {},
-  receiveObject: function (cardClick) {
-    $popupImageShow.img = cardClick
-      .querySelector(".elements__image")
-      .getAttribute("src");
-    $popupImageShow.imgName =
-      cardClick.querySelector(".elements__caption").textContent;
-    $popupImageShow.popupImage.setAttribute("src", $popupImageShow.img);
-    $popupImageShow.popupImage.setAttribute("alt", $popupImageShow.imgName);
-    $popupImageShow.popupTextImage.textContent = $popupImageShow.imgName;
+  receiveObject: function (cardName,cardUrl) {
+    $popupImageShow.popupImage.setAttribute("src", cardUrl);
+    $popupImageShow.popupImage.setAttribute("alt", cardName);
+    $popupImageShow.popupTextImage.textContent = cardName;
     openPopup($popupImageShow.popupWindow);
   },
 };
@@ -95,8 +87,6 @@ $popupEditJob.popupName =
   $popupEditJob.popupWindow.querySelector("#popupEditname");
 $popupEditJob.popupJob =
   $popupEditJob.popupWindow.querySelector("#popupEditjob");
-$popupEditJob.closeButton =
-  $popupEditJob.popupWindow.querySelector(".popup__close");
 $popupEditJob.saveButton =
   $popupEditJob.popupWindow.querySelector(".popup__submit");
 
@@ -105,10 +95,7 @@ $popupEditJob.editButton.addEventListener("click", (evt) => {
   $popupEditJob.popupName.value = $popupEditJob.nameText.textContent;
   $popupEditJob.popupJob.value = $popupEditJob.professionText.textContent;
 });
-// Событие закрытия окна
-$popupEditJob.closeButton.addEventListener("click", (evt) => {
-  closePopup($popupEditJob.popupWindow);
-});
+
 // Событие записи результатов
 $popupEditJob.popupForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -126,8 +113,6 @@ $popupNewPlace.popupPlace =
   $popupNewPlace.popupWindow.querySelector("#popupPlaceName");
 $popupNewPlace.popupLink =
   $popupNewPlace.popupWindow.querySelector("#LinkToImage");
-$popupNewPlace.closeButton =
-  $popupNewPlace.popupWindow.querySelector(".popup__close");
 $popupNewPlace.saveButton =
   $popupNewPlace.popupWindow.querySelector(".popup__submit");
 
@@ -136,18 +121,13 @@ $popupNewPlace.addButton.addEventListener("click", (evt) => {
   openPopup($popupNewPlace.popupWindow);
 });
 
-// Событие закрытия окна
-$popupNewPlace.closeButton.addEventListener("click", (evt) => {
-  closePopup($popupNewPlace.popupWindow);
-});
-
 // Событие записи результатов
 $popupNewPlace.popupWindow.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const newCard = {};
   newCard.name = $popupNewPlace.popupPlace.value;
   newCard.link = $popupNewPlace.popupLink.value;
-  createCard(newCard);
+  prependCard(newCard);
   closePopup($popupNewPlace.popupWindow);
   // Очистка инпутов
   $popupNewPlace.popupPlace.value = "";
@@ -160,17 +140,19 @@ $popupImageShow.popupImage =
   $popupImageShow.popupWindow.querySelector(".popup__image");
 $popupImageShow.popupTextImage =
   $popupImageShow.popupWindow.querySelector(".popup__imageName");
-$popupImageShow.closePopupButton =
-  $popupImageShow.popupWindow.querySelector(".popup__close");
-
-// Событие закрытия
-$popupImageShow.closePopupButton.addEventListener("click", (evt) => {
-  closePopup($popupImageShow.popupWindow);
-});
 //------------------------------------------------------------------------------
 // ПЕРЕМЕННЫЕ ДЛЯ ШАБЛОНОВ КАРТОЧЕК
 const $cardContainer = document.querySelector(".elements__list");
 const $templateCard = document.querySelector("#card").content;
+
+// Универсальное событие закрытия окна
+const closeButtons = document.querySelectorAll(".popup__close");
+closeButtons.forEach((button) => {
+  const $popup = button.closest(".popup");
+  // debugger;
+  button.addEventListener("click", () => closePopup($popup));
+});
+
 
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
@@ -190,6 +172,15 @@ function closePopup(popupWindow) {
   } else {
     return;
   }
+}
+
+initialCards.forEach((element) => {
+  prependCard(element);
+});
+
+function prependCard(cardItem){
+  const $cardli = createCard(cardItem);
+  $cardContainer.prepend($cardli);
 }
 
 // Функция создания карточки
@@ -218,15 +209,15 @@ function createCard(cardItem) {
   });
 
   // Открытие просмотра изображения на полный экран
-  $cardImage.addEventListener("click", (evt) => {
+  $cardImage.addEventListener("click", () => {
     const imageClick = $cardImage.closest(".elements__item");
-    $popupImageShow.receiveObject(imageClick);
+    const cardName = imageClick.querySelector('.elements__caption').textContent;
+    const cardUrl = imageClick.querySelector('.elements__image').getAttribute('src');
+    $popupImageShow.receiveObject(cardName,cardUrl);
   });
-
-  //Добавляем в DOM
-  $cardContainer.prepend($cardli);
+  return $cardli;
 }
 
-initialCards.forEach((element) => {
-  createCard(element);
-});
+
+
+
