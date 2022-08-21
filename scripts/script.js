@@ -211,7 +211,7 @@ function createCard(cardItem) {
     const deleteCardUrl = $deleteCard
       .querySelector(".elements__image")
       .getAttribute("src");
-    const deleteCardNum = CardClickIndex(deleteCardName, deleteCardUrl);
+    const deleteCardNum = getClickNumber(deleteCardName, deleteCardUrl);
     initialCards.splice(deleteCardNum, 1);
     createCards();
   });
@@ -234,7 +234,7 @@ function createCard(cardItem) {
   return $cardli;
 }
 
-function CardClickIndex(deleteCardName, deleteCardUrl) {
+function getClickNumber(deleteCardName, deleteCardUrl) {
   let deleteCardNum = -1;
 
   for (let i = 0; i < initialCards.length; i++) {
