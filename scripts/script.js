@@ -1,4 +1,6 @@
-// Начальный массив карточек
+// Начальный массив карточек.
+// Алгоритм создания/удаления карт реализован на основе работы с элементами массива и его пересоздания в DOM.
+
 const initialCards = [
   {
     name: "Архыз",
@@ -61,7 +63,7 @@ const $popupImageShow = {
   popupWindow: {},
   popupImage: {},
   popupTextImage: {},
-  receiveObject: function (cardName,cardUrl) {
+  receiveObject: function (cardName, cardUrl) {
     $popupImageShow.popupImage.setAttribute("src", cardUrl);
     $popupImageShow.popupImage.setAttribute("alt", cardName);
     $popupImageShow.popupTextImage.textContent = cardName;
@@ -127,7 +129,10 @@ $popupNewPlace.popupWindow.addEventListener("submit", (evt) => {
   const newCard = {};
   newCard.name = $popupNewPlace.popupPlace.value;
   newCard.link = $popupNewPlace.popupLink.value;
-  prependCard(newCard);
+  //Добавляем новый элемент в общий массив элементов первым
+  initialCards.unshift(newCard);
+  //Пересоздаем веси массив элементов по порядку с первого
+  createCards();
   closePopup($popupNewPlace.popupWindow);
   // Очистка инпутов
   $popupNewPlace.popupPlace.value = "";
@@ -149,10 +154,9 @@ const $templateCard = document.querySelector("#card").content;
 const closeButtons = document.querySelectorAll(".popup__close");
 closeButtons.forEach((button) => {
   const $popup = button.closest(".popup");
-  // debugger;
+
   button.addEventListener("click", () => closePopup($popup));
 });
-
 
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
@@ -174,13 +178,16 @@ function closePopup(popupWindow) {
   }
 }
 
-initialCards.forEach((element) => {
-  prependCard(element);
-});
+function createCards() {
+  $cardContainer.innerHTML = "";
+  initialCards.forEach((element) => {
+    appendCard(element);
+  });
+}
 
-function prependCard(cardItem){
+function appendCard(cardItem) {
   const $cardli = createCard(cardItem);
-  $cardContainer.prepend($cardli);
+  $cardContainer.append($cardli);
 }
 
 // Функция создания карточки
@@ -197,9 +204,16 @@ function createCard(cardItem) {
   $cardImage.setAttribute("alt", cardItem.name);
 
   // Событие клика - удаление карты
-  $cardDelete.addEventListener("click", (event) => {
-    const $deletecardli = $cardDelete.closest(".elements__item");
-    $deletecardli.remove();
+  $cardDelete.addEventListener("click", () => {
+    const $deleteCard = $cardDelete.closest(".elements__item");
+    const deleteCardName =
+      $deleteCard.querySelector(".elements__caption").textContent;
+    const deleteCardUrl = $deleteCard
+      .querySelector(".elements__image")
+      .getAttribute("src");
+    const deleteCardNum = CardClickIndex(deleteCardName, deleteCardUrl);
+    initialCards.splice(deleteCardNum, 1);
+    createCards();
   });
 
   // событие клика - установка лайка
@@ -211,13 +225,27 @@ function createCard(cardItem) {
   // Открытие просмотра изображения на полный экран
   $cardImage.addEventListener("click", () => {
     const imageClick = $cardImage.closest(".elements__item");
-    const cardName = imageClick.querySelector('.elements__caption').textContent;
-    const cardUrl = imageClick.querySelector('.elements__image').getAttribute('src');
-    $popupImageShow.receiveObject(cardName,cardUrl);
+    const cardName = imageClick.querySelector(".elements__caption").textContent;
+    const cardUrl = imageClick
+      .querySelector(".elements__image")
+      .getAttribute("src");
+    $popupImageShow.receiveObject(cardName, cardUrl);
   });
   return $cardli;
 }
 
+function CardClickIndex(deleteCardName, deleteCardUrl) {
+  let deleteCardNum = -1;
 
+  for (let i = 0; i < initialCards.length; i++) {
+    if (
+      initialCards[i].name === deleteCardName &&
+      initialCards[i].link === deleteCardUrl
+    ) {
+      deleteCardNum = i;
+    }
+  }
+  return deleteCardNum;
+}
 
-
+createCards();
