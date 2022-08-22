@@ -160,12 +160,8 @@ closeButtons.forEach((button) => {
 
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
-  let isopenPopup = popupWindow.classList.contains("popup_opened");
-  if (!isopenPopup) {
-    popupWindow.classList.add("popup_opened");
-  } else {
-    return;
-  }
+  popupWindow.classList.add("popup_opened");
+
 }
 
 //Универсальная функция закрытия popup
@@ -178,16 +174,13 @@ function closePopup(popupWindow) {
   }
 }
 
-function createCards() {
-  $cardContainer.innerHTML = "";
-  for (let i = 0; i < initialCards.length; i++) {
-    appendCard(initialCards[i], i);
-  }
-}
+initialCards.forEach((element) => {
+  prependCard(element);
+});
 
-function appendCard(cardItem, index) {
-  const $cardli = createCard(cardItem, index);
-  $cardContainer.append($cardli);
+function prependCard(cardItem){
+  const $cardli = createCard(cardItem);
+  $cardContainer.prepend($cardli);
 }
 
 // Функция создания карточки
@@ -198,8 +191,6 @@ function createCard(cardItem, index) {
   const $cardImage = $cardli.querySelector(".elements__image");
   const $cardLike = $cardli.querySelector(".elements__like-button");
   const $cardDelete = $cardli.querySelector(".elements__delete-button");
-  const $cardNumber = $cardli.querySelector(".elements__item");
-
   // Назначаем параметры
   $cardNumber.setAttribute("id", index);
   $cardName.textContent = cardItem.name;
@@ -229,7 +220,7 @@ function createCard(cardItem, index) {
       .getAttribute("src");
     $popupImageShow.receiveObject(cardName, cardUrl);
   });
-  return $cardli;
+  return $newCard;
 }
 
 createCards();
