@@ -156,41 +156,31 @@ closeButtons.forEach((button) => {
 
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
-  let isopenPopup = popupWindow.classList.contains("popup_opened");
-  if (!isopenPopup) {
-    popupWindow.classList.add("popup_opened");
-  } else {
-    return;
-  }
+  popupWindow.classList.add("popup_opened");
+
 }
 
 //Универсальная функция закрытия popup
 function closePopup(popupWindow) {
-  let isopenPopup = popupWindow.classList.contains("popup_opened");
-  if (isopenPopup) {
-    popupWindow.classList.remove("popup_opened");
-  } else {
-    return;
-  }
+  popupWindow.classList.remove("popup_opened");
 }
 
-initialCards.forEach((element) => {
-  prependCard(element);
-});
+// Создание карт из первоначального массива
+initialCards.forEach(prependCard);
 
 function prependCard(cardItem){
-  const $cardli = createCard(cardItem);
-  $cardContainer.prepend($cardli);
+  const $carditem = getCard(cardItem);
+  $cardContainer.prepend($carditem);
 }
 
 // Функция создания карточки
-function createCard(cardItem) {
+function getCard(cardItem) {
   // Клонируем элементы шаблона
-  const $cardli = $templateCard.cloneNode(true);
-  const $cardName = $cardli.querySelector(".elements__caption");
-  const $cardImage = $cardli.querySelector(".elements__image");
-  const $cardLike = $cardli.querySelector(".elements__like-button");
-  const $cardDelete = $cardli.querySelector(".elements__delete-button");
+  const $newCard = $templateCard.cloneNode(true);
+  const $cardName = $newCard.querySelector(".elements__caption");
+  const $cardImage = $newCard.querySelector(".elements__image");
+  const $cardLike = $newCard.querySelector(".elements__like-button");
+  const $cardDelete = $newCard.querySelector(".elements__delete-button");
   // Назначаем параметры
   $cardName.textContent = cardItem.name;
   $cardImage.setAttribute("src", cardItem.link);
@@ -215,7 +205,7 @@ function createCard(cardItem) {
     const cardUrl = imageClick.querySelector('.elements__image').getAttribute('src');
     $popupImageShow.receiveObject(cardName,cardUrl);
   });
-  return $cardli;
+  return $newCard;
 }
 
 
