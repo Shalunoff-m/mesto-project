@@ -1,6 +1,4 @@
-// Начальный массив карточек.
-// Алгоритм создания/удаления карт реализован на основе работы с элементами массива и его пересоздания в DOM.
-
+// Начальный массив карточек
 const initialCards = [
   {
     name: "Архыз",
@@ -63,7 +61,7 @@ const $popupImageShow = {
   popupWindow: {},
   popupImage: {},
   popupTextImage: {},
-  receiveObject: function (cardName, cardUrl) {
+  receiveObject: function (cardName,cardUrl) {
     $popupImageShow.popupImage.setAttribute("src", cardUrl);
     $popupImageShow.popupImage.setAttribute("alt", cardName);
     $popupImageShow.popupTextImage.textContent = cardName;
@@ -129,10 +127,7 @@ $popupNewPlace.popupWindow.addEventListener("submit", (evt) => {
   const newCard = {};
   newCard.name = $popupNewPlace.popupPlace.value;
   newCard.link = $popupNewPlace.popupLink.value;
-  //Добавляем новый элемент в общий массив элементов первым
-  initialCards.unshift(newCard);
-  //Пересоздаем веси массив элементов по порядку с первого
-  createCards();
+  prependCard(newCard);
   closePopup($popupNewPlace.popupWindow);
   // Очистка инпутов
   $popupNewPlace.popupPlace.value = "";
@@ -154,9 +149,10 @@ const $templateCard = document.querySelector("#card").content;
 const closeButtons = document.querySelectorAll(".popup__close");
 closeButtons.forEach((button) => {
   const $popup = button.closest(".popup");
-
+  // debugger;
   button.addEventListener("click", () => closePopup($popup));
 });
+
 
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
@@ -166,43 +162,34 @@ function openPopup(popupWindow) {
 
 //Универсальная функция закрытия popup
 function closePopup(popupWindow) {
-  let isopenPopup = popupWindow.classList.contains("popup_opened");
-  if (isopenPopup) {
-    popupWindow.classList.remove("popup_opened");
-  } else {
-    return;
-  }
+  popupWindow.classList.remove("popup_opened");
 }
 
-initialCards.forEach((element) => {
-  prependCard(element);
-});
+// Создание карт из первоначального массива
+initialCards.forEach(prependCard);
 
 function prependCard(cardItem){
-  const $cardli = createCard(cardItem);
-  $cardContainer.prepend($cardli);
+  const $carditem = getCard(cardItem);
+  $cardContainer.prepend($carditem);
 }
 
 // Функция создания карточки
-function createCard(cardItem, index) {
+function getCard(cardItem) {
   // Клонируем элементы шаблона
-  const $cardli = $templateCard.cloneNode(true);
-  const $cardName = $cardli.querySelector(".elements__caption");
-  const $cardImage = $cardli.querySelector(".elements__image");
-  const $cardLike = $cardli.querySelector(".elements__like-button");
-  const $cardDelete = $cardli.querySelector(".elements__delete-button");
+  const $newCard = $templateCard.cloneNode(true);
+  const $cardName = $newCard.querySelector(".elements__caption");
+  const $cardImage = $newCard.querySelector(".elements__image");
+  const $cardLike = $newCard.querySelector(".elements__like-button");
+  const $cardDelete = $newCard.querySelector(".elements__delete-button");
   // Назначаем параметры
-  $cardNumber.setAttribute("id", index);
   $cardName.textContent = cardItem.name;
   $cardImage.setAttribute("src", cardItem.link);
   $cardImage.setAttribute("alt", cardItem.name);
 
   // Событие клика - удаление карты
-  $cardDelete.addEventListener("click", () => {
-    const $deleteCard = $cardDelete.closest(".elements__item");
-    const cardNumber = $deleteCard.getAttribute('id');
-    initialCards.splice(cardNumber, 1);
-    createCards();
+  $cardDelete.addEventListener("click", (event) => {
+    const $deletecardli = $cardDelete.closest(".elements__item");
+    $deletecardli.remove();
   });
 
   // событие клика - установка лайка
@@ -214,13 +201,13 @@ function createCard(cardItem, index) {
   // Открытие просмотра изображения на полный экран
   $cardImage.addEventListener("click", () => {
     const imageClick = $cardImage.closest(".elements__item");
-    const cardName = imageClick.querySelector(".elements__caption").textContent;
-    const cardUrl = imageClick
-      .querySelector(".elements__image")
-      .getAttribute("src");
-    $popupImageShow.receiveObject(cardName, cardUrl);
+    const cardName = imageClick.querySelector('.elements__caption').textContent;
+    const cardUrl = imageClick.querySelector('.elements__image').getAttribute('src');
+    $popupImageShow.receiveObject(cardName,cardUrl);
   });
   return $newCard;
 }
 
-createCards();
+
+
+
