@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Проект "Место РОССИЯ"</title>
-    <link rel="stylesheet" href="pages/index.css" />
+    <!-- <link rel="stylesheet" href="pages/index.css" /> -->
   </head>
   <body class="main">
     <div class="page">
       <header class="page__header header">
-        <img src="images/logo_white.svg" class="header__logo" alt="Логотип" />
+        <img
+          src="<%=require('./images/logo_white.svg')%>"
+          class="header__logo"
+          alt="Логотип"
+        />
       </header>
       <main class="page__content content">
         <section
@@ -18,7 +22,7 @@
           aria-label="Профиль пользователя"
         >
           <img
-            src="images/Kusto.jpg"
+            src="<%=require('./images/Kusto.jpg')%>"
             class="profile__photo"
             alt="Фото Профиля"
           />
@@ -131,7 +135,5 @@
         <button type="button" class="elements__delete-button"></button>
       </li>
     </template>
-
-    <script src="scripts/script.js"></script>
   </body>
 </html>

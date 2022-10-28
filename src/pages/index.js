@@ -1,3 +1,5 @@
+import "./index.css";
+
 // Начальный массив карточек
 const initialCards = [
   {
@@ -61,7 +63,7 @@ const $popupImageShow = {
   popupWindow: {},
   popupImage: {},
   popupTextImage: {},
-  receiveObject: function (cardName,cardUrl) {
+  receiveObject: function (cardName, cardUrl) {
     $popupImageShow.popupImage.setAttribute("src", cardUrl);
     $popupImageShow.popupImage.setAttribute("alt", cardName);
     $popupImageShow.popupTextImage.textContent = cardName;
@@ -153,11 +155,9 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup($popup));
 });
 
-
 //Универсальная функция открытия popup
 function openPopup(popupWindow) {
   popupWindow.classList.add("popup_opened");
-
 }
 
 //Универсальная функция закрытия popup
@@ -168,7 +168,7 @@ function closePopup(popupWindow) {
 // Создание карт из первоначального массива
 initialCards.forEach(prependCard);
 
-function prependCard(cardItem){
+function prependCard(cardItem) {
   const $carditem = getCard(cardItem);
   $cardContainer.prepend($carditem);
 }
@@ -201,13 +201,11 @@ function getCard(cardItem) {
   // Открытие просмотра изображения на полный экран
   $cardImage.addEventListener("click", () => {
     const imageClick = $cardImage.closest(".elements__item");
-    const cardName = imageClick.querySelector('.elements__caption').textContent;
-    const cardUrl = imageClick.querySelector('.elements__image').getAttribute('src');
-    $popupImageShow.receiveObject(cardName,cardUrl);
+    const cardName = imageClick.querySelector(".elements__caption").textContent;
+    const cardUrl = imageClick
+      .querySelector(".elements__image")
+      .getAttribute("src");
+    $popupImageShow.receiveObject(cardName, cardUrl);
   });
   return $newCard;
 }
-
-
-
-
