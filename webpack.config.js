@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const chokidar = require("chokidar");
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 
 module.exports = {
   entry: { main: "./src/pages/index.js" },
@@ -17,7 +17,7 @@ module.exports = {
     static: path.resolve(__dirname, "./dist"),
     compress: true,
     port: 8080,
-    open: true,
+    open: false,
   },
 
   module: {
@@ -49,8 +49,15 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      inject: "body",
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
+    new BrowserSyncPlugin({
+      host: "localhost",
+      port: 3000,
+      proxy: "localhost:8080", // devserver
+      files: path.resolve(__dirname, "./dist"),
+    }),
   ],
 };

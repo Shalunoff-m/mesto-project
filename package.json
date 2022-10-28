@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
+    "prebuild": "webpack --mode development",
     "dev": "webpack serve"
   },
   "repository": {
@@ -23,6 +24,7 @@
     "@babel/preset-env": "^7.19.4",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.0.0",
+    "browser-sync-webpack-plugin": "^2.3.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "cssnano": "^5.1.14",
