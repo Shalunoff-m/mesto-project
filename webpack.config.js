@@ -22,19 +22,17 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        use: "babel-loader",
-        exclude: "/node_modules/",
-      },
+      // {
+      //   test: /\.js$/,
+      //   use: "babel-loader",
+      //   exclude: "/node_modules/",
+      // },
       {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: "asset/resource",
       },
       {
         test: /\.css$/,
-        // при обработке этих файлов нужно использовать
-        // MiniCssExtractPlugin.loader и css-loader
         use: [
           MiniCssExtractPlugin.loader,
           {
