@@ -1,23 +1,16 @@
-// Импорт CSS
+//  ----------------------------------
+// импорт стилей CSS
 import "./index.css";
+//  ----------------------------------
+// импорт js модулей
 
-// Импорт модулей JS
-// debugger;
-import { initialCards } from "./../components/objects.js";
-import {
-  createCards,
-  insertAtStart,
-  insertAtEnd,
-} from "./../components/card.js";
+import { initialCards, createCards } from "./../components/card";
+import { initUIEvent } from "./../components/ui";
+import { initModal } from "./../components/modal";
 
-createCards(initialCards, insertAtStart);
-//Основной стек
+//  ----------------------------------
+// Основной код
 
-userFormElements.btKustoEditProfile.addEventListener("click", () => {
-  showPopupEditProfile(userFormElements);
-});
-
-function exportDataToPage(job, name) {
-  userFormElements.labelName.textContent = name;
-  userFormElements.labeljob.textContent = job;
-}
+createCards(initialCards);
+initUIEvent();
+initModal();

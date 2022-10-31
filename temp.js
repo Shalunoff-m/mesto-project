@@ -1,15 +1,26 @@
-plugins: [
-  new BrowserSyncPlugin(
-    {
-      host: "localhost",
-      port: 3000,
-      proxy: "localhost:8080", // devserver
-      files: ["./resources/views/**/*.blade.php"],
-    },
-    {
-      // prevent BrowserSync from reloading the page
-      // and let Webpack Dev Server take care of this
-      reload: false,
+function addCardListeners($card) {
+  const $cardElementList = $card.querySelector(".elements__item");
+
+  $cardElementList.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("elements__like-button")) {
+      evt.target.classList.toggle("elements__like-button_active");
+      evt.stopPropagation();
     }
-  ),
-];
+    if (evt.target.classList.contains("elements__delete-button")) {
+      $cardElementList.remove();
+      evt.stopPropagation();
+    }
+    if (evt.target.classList.contains("elements__image")) {
+      debugger;
+      const imageClick = evt.target.closest(".elements__item");
+      ppShow.popupTextImage =
+        imageClick.querySelector(".elements__caption").textContent;
+      ppShow.popupImage = imageClick
+        .querySelector(".elements__image")
+        .getAttribute("src");
+      openPopup(ppShow.popupWindow);
+      evt.stopPropagation();
+    }
+  });
+  return $card;
+}

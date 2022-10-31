@@ -52,7 +52,7 @@
         <h2 class="popup__header">Редактировать профиль</h2>
         <form
           id="popupEditForm"
-          name="basic-data-input"
+          name="popupEditForm"
           class="popup__form"
           action="#"
         >
@@ -62,7 +62,7 @@
               class="basic-data-input__input"
               name="name"
               id="popupEditname"
-              value="Жак-Ив Кусто"
+              value=""
               placeholder="Введите Имя и Фамилию"
             />
             <input
@@ -70,11 +70,13 @@
               class="basic-data-input__input"
               name="job"
               id="popupEditjob"
-              value="Исследователь океана"
+              value=""
               placeholder="Введите род деятельности"
             />
           </fieldset>
-          <button type="submit" class="popup__submit">Сохранить</button>
+          <button type="submit" class="popup__submit" name="submit">
+            Сохранить
+          </button>
         </form>
         <button type="button" class="popup__close"></button>
       </div>
@@ -85,7 +87,7 @@
         <h2 class="popup__header">Новое место</h2>
         <form
           id="popupNewPlace"
-          name="basic-data-input"
+          name="popupNewPlace"
           class="popup__form"
           action="#"
         >
@@ -93,7 +95,7 @@
             <input
               type="text"
               class="basic-data-input__input"
-              name="popupPlaceName"
+              name="name"
               id="popupPlaceName"
               value=""
               placeholder="Название"
@@ -101,7 +103,7 @@
             <input
               type="text"
               class="basic-data-input__input"
-              name="LinkToImage"
+              name="link"
               id="LinkToImage"
               value=""
               placeholder="Ссылка на картинку"
