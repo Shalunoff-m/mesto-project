@@ -23,6 +23,18 @@ export const $UI = (function () {
   return $UI;
 })();
 
+export const $uiOpt = {
+  base: document,
+  elements: {
+    photo: ".profile__photo",
+    labelUserName: ".profile__name",
+    labelUserJob: ".profile__job",
+    uiEditButton: ".profile__edit-button",
+    uiAddCardButton: ".profile__add-button",
+    cardList: ".elements__list",
+  },
+};
+
 export function initUIEvent() {
   $UI.cardList.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("elements__like-button")) {
