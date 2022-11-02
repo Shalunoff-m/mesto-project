@@ -38,3 +38,21 @@ export function getObj(options) {
     element3: {key: 'name', type: 'formElement'},
   }
 } */
+
+export function getDataForm(modal, opt) {
+  const data = {};
+
+  for (let item in opt.elements) {
+    if (opt.elements[item].type === "formElement") {
+      //   console.log(data[item]);
+      data[item] = opt.elements[item].key;
+    }
+  }
+
+  for (let key in data) {
+    // debugger;
+    // modal[key].value = data[key];
+    data[key] = modal[key].value;
+  }
+  return data;
+}

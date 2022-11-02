@@ -14,9 +14,14 @@ export function closePopup(window) {
   window.classList.remove("popup_opened");
 }
 
-export function initClose(window) {
+export function initClose(window, form) {
   window.addEventListener("click", eventClose);
   document.addEventListener("keydown", clickEsc);
+  if (form) {
+    form.addEventListener("submit", () => {
+      closePopup(window);
+    });
+  }
 
   function eventClose(evt) {
     if (
@@ -35,4 +40,15 @@ export function initClose(window) {
       document.removeEventListener("keydown", clickEsc);
     }
   }
+}
+
+export function initSubmit(modUserProf, onUserSaveprof) {
+  modUserProf.form.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    onUserSaveprof(modUserProf);
+  });
+}
+
+export function resetForm(form) {
+  form.reset();
 }

@@ -26,6 +26,11 @@ export const initialCards = [
   },
 ];
 
+export const userData = {
+  name: "Жак-Ив Кусто",
+  job: "Исследователь океана",
+};
+
 export const uiOpt = {
   base: document,
   elements: {
@@ -52,7 +57,7 @@ export const modUserProfOpt = {
     window: { key: "#popup-edit-job", type: "base" },
     form: { key: "popupEditForm", type: "formMain" },
     name: { key: "name", type: "formElement" },
-    job: { key: "name", type: "formElement" },
+    job: { key: "job", type: "formElement" },
     savebutton: { key: ".popup__submit", type: "simple" },
   },
 };
