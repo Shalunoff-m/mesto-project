@@ -1,36 +1,38 @@
-export function showImageModal({ evt, modImage }) {
-  // console.log(evt);
-  console.log(modImage);
-  const imageClick = evt.target.closest(".elements__item");
-  const cardName = imageClick.querySelector(".elements__caption").textContent;
-  const cardUrl = imageClick
-    .querySelector(".elements__image")
-    .getAttribute("src");
+export function initShowImage(name, url, modImage) {
+  // console.log(name, url, modImage);
 
-  console.log(imageClick, cardName, cardUrl);
-
-  // modImage.image.setAttribute("src", cardUrl);
-  // modImage.image.setAttribute("alt", cardName);
-  modImage.Description.textContent = cardName;
-  // const { window } = modImage;
-  openPopup(window);
+  modImage.description.textContent = name;
+  modImage.image.setAttribute("src", url);
+  modImage.image.setAttribute("alt", name);
 }
 
-export function openPopup(popupWindow) {
-  popupWindow.classList.add("popup_opened");
-  // popupWindow.addEventListener("click", closePopup);
+export function openPopup(window) {
+  window.classList.add("popup_opened");
 }
 
-function closePopup(evt) {
-  if (
-    evt.target.classList.contains("popup__close") ||
-    evt.target.classList.contains("popup") ||
-    evt.type === "submit"
-  ) {
-    const popupWindow = evt.target.closest(".popup");
-    popupWindow.classList.remove("popup_opened");
-    // debugger;
-    popupWindow.removeEventListener("click", closePopup);
-    evt.stopPropagation();
+export function closePopup(window) {
+  window.classList.remove("popup_opened");
+}
+
+export function initClose(window) {
+  window.addEventListener("click", eventClose);
+  document.addEventListener("keydown", clickEsc);
+
+  function eventClose(evt) {
+    if (
+      evt.target.classList.contains("popup__close") ||
+      evt.target.classList.contains("popup")
+    ) {
+      closePopup(window);
+      window.removeEventListener("click", eventClose);
+      document.removeEventListener("keydown", clickEsc);
+    }
+  }
+  function clickEsc(evt) {
+    if (evt.key === "Escape") {
+      closePopup(window);
+      window.removeEventListener("click", eventClose);
+      document.removeEventListener("keydown", clickEsc);
+    }
   }
 }

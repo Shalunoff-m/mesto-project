@@ -7,7 +7,12 @@ import "./index.css";
 import { getObj } from "./../components/utils";
 import { renderCards } from "./../components/card";
 import {} from "./../components/ui";
-import {} from "./../components/modal";
+import {
+  initShowImage,
+  initClose,
+  openPopup,
+  closePopup,
+} from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,
@@ -31,4 +36,11 @@ const modAddPlace = getObj(modAddPlaceOpt);
 const cardObg = getObj(cardsOpt);
 // console.log(cardObg);
 
-renderCards(initialCards, cardObg);
+renderCards(initialCards, cardObg, onShow);
+
+function onShow(name, url) {
+  initShowImage(name, url, modImage);
+  initClose(modImage.window);
+  openPopup(modImage.window);
+  // console.log(name, url);
+}

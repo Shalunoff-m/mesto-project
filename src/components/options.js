@@ -41,8 +41,8 @@ export const modImageShowOpt = {
   base: "#view-image",
   elements: {
     window: { key: "#view-image", type: "base" },
-    Image: { key: ".popup__image", type: "simple" },
-    Description: { key: ".popup__imageName", type: "simple" },
+    image: { key: ".popup__image", type: "simple" },
+    description: { key: ".popup__imageName", type: "simple" },
   },
 };
 
