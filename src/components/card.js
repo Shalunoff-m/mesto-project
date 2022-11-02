@@ -1,5 +1,3 @@
-// TODO Нужно написать еще функцию простановки опций карты и передать их в создание карточки
-
 export function renderCards(arrCards, uiData, onShow) {
   for (let data of arrCards) {
     const $newCard = getCard(data, uiData, tgLike, deleteCard);

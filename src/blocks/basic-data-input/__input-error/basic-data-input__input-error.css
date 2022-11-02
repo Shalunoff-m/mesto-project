@@ -10,7 +10,6 @@
   color: red;
   position: relative;
   transition: opacity 0.5s, visibility 0.5s;
-  visibility: hidden;
-  opacity: 0%;
-  /* top: 0px; */
+  /* visibility: hidden; */
+  /* opacity: 0%; */
 }

@@ -1,5 +1,8 @@
 export function enableValidate(modal) {
-  // console.log(form);
+  // TODO JS/ Остановился здесь
+  const formError = modal.form.querySelector(`.${modal.name.id}-error`);
+  formError.textContent = "Ошибка найдена";
+  console.log(formError);
 
   function showInputError(element) {
     element.classList.add("basic-data-input__input_type_error");
