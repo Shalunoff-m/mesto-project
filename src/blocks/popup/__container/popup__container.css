@@ -1,5 +1,6 @@
 .popup__container {
   position: relative;
+  /* position:absolute; */
   box-sizing: border-box;
   margin: 19px;
   padding: 35px;
@@ -7,6 +8,7 @@
   background-color: white;
   border-radius: 10px;
   transition: padding 1s;
+  min-height: 330px;
 }
 @media screen and (max-width: 700px) {
   .popup__container {

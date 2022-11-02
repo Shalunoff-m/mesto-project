@@ -1,7 +1,7 @@
 .popup__basic-data-input {
   margin: 0;
   padding: 0;
-  margin-bottom: 47px;
+  margin-bottom: 18px;
 }
 @media screen and (max-width: 480px) {
   .popup__basic-data-input {

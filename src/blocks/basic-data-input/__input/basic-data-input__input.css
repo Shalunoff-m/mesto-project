@@ -8,9 +8,16 @@
   padding-bottom: 9px;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: font-size 1s, border 0.3s;
+  transition: font-size 1s, border 0.5s, color 1s;
 }
 .basic-data-input__input:focus {
   outline: none;
   border-bottom: 1px solid black;
 }
+
+/* .basic-data-input__input:invalid{
+  border-bottom: 1px solid #FF0000;
+  color:#FF0000;
+
+} */
+

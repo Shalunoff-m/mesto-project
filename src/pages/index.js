@@ -5,6 +5,7 @@ import "./index.css";
 // импорт js модулей
 
 import { getObj, getDataForm } from "./../components/utils";
+import { enableValidate } from "./../components/validate";
 import { renderCards } from "./../components/card";
 import {
   renderUserProfile,
@@ -60,6 +61,7 @@ function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
   initClose(modUserProf.window, modUserProf.form);
   initSubmit(modUserProf, onUserSaveprof);
+  enableValidate(modUserProf);
   openPopup(modUserProf.window);
 }
 

@@ -47,7 +47,8 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup" id="popup-edit-job">
+    <!-- <div class="popup" id="popup-edit-job"> -->
+    <div class="popup popup_opened" id="popup-edit-job">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
         <form
@@ -55,7 +56,9 @@
           name="popupEditForm"
           class="popup__form"
           action="#"
+          novalidate
         >
+          <!-- BM Поле валидации html -->
           <fieldset class="popup__basic-data-input basic-data-input">
             <input
               type="text"
@@ -64,7 +67,13 @@
               id="popupEditname"
               value=""
               placeholder="Введите Имя и Фамилию"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="basic-data-input__input-error popupEditname-error"
+              >Это сообщение об ошибке</span
+            >
             <input
               type="text"
               class="basic-data-input__input"
@@ -72,7 +81,13 @@
               id="popupEditjob"
               value=""
               placeholder="Введите род деятельности"
+              minlength="2"
+              maxlength="200"
+              required
             />
+            <span class="basic-data-input__input-error popupEditname-error"
+              >Это сообщение об ошибке</span
+            >
           </fieldset>
           <button type="submit" class="popup__submit" name="submit">
             Сохранить
