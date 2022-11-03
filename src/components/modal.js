@@ -6,46 +6,46 @@ export function initShowImage(name, url, modImage) {
   modImage.image.setAttribute("alt", name);
 }
 
-export function openPopup(window) {
-  window.classList.add("popup_opened");
+export function openPopup(modal) {
+  modal.classList.add("popup_opened");
 }
 
-export function closePopup(window) {
-  window.classList.remove("popup_opened");
+export function closePopup(modal) {
+  modal.classList.remove("popup_opened");
 }
 
-export function initClose(window, form) {
-  window.addEventListener("click", eventClose);
+export function initClose(modal, form) {
+  modal.addEventListener("click", closeModal);
   document.addEventListener("keydown", clickEsc);
   if (form) {
     form.addEventListener("submit", () => {
-      closePopup(window);
+      closePopup(modal);
     });
   }
 
-  function eventClose(evt) {
+  function closeModal(evt) {
     if (
       evt.target.classList.contains("popup__close") ||
       evt.target.classList.contains("popup")
     ) {
-      closePopup(window);
-      window.removeEventListener("click", eventClose);
+      closePopup(modal);
+      modal.removeEventListener("click", closeModal);
       document.removeEventListener("keydown", clickEsc);
     }
   }
   function clickEsc(evt) {
     if (evt.key === "Escape") {
-      closePopup(window);
-      window.removeEventListener("click", eventClose);
+      closePopup(modal);
+      modal.removeEventListener("click", closeModal);
       document.removeEventListener("keydown", clickEsc);
     }
   }
 }
 
-export function initSubmit(modUserProf, onUserSaveprof) {
+export function initSubmit(modUserProf, onSaveProfile) {
   modUserProf.form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    onUserSaveprof(modUserProf);
+    onSaveProfile(modUserProf);
   });
 }
 

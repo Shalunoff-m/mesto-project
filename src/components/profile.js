@@ -16,11 +16,3 @@ export function saveUserData(data, userData) {
   userData.name = data.name;
   userData.job = data.job;
 }
-
-export function getCardData(modAddPlace) {
-  const data = {
-    name: modAddPlace.name.value,
-    link: modAddPlace.link.value,
-  };
-  return [data];
-}

@@ -6,14 +6,13 @@ import "./index.css";
 
 import { getObj, getDataForm } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { renderCards } from "./../components/card";
+import { renderCards, getCardData } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
   initJobData,
   saveUserData,
-  getCardData,
-} from "./../components/ui";
+} from "../components/profile";
 import {
   initShowImage,
   initClose,
@@ -61,11 +60,11 @@ function onShow(name, url) {
 function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
   initClose(modUserProf.window, modUserProf.form);
-  initSubmit(modUserProf, onUserSaveprof);
+  initSubmit(modUserProf, onSaveProfile);
   openPopup(modUserProf.window);
 }
 
-function onUserSaveprof(modUserProf) {
+function onSaveProfile(modUserProf) {
   const data = getDataForm(modUserProf, modUserProfOpt);
   saveUserData(data, userData);
   renderUserProfile(userData, uiCtrl);

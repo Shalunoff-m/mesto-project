@@ -14,20 +14,17 @@ export function renderCards(arrCards, uiData, onShow) {
     $Image.setAttribute("src", data.link);
     $Image.setAttribute("alt", data.name);
 
-    $cardElement.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("elements__like-button")) {
-        cbLike($like);
-      }
-      if (evt.target.classList.contains("elements__delete-button")) {
-        cbDelete(evt);
-      }
-      if (evt.target.classList.contains("elements__image")) {
-        // console.log(evt.target);
-        const $card = evt.target.closest(".elements__item");
-        const name = $card.querySelector(".elements__caption").textContent;
-        const url = $card.querySelector(".elements__image").getAttribute("src");
-        onShow(name, url);
-      }
+    $like.addEventListener("click", () => {
+      cbLike($like);
+    });
+    $delete.addEventListener("click", (evt) => {
+      cbDelete(evt, $cardElement);
+    });
+    $Image.addEventListener("click", (evt) => {
+      const $card = evt.target.closest(".elements__item");
+      const name = $card.querySelector(".elements__caption").textContent;
+      const url = $card.querySelector(".elements__image").getAttribute("src");
+      onShow(name, url);
     });
 
     return $newCard;
@@ -38,12 +35,18 @@ export function renderCards(arrCards, uiData, onShow) {
   }
 }
 
-function tgLike(Bt) {
-  Bt.classList.toggle("elements__like-button_active");
+export function getCardData(modAddPlace) {
+  const data = {
+    name: modAddPlace.name.value,
+    link: modAddPlace.link.value,
+  };
+  return [data];
 }
 
-function deleteCard(evt) {
-  // console.log(evt);
-  evt.target.closest(".elements__item").remove();
-  // $deletecardli;
+function tgLike(button) {
+  button.classList.toggle("elements__like-button_active");
+}
+
+function deleteCard(evt, $card) {
+  $card.remove();
 }
