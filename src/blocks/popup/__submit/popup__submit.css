@@ -25,3 +25,10 @@
 .popup__submit:active {
   transform: scale(0.99);
 }
+
+.popup__submit:disabled {
+  background-color: white;
+  color: black;
+  opacity: 20%;
+  border: 1px solid black;
+}

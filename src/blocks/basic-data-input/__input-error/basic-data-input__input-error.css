@@ -1,8 +1,6 @@
 .basic-data-input__input-error {
   margin: 0;
   padding: 5px 0 10px;
-  /* padding-bottom: 50px; */
-  /* outline: 1px solid rgb(18, 114, 232); */
   width: 100%;
   font-weight: 400;
   font-size: 12px;
@@ -10,6 +8,7 @@
   color: red;
   position: relative;
   transition: opacity 0.5s, visibility 0.5s;
-  /* visibility: hidden; */
-  /* opacity: 0%; */
+  visibility: hidden;
+  opacity: 0%;
 }
+

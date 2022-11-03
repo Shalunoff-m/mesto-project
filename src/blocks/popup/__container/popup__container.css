@@ -9,6 +9,7 @@
   border-radius: 10px;
   transition: padding 1s;
   min-height: 330px;
+  cursor: default;
 }
 @media screen and (max-width: 700px) {
   .popup__container {

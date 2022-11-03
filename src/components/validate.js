@@ -1,22 +1,63 @@
-export function enableValidate(modal) {
-  // TODO JS/ Остановился здесь
-  const formError = modal.form.querySelector(`.${modal.name.id}-error`);
-  formError.textContent = "Ошибка найдена";
-  console.log(formError);
+export function enableValidate(...arrModal) {
+  arrModal.forEach((currentForm) => {
+    // debugger;
+    console.log(currentForm);
+    setEventListeners(currentForm.form, currentForm.savebutton);
+  });
 
-  function showInputError(element) {
-    element.classList.add("basic-data-input__input_type_error");
-  }
-  function hideInputError(element) {
-    element.classList.remove("basic-data-input__input_type_error");
+  function setEventListeners(form, bt) {
+    const inputList = Array.from(
+      form.querySelectorAll(".basic-data-input__input")
+    );
+    toggleButtonState(inputList, bt);
+    inputList.forEach((input) => {
+      console.log(input);
+      input.addEventListener("input", () => {
+        isValid(form, input);
+        toggleButtonState(inputList, bt);
+      });
+    });
   }
 
-  function isValid() {
-    if (!modal.name.validity.valid) {
-      showInputError(modal.name);
+  function isValid(form, input) {
+    if (input.validity.patternMismatch) {
+      input.setCustomValidity(input.dataset.errorMessage);
     } else {
-      hideInputError(modal.name);
+      input.setCustomValidity("");
+    }
+
+    if (!input.validity.valid) {
+      showInputError(form, input, input.validationMessage);
+    } else {
+      hideInputError(form, input);
     }
   }
-  modal.name.addEventListener("input", isValid);
+
+  function toggleButtonState(inputList, bt) {
+    if (hasInvalidInput(inputList)) {
+      bt.disabled = true;
+    } else {
+      bt.disabled = false;
+    }
+  }
+
+  function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
+  }
+
+  function showInputError(form, input, error) {
+    const formError = form.querySelector(`.${input.id}-error`);
+    input.classList.add("basic-data-input__input_type_error");
+    formError.classList.add("basic-data-input__input-error_active");
+    formError.textContent = error;
+  }
+
+  function hideInputError(form, input) {
+    const formError = form.querySelector(`.${input.id}-error`);
+    input.classList.remove("basic-data-input__input_type_error");
+    formError.classList.remove("basic-data-input__input-error_active");
+    formError.textContent = "Верно";
+  }
 }

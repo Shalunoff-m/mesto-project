@@ -49,6 +49,7 @@ renderCards(initialCards, cardObg, onShow);
 renderUserProfile(userData, uiCtrl);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
+enableValidate(modUserProf, modAddPlace);
 
 function onShow(name, url) {
   initShowImage(name, url, modImage);
@@ -61,7 +62,6 @@ function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
   initClose(modUserProf.window, modUserProf.form);
   initSubmit(modUserProf, onUserSaveprof);
-  enableValidate(modUserProf);
   openPopup(modUserProf.window);
 }
 
