@@ -1,9 +1,4 @@
 export function renderCards(arrCards, uiData, onShow) {
-  for (let data of arrCards) {
-    const $newCard = getCard(data, uiData, tgLike, deleteCard);
-    uiData.container.prepend($newCard);
-  }
-
   function getCard(data, uiData, cbLike, cbDelete) {
     const template = uiData.template.content;
     // Клонируем элементы шаблона
@@ -36,6 +31,10 @@ export function renderCards(arrCards, uiData, onShow) {
     });
 
     return $newCard;
+  }
+  for (let data of arrCards) {
+    const $newCard = getCard(data, uiData, tgLike, deleteCard);
+    uiData.container.prepend($newCard);
   }
 }
 

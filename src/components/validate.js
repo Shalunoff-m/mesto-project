@@ -1,7 +1,7 @@
 export function enableValidate(...arrModal) {
+  // debugger;
   arrModal.forEach((currentForm) => {
     // debugger;
-    console.log(currentForm);
     setEventListeners(currentForm.form, currentForm.savebutton);
   });
 
@@ -11,7 +11,6 @@ export function enableValidate(...arrModal) {
     );
     toggleButtonState(inputList, bt);
     inputList.forEach((input) => {
-      console.log(input);
       input.addEventListener("input", () => {
         isValid(form, input);
         toggleButtonState(inputList, bt);
@@ -20,6 +19,13 @@ export function enableValidate(...arrModal) {
   }
 
   function isValid(form, input) {
+    let validationMS = input.validationMessage;
+    if (input.validity.valueMissing) {
+      validationMS = `Вы пропустили это поле`;
+    } else {
+      validationMS = input.validationMessage;
+    }
+
     if (input.validity.patternMismatch) {
       input.setCustomValidity(input.dataset.errorMessage);
     } else {
@@ -27,7 +33,7 @@ export function enableValidate(...arrModal) {
     }
 
     if (!input.validity.valid) {
-      showInputError(form, input, input.validationMessage);
+      showInputError(form, input, validationMS);
     } else {
       hideInputError(form, input);
     }
