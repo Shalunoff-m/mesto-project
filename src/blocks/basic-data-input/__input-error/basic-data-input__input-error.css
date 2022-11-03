@@ -1,4 +1,6 @@
 .basic-data-input__input-error {
+  display:block;
+  min-height: 2rem;
   margin: 0;
   padding: 5px 0 10px;
   width: 100%;
