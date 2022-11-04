@@ -6,19 +6,14 @@ import "./index.css";
 
 import { getObj, getDataForm } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { renderCards, getCardData } from "./../components/card";
+import { getCard, insertCard } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
   initJobData,
   saveUserData,
 } from "../components/profile";
-import {
-  initShowImage,
-  initShow,
-  initSubmit,
-  resetForm,
-} from "./../components/modal";
+import { initShowImage, initShow, resetForm } from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,
@@ -33,21 +28,22 @@ import {
 // Основной код
 
 const uiCtrl = getObj(uiOpt);
-// console.log(uiControls);
 const modImage = getObj(modImageShowOpt);
-// console.log(modImage);
 const modUserProf = getObj(modUserProfOpt);
-// console.log(modUserProf);
 const modAddPlace = getObj(modAddPlaceOpt);
-// console.log(modAddPlace);
 const cardObg = getObj(cardsOpt);
-// console.log(cardObg);
 
-renderCards(initialCards, cardObg, onShow);
+renderCards(initialCards, cardObg);
 renderUserProfile(userData, uiCtrl);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 enableValidate(modUserProf, modAddPlace);
+
+function renderCards(arrCards, cardObg) {
+  for (let data of arrCards) {
+    insertCard(getCard(data, cardObg, onShow), cardObg);
+  }
+}
 
 function onShow(name, url) {
   initShowImage(name, url, modImage);
@@ -57,8 +53,6 @@ function onShow(name, url) {
 function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
   initShow(modUserProf, onSaveProfile);
-  // initSubmit(modUserProf, onSaveProfile);
-  // openPopup(modUserProf.window);
 }
 
 function onSaveProfile(modUserProf) {
@@ -70,12 +64,12 @@ function onAddCard(modAddPlace) {
   //
   resetForm(modAddPlace.form);
   initShow(modAddPlace, onSaveCard);
-  // initSubmit(modAddPlace, onSaveCard);
-  // openPopup(modAddPlace.window);
-  // console.log("Нажата кнопка добавить");
 }
 
 function onSaveCard() {
-  const data = [getDataForm(modAddPlace, modAddPlaceOpt)];
-  renderCards(data, cardObg, onShow);
+  insertCard(
+    getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),
+    cardObg.container
+  );
+  // renderCards(data, cardObg, onShow);
 }
