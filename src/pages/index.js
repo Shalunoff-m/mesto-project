@@ -55,7 +55,7 @@ function onShow(name, url) {
 
 function onEdit(modUserProf) {
   api.getProfile(initJobData, modUserProf);
-  initJobData(userData, modUserProf);
+  // initJobData(userData, modUserProf);
   initShow(modUserProf, onSaveProfile);
 }
 
