@@ -45,31 +45,34 @@ export const uiOpt = {
 export const modImageShowOpt = {
   base: "#view-image",
   elements: {
-    window: { key: "#view-image", type: "base" },
+    modal: { key: "#view-image", type: "base" },
     image: { key: ".popup__image", type: "simple" },
     description: { key: ".popup__imageName", type: "simple" },
+    closeButton: { key: ".popup__close", type: "simple" },
   },
 };
 
 export const modUserProfOpt = {
   base: "#popup-edit-job",
   elements: {
-    window: { key: "#popup-edit-job", type: "base" },
+    modal: { key: "#popup-edit-job", type: "base" },
     form: { key: "popupEditForm", type: "formMain" },
     name: { key: "name", type: "formElement" },
     job: { key: "job", type: "formElement" },
     savebutton: { key: ".popup__submit", type: "simple" },
+    closeButton: { key: ".popup__close", type: "simple" },
   },
 };
 
 export const modAddPlaceOpt = {
   base: "#popup-new-place",
   elements: {
-    window: { key: "#popup-new-place", type: "base" },
+    modal: { key: "#popup-new-place", type: "base" },
     form: { key: "popupNewPlace", type: "formMain" },
     name: { key: "name", type: "formElement" },
     link: { key: "link", type: "formElement" },
     savebutton: { key: ".popup__submit", type: "simple" },
+    closeButton: { key: ".popup__close", type: "simple" },
   },
 };
 
@@ -79,4 +82,11 @@ export const cardsOpt = {
     container: { key: ".elements__list", type: "simple" },
     template: { key: "#card", type: "simple" },
   },
+};
+
+// названия классов для подключения к функции валидации
+export const validationOpt = {
+  inputError: "basic-data-input__input_type_error",
+  labelError: "basic-data-input__input-error_active",
+  validInput: "Верно",
 };

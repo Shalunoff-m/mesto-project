@@ -1,54 +1,77 @@
 export function initShowImage(name, url, modImage) {
-  // console.log(name, url, modImage);
-
+  // debugger;
   modImage.description.textContent = name;
   modImage.image.setAttribute("src", url);
   modImage.image.setAttribute("alt", name);
 }
 
-export function openPopup(modal) {
-  modal.classList.add("popup_opened");
-}
+export function initShow(popup, cbForm) {
+  // берем элементы
+  const { closeButton, modal } = popup;
+  let form = false;
+  if (popup.form) {
+    form = popup.form;
+  }
 
-export function closePopup(modal) {
-  modal.classList.remove("popup_opened");
-}
-
-export function initClose(modal, form) {
-  modal.addEventListener("click", closeModal);
-  document.addEventListener("keydown", clickEsc);
+  // вешаем слушатели
+  closeButton.addEventListener("click", closePopup);
+  modal.addEventListener("click", closePopup);
+  document.addEventListener("keydown", closePopup);
+  // Слушатель на форму, если она есть
   if (form) {
-    form.addEventListener("submit", () => {
-      closePopup(modal);
-    });
+    form.addEventListener("submit", sendData);
   }
+  // Открываем сам popup
+  openPopup(modal);
 
-  function closeModal(evt) {
-    if (
-      evt.target.classList.contains("popup__close") ||
-      evt.target.classList.contains("popup")
-    ) {
-      closePopup(modal);
-      modal.removeEventListener("click", closeModal);
-      document.removeEventListener("keydown", clickEsc);
-    }
-  }
-  function clickEsc(evt) {
-    if (evt.key === "Escape") {
-      closePopup(modal);
-      modal.removeEventListener("click", closeModal);
-      document.removeEventListener("keydown", clickEsc);
-    }
-  }
-}
-
-export function initSubmit(modUserProf, onSaveProfile) {
-  modUserProf.form.addEventListener("submit", (evt) => {
+  // Функция обработки поведения формы
+  function sendData(evt) {
     evt.preventDefault();
-    onSaveProfile(modUserProf);
-  });
+    cbForm(popup);
+    closePopup(evt);
+  }
+
+  // Функция для закрытия модалки
+  function closePopup(evt) {
+    // Отменяем всплытие события
+    evt.stopPropagation();
+
+    // Проверяем событие
+    if (checkElement(evt)) {
+      // Снимаем все слушатели
+      closeButton.removeEventListener("click", closePopup);
+      modal.removeEventListener("click", closePopup);
+      document.removeEventListener("keydown", closePopup);
+      // закрываем активное модальное окно
+      modal.classList.remove("popup_opened");
+      // Если есть форма, то снимаем слушатель и с неё
+      if (form) {
+        form.removeEventListener("submit", sendData);
+      }
+    }
+
+    // Функция проверки события
+    function checkElement(evt) {
+      if (evt.target.classList.contains("popup__close")) return true;
+      if (evt.target.classList.contains("popup")) return true;
+      // if (evt.target.classList.contains("popup")) return true;
+      if (evt.key === "Escape") {
+        return true;
+      }
+      if (evt.type === "submit") {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  // функция показа окна
+  function openPopup(modal) {
+    modal.classList.add("popup_opened");
+  }
 }
 
+// сброс всех полей формы
 export function resetForm(form) {
   form.reset();
 }

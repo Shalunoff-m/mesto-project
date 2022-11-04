@@ -1,11 +1,15 @@
-export function renderCards(arrCards, profileData, onShow) {
+/* export function renderCards(arrCards, profileData, onShow) {
   for (let data of arrCards) {
-    const $newCard = getCard(data, profileData, tgLike, deleteCard, onShow);
+    const $newCard = getCard(data, profileData, toggleLike, deleteCard, onShow);
     profileData.container.prepend($newCard);
   }
+} */
+
+export function insertCard(card, cardObj) {
+  cardObj.container.prepend(card);
 }
 
-function getCard(data, profileData, cbLike, cbDelete, onShow) {
+export function getCard(data, profileData, onShow) {
   const template = profileData.template.content;
   // Клонируем элементы шаблона
   const $newCard = template.cloneNode(true);
@@ -21,10 +25,12 @@ function getCard(data, profileData, cbLike, cbDelete, onShow) {
   $Image.setAttribute("alt", data.name);
 
   $like.addEventListener("click", () => {
-    cbLike($like);
+    // cbLike($like);
+    toggleLike($like);
   });
   $delete.addEventListener("click", (evt) => {
-    cbDelete(evt, $cardElement);
+    // cbDelete(evt, $cardElement);
+    deleteCard(evt, $cardElement);
   });
   $Image.addEventListener("click", () => {
     const name = $Name.textContent;
@@ -35,18 +41,18 @@ function getCard(data, profileData, cbLike, cbDelete, onShow) {
   return $newCard;
 }
 
-export function getCardData(modAddPlace) {
-  const data = {
-    name: modAddPlace.name.value,
-    link: modAddPlace.link.value,
-  };
-  return [data];
-}
+// export function getCardData(modAddPlace) {
+//   const data = {
+//     name: modAddPlace.name.value,
+//     link: modAddPlace.link.value,
+//   };
+//   return [data];
+// }
 
-function tgLike(button) {
+export function toggleLike(button) {
   button.classList.toggle("elements__like-button_active");
 }
 
-function deleteCard(evt, $card) {
+export function deleteCard(evt, $card) {
   $card.remove();
 }

@@ -6,20 +6,14 @@ import "./index.css";
 
 import { getObj, getDataForm } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { renderCards, getCardData } from "./../components/card";
+import { getCard, insertCard } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
   initJobData,
   saveUserData,
 } from "../components/profile";
-import {
-  initShowImage,
-  initClose,
-  openPopup,
-  initSubmit,
-  resetForm,
-} from "./../components/modal";
+import { initShowImage, initShow, resetForm } from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,
@@ -28,58 +22,54 @@ import {
   cardsOpt,
   initialCards,
   userData,
+  validationOpt,
 } from "./../components/options";
 
 //  ----------------------------------
 // Основной код
 
 const uiCtrl = getObj(uiOpt);
-// console.log(uiControls);
 const modImage = getObj(modImageShowOpt);
-// console.log(modImage);
 const modUserProf = getObj(modUserProfOpt);
-// console.log(modUserProf);
 const modAddPlace = getObj(modAddPlaceOpt);
-// console.log(modAddPlace);
 const cardObg = getObj(cardsOpt);
-// console.log(cardObg);
 
-renderCards(initialCards, cardObg, onShow);
+renderCards(initialCards, cardObg);
 renderUserProfile(userData, uiCtrl);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
-enableValidate(modUserProf, modAddPlace);
+enableValidate(validationOpt, modUserProf, modAddPlace);
+
+function renderCards(arrCards, cardObg) {
+  for (let data of arrCards) {
+    insertCard(getCard(data, cardObg, onShow), cardObg);
+  }
+}
 
 function onShow(name, url) {
   initShowImage(name, url, modImage);
-  initClose(modImage.window);
-  openPopup(modImage.window);
-  // console.log(name, url);
+  initShow(modImage);
 }
 
 function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
-  initClose(modUserProf.window, modUserProf.form);
-  initSubmit(modUserProf, onSaveProfile);
-  openPopup(modUserProf.window);
+  initShow(modUserProf, onSaveProfile);
 }
 
 function onSaveProfile(modUserProf) {
-  const data = getDataForm(modUserProf, modUserProfOpt);
-  saveUserData(data, userData);
+  saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
   renderUserProfile(userData, uiCtrl);
 }
 
 function onAddCard(modAddPlace) {
   //
   resetForm(modAddPlace.form);
-  initClose(modAddPlace.window, modAddPlace.form);
-  initSubmit(modAddPlace, onSaveCard);
-  openPopup(modAddPlace.window);
-  // console.log("Нажата кнопка добавить");
+  initShow(modAddPlace, onSaveCard);
 }
 
 function onSaveCard() {
-  const data = [getDataForm(modAddPlace, modAddPlaceOpt)];
-  renderCards(data, cardObg, onShow);
+  insertCard(
+    getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),
+    cardObg
+  );
 }
