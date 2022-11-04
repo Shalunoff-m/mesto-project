@@ -1,5 +1,5 @@
 export function getObj(options) {
-  // debugger;
+  //
   let basePlace = document;
   if (options.base !== document) {
     basePlace = document.querySelector(`${options.base}`);
@@ -40,6 +40,7 @@ export function getObj(options) {
 } */
 
 export function getDataForm(modal, opt) {
+  //
   const data = {};
 
   for (let item in opt.elements) {
@@ -50,7 +51,7 @@ export function getDataForm(modal, opt) {
   }
 
   for (let key in data) {
-    // debugger;
+    //
     // modal[key].value = data[key];
     data[key] = modal[key].value;
   }

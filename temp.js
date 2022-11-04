@@ -11,7 +11,6 @@ function addCardListeners($card) {
       evt.stopPropagation();
     }
     if (evt.target.classList.contains("elements__image")) {
-      debugger;
       const imageClick = evt.target.closest(".elements__item");
       ppShow.popupTextImage =
         imageClick.querySelector(".elements__caption").textContent;

@@ -71,6 +71,7 @@ function onSaveProfile(modUserProf) {
 }
 
 function onAddCard(modAddPlace) {
+  //
   resetForm(modAddPlace.form);
   initClose(modAddPlace.window, modAddPlace.form);
   initSubmit(modAddPlace, onSaveCard);

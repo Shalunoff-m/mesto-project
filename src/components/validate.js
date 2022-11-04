@@ -1,7 +1,7 @@
 export function enableValidate(...arrModal) {
-  // debugger;
+  //
   arrModal.forEach((currentForm) => {
-    // debugger;
+    //
     setEventListeners(currentForm.form, currentForm.savebutton);
   });
 
