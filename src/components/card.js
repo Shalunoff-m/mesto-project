@@ -1,38 +1,38 @@
-export function renderCards(arrCards, uiData, onShow) {
-  function getCard(data, uiData, cbLike, cbDelete) {
-    const template = uiData.template.content;
-    // Клонируем элементы шаблона
-    const $newCard = template.cloneNode(true);
-    const $cardElement = $newCard.querySelector(".elements__item");
-    const $Name = $newCard.querySelector(".elements__caption");
-    const $Image = $newCard.querySelector(".elements__image");
-    const $like = $newCard.querySelector(".elements__like-button");
-    const $delete = $newCard.querySelector(".elements__delete-button");
-
-    // Назначаем параметры
-    $Name.textContent = data.name;
-    $Image.setAttribute("src", data.link);
-    $Image.setAttribute("alt", data.name);
-
-    $like.addEventListener("click", () => {
-      cbLike($like);
-    });
-    $delete.addEventListener("click", (evt) => {
-      cbDelete(evt, $cardElement);
-    });
-    $Image.addEventListener("click", (evt) => {
-      const $card = evt.target.closest(".elements__item");
-      const name = $card.querySelector(".elements__caption").textContent;
-      const url = $card.querySelector(".elements__image").getAttribute("src");
-      onShow(name, url);
-    });
-
-    return $newCard;
-  }
+export function renderCards(arrCards, profileData, onShow) {
   for (let data of arrCards) {
-    const $newCard = getCard(data, uiData, tgLike, deleteCard);
-    uiData.container.prepend($newCard);
+    const $newCard = getCard(data, profileData, tgLike, deleteCard, onShow);
+    profileData.container.prepend($newCard);
   }
+}
+
+function getCard(data, profileData, cbLike, cbDelete, onShow) {
+  const template = profileData.template.content;
+  // Клонируем элементы шаблона
+  const $newCard = template.cloneNode(true);
+  const $cardElement = $newCard.querySelector(".elements__item");
+  const $Name = $newCard.querySelector(".elements__caption");
+  const $Image = $newCard.querySelector(".elements__image");
+  const $like = $newCard.querySelector(".elements__like-button");
+  const $delete = $newCard.querySelector(".elements__delete-button");
+
+  // Назначаем параметры
+  $Name.textContent = data.name;
+  $Image.setAttribute("src", data.link);
+  $Image.setAttribute("alt", data.name);
+
+  $like.addEventListener("click", () => {
+    cbLike($like);
+  });
+  $delete.addEventListener("click", (evt) => {
+    cbDelete(evt, $cardElement);
+  });
+  $Image.addEventListener("click", () => {
+    const name = $Name.textContent;
+    const url = $Image.getAttribute("src");
+    onShow(name, url);
+  });
+
+  return $newCard;
 }
 
 export function getCardData(modAddPlace) {
