@@ -6,12 +6,9 @@ export function initShowImage(name, url, modImage) {
 }
 
 export function initShow(popup, cbForm) {
-  // console.log(popup);
-
   // берем элементы
   const { closeButton, modal } = popup;
   let form = false;
-  // debugger;
   if (popup.form) {
     form = popup.form;
   }
@@ -27,30 +24,33 @@ export function initShow(popup, cbForm) {
   // Открываем сам popup
   openPopup(modal);
 
+  // Функция обработки поведения формы
   function sendData(evt) {
     evt.preventDefault();
     cbForm(popup);
     closePopup(evt);
   }
 
+  // Функция для закрытия модалки
   function closePopup(evt) {
     // Отменяем всплытие события
     evt.stopPropagation();
-    // console.log(evt.type);
 
     // Проверяем событие
     if (checkElement(evt)) {
-      // снимаем все слушатели
+      // Снимаем все слушатели
       closeButton.removeEventListener("click", closePopup);
       modal.removeEventListener("click", closePopup);
       document.removeEventListener("keydown", closePopup);
       // закрываем активное модальное окно
       modal.classList.remove("popup_opened");
+      // Если есть форма, то снимаем слушатель и с неё
       if (form) {
         form.removeEventListener("submit", sendData);
       }
     }
 
+    // Функция проверки события
     function checkElement(evt) {
       if (evt.target.classList.contains("popup__close")) return true;
       if (evt.target.classList.contains("popup")) return true;
@@ -65,18 +65,13 @@ export function initShow(popup, cbForm) {
     }
   }
 
+  // функция показа окна
   function openPopup(modal) {
     modal.classList.add("popup_opened");
   }
 }
 
-export function initSubmit(modUserProf, onSaveProfile) {
-  modUserProf.form.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    onSaveProfile(modUserProf);
-  });
-}
-
+// сброс всех полей формы
 export function resetForm(form) {
   form.reset();
 }

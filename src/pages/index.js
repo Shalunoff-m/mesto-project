@@ -72,5 +72,4 @@ function onSaveCard() {
     getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),
     cardObg
   );
-  // renderCards(data, cardObg, onShow);
 }

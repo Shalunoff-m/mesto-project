@@ -84,6 +84,7 @@ export const cardsOpt = {
   },
 };
 
+// названия классов для подключения к функции валидации
 export const validationOpt = {
   inputError: "basic-data-input__input_type_error",
   labelError: "basic-data-input__input-error_active",
