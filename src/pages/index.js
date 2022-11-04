@@ -15,8 +15,7 @@ import {
 } from "../components/profile";
 import {
   initShowImage,
-  initClose,
-  openPopup,
+  initShow,
   initSubmit,
   resetForm,
 } from "./../components/modal";
@@ -52,30 +51,27 @@ enableValidate(modUserProf, modAddPlace);
 
 function onShow(name, url) {
   initShowImage(name, url, modImage);
-  initClose(modImage.window);
-  openPopup(modImage.window);
-  // console.log(name, url);
+  initShow(modImage);
 }
 
 function onEdit(modUserProf) {
   initJobData(modUserProf, userData);
-  initClose(modUserProf.window, modUserProf.form);
-  initSubmit(modUserProf, onSaveProfile);
-  openPopup(modUserProf.window);
+  initShow(modUserProf, onSaveProfile);
+  // initSubmit(modUserProf, onSaveProfile);
+  // openPopup(modUserProf.window);
 }
 
 function onSaveProfile(modUserProf) {
-  const data = getDataForm(modUserProf, modUserProfOpt);
-  saveUserData(data, userData);
+  saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
   renderUserProfile(userData, uiCtrl);
 }
 
 function onAddCard(modAddPlace) {
   //
   resetForm(modAddPlace.form);
-  initClose(modAddPlace.window, modAddPlace.form);
-  initSubmit(modAddPlace, onSaveCard);
-  openPopup(modAddPlace.window);
+  initShow(modAddPlace, onSaveCard);
+  // initSubmit(modAddPlace, onSaveCard);
+  // openPopup(modAddPlace.window);
   // console.log("Нажата кнопка добавить");
 }
 

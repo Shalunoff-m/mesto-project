@@ -1,44 +1,72 @@
 export function initShowImage(name, url, modImage) {
-  // console.log(name, url, modImage);
-
+  // debugger;
   modImage.description.textContent = name;
   modImage.image.setAttribute("src", url);
   modImage.image.setAttribute("alt", name);
 }
 
-export function openPopup(modal) {
-  modal.classList.add("popup_opened");
-}
+export function initShow(popup, cbForm) {
+  // console.log(popup);
 
-export function closePopup(modal) {
-  modal.classList.remove("popup_opened");
-}
+  // берем элементы
+  const { closeButton, modal } = popup;
+  let form = false;
+  // debugger;
+  if (popup.form) {
+    form = popup.form;
+  }
 
-export function initClose(modal, form) {
-  modal.addEventListener("click", closeModal);
-  document.addEventListener("keydown", clickEsc);
+  // вешаем слушатели
+  closeButton.addEventListener("click", closePopup);
+  modal.addEventListener("click", closePopup);
+  document.addEventListener("keydown", closePopup);
+  // Слушатель на форму, если она есть
   if (form) {
-    form.addEventListener("submit", () => {
-      closePopup(modal);
-    });
+    form.addEventListener("submit", sendData);
+  }
+  // Открываем сам popup
+  openPopup(modal);
+
+  function sendData(evt) {
+    evt.preventDefault();
+    cbForm(popup);
+    closePopup(evt);
   }
 
-  function closeModal(evt) {
-    if (
-      evt.target.classList.contains("popup__close") ||
-      evt.target.classList.contains("popup")
-    ) {
-      closePopup(modal);
-      modal.removeEventListener("click", closeModal);
-      document.removeEventListener("keydown", clickEsc);
+  function closePopup(evt) {
+    // Отменяем всплытие события
+    evt.stopPropagation();
+    // console.log(evt.type);
+
+    // Проверяем событие
+    if (checkElement(evt)) {
+      // снимаем все слушатели
+      closeButton.removeEventListener("click", closePopup);
+      modal.removeEventListener("click", closePopup);
+      document.removeEventListener("keydown", closePopup);
+      // закрываем активное модальное окно
+      modal.classList.remove("popup_opened");
+      if (form) {
+        form.removeEventListener("submit", sendData);
+      }
+    }
+
+    function checkElement(evt) {
+      if (evt.target.classList.contains("popup__close")) return true;
+      if (evt.target.classList.contains("popup")) return true;
+      // if (evt.target.classList.contains("popup")) return true;
+      if (evt.key === "Escape") {
+        return true;
+      }
+      if (evt.type === "submit") {
+        return true;
+      }
+      return false;
     }
   }
-  function clickEsc(evt) {
-    if (evt.key === "Escape") {
-      closePopup(modal);
-      modal.removeEventListener("click", closeModal);
-      document.removeEventListener("keydown", clickEsc);
-    }
+
+  function openPopup(modal) {
+    modal.classList.add("popup_opened");
   }
 }
 
