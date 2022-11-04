@@ -1,15 +1,18 @@
 export function renderUserProfile(userData, uiCtrl) {
+  // console.log(userData);
   uiCtrl.labelUserName.textContent = userData.name;
-  uiCtrl.labelUserJob.textContent = userData.job;
+  uiCtrl.labelUserJob.textContent = userData.about;
+  // console.log(userData.avatar);
+  uiCtrl.photo.setAttribute("src", userData.avatar);
 }
 
 export function activateBt(bt, cb, modal) {
   bt.addEventListener("click", () => cb(modal));
 }
 
-export function initJobData(modUserProf, userData) {
+export function initJobData(userData, modUserProf) {
   modUserProf.name.value = userData.name;
-  modUserProf.job.value = userData.job;
+  modUserProf.job.value = userData.about;
 }
 
 export function saveUserData(data, userData) {

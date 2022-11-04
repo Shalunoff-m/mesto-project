@@ -5,10 +5,10 @@ const profile = "users/me";
 export const api = {
   token,
   group,
-  get,
+  getProfile,
 };
 
-function get() {
+function getProfile(cbForData, targetElement) {
   return fetch(`${address}/v1/${group}/${profile}`, {
     headers: {
       authorization: token,
@@ -21,7 +21,8 @@ function get() {
       return Promise.reject(`Что-то пошло не так, ответа нет: ${res.status}`);
     })
     .then((result) => {
-      console.log(result);
+      // console.log(result);
+      cbForData(result, targetElement);
     })
     .catch((err) => {
       console.log(err);

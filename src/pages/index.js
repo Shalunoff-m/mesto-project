@@ -4,6 +4,7 @@ import "./index.css";
 //  ----------------------------------
 // импорт js модулей
 
+import { api } from "./../components/api";
 import { getObj, getDataForm } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
 import { getCard, insertCard } from "./../components/card";
@@ -34,8 +35,9 @@ const modUserProf = getObj(modUserProfOpt);
 const modAddPlace = getObj(modAddPlaceOpt);
 const cardObg = getObj(cardsOpt);
 
+// renderUserProfile(api.getProfile(), uiCtrl);
+api.getProfile(renderUserProfile, uiCtrl);
 renderCards(initialCards, cardObg);
-renderUserProfile(userData, uiCtrl);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 enableValidate(validationOpt, modUserProf, modAddPlace);
@@ -52,7 +54,8 @@ function onShow(name, url) {
 }
 
 function onEdit(modUserProf) {
-  initJobData(modUserProf, userData);
+  api.getProfile(initJobData, modUserProf);
+  initJobData(userData, modUserProf);
   initShow(modUserProf, onSaveProfile);
 }
 
