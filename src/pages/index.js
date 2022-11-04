@@ -63,7 +63,7 @@ function onSaveProfile(modUserProf) {
 
 function onAddCard(modAddPlace) {
   //
-  resetForm(modAddPlace.form);
+  resetForm(modAddPlace);
   initShow(modAddPlace, onSaveCard);
 }
 

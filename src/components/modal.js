@@ -72,6 +72,7 @@ export function initShow(popup, cbForm) {
 }
 
 // сброс всех полей формы
-export function resetForm(form) {
-  form.reset();
+export function resetForm(popup) {
+  popup.form.reset();
+  popup.savebutton.disabled = true;
 }
