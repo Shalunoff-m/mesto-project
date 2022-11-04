@@ -22,6 +22,7 @@ import {
   cardsOpt,
   initialCards,
   userData,
+  validationOpt,
 } from "./../components/options";
 
 //  ----------------------------------
@@ -37,7 +38,7 @@ renderCards(initialCards, cardObg);
 renderUserProfile(userData, uiCtrl);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
-enableValidate(modUserProf, modAddPlace);
+enableValidate(validationOpt, modUserProf, modAddPlace);
 
 function renderCards(arrCards, cardObg) {
   for (let data of arrCards) {
@@ -69,7 +70,7 @@ function onAddCard(modAddPlace) {
 function onSaveCard() {
   insertCard(
     getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),
-    cardObg.container
+    cardObg
   );
   // renderCards(data, cardObg, onShow);
 }

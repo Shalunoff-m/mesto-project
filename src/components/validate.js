@@ -1,4 +1,4 @@
-export function enableValidate(...arrModal) {
+export function enableValidate(validationOpt, ...arrModal) {
   //
   arrModal.forEach((currentForm) => {
     //
@@ -55,15 +55,15 @@ export function enableValidate(...arrModal) {
 
   function showInputError(form, input, error) {
     const formError = form.querySelector(`.${input.id}-error`);
-    input.classList.add("basic-data-input__input_type_error");
-    formError.classList.add("basic-data-input__input-error_active");
+    input.classList.add(validationOpt.inputError);
+    formError.classList.add(validationOpt.labelError);
     formError.textContent = error;
   }
 
   function hideInputError(form, input) {
     const formError = form.querySelector(`.${input.id}-error`);
-    input.classList.remove("basic-data-input__input_type_error");
-    formError.classList.remove("basic-data-input__input-error_active");
-    formError.textContent = "Верно";
+    input.classList.remove(validationOpt.inputError);
+    formError.classList.remove(validationOpt.labelError);
+    formError.textContent = validationOpt.validInput;
   }
 }

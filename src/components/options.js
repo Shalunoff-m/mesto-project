@@ -83,3 +83,9 @@ export const cardsOpt = {
     template: { key: "#card", type: "simple" },
   },
 };
+
+export const validationOpt = {
+  inputError: "basic-data-input__input_type_error",
+  labelError: "basic-data-input__input-error_active",
+  validInput: "Верно",
+};
