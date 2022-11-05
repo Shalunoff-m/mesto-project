@@ -29,6 +29,7 @@ import {
   cardsOpt,
   initialCards,
   validationOpt,
+  modAvatarOpt,
 } from "./../components/options";
 
 //  ----------------------------------
@@ -38,9 +39,10 @@ const uiCtrl = getObj(uiOpt);
 const modImage = getObj(modImageShowOpt);
 const modUserProf = getObj(modUserProfOpt);
 const modAddPlace = getObj(modAddPlaceOpt);
+const modAvatar = getObj(modAvatarOpt);
 const cardObg = getObj(cardsOpt);
 
-// console.log(api.getServerData());
+console.log(modAvatar);
 
 Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .then(([remoteProfile, cards]) => {
@@ -57,7 +59,10 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
 
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
-enableValidate(validationOpt, modUserProf, modAddPlace);
+// TODO Здесь нужно написать колбек инициализ окно аватарки и передать его, а в него передать ссылку на нынешний аватар
+/* Короче модалка есть, нужно написать обработчик на переброс активной ссылки, после чего написать АПИ запрос на обновление фото на сервере, и из ответа прорендерить новое фото на страницу */
+activateBt(uiCtrl.uiEditAvatarButton, onAddCard, modAvatar);
+enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
 // BM js/ создание карточек
 function renderCards(arrCards, cardObg, remoteProfile) {
@@ -117,10 +122,8 @@ function onLikeCard(card, likeButton, opt) {
       toggleLike(likeButton);
     });
   }
-
-  // TODO доделать отправку запроса на сервер
 }
-
+// TODO Не хватает одного окна подтверждения удаления
 // BM JS/ Удаление карточки
 function onDeleteCard(card) {
   console.log("Попытка удаления");

@@ -34,6 +34,18 @@ export const uiOpt = {
     labelUserJob: { key: ".profile__job", type: "simple" },
     uiEditButton: { key: ".profile__edit-button", type: "simple" },
     uiAddCardButton: { key: ".profile__add-button", type: "simple" },
+    uiEditAvatarButton: { key: ".profile__avatar", type: "simple" },
+  },
+};
+
+export const modAvatarOpt = {
+  base: document,
+  elements: {
+    modal: { key: "#popup-avatar", type: "base" },
+    form: { key: "popup-avatar", type: "formMain" },
+    link: { key: "link", type: "formElement" },
+    savebutton: { key: ".popup__submit", type: "simple" },
+    closeButton: { key: ".popup__close", type: "simple" },
   },
 };
 

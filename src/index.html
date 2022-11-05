@@ -150,6 +150,37 @@
       </div>
     </div>
 
+    <!-- BM html/ модалка редактирования аватара -->
+    <div class="popup" id="popup-avatar">
+      <div class="popup__container">
+        <h2 class="popup__header">Обновить аватар</h2>
+        <form
+          id="popup-avatar"
+          name="popup-avatar"
+          class="popup__form"
+          action="#"
+          novalidate
+        >
+          <fieldset class="popup__basic-data-input basic-data-input">
+            <input
+              type="url"
+              class="basic-data-input__input"
+              name="link"
+              id="avatar-link"
+              value=""
+              placeholder="Вставьте ссылку на изображение профиля"
+              required
+            />
+            <span class="basic-data-input__input-error avatar-link-error"
+              >Это сообщение об ошибке</span
+            >
+          </fieldset>
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </div>
+    </div>
+
     <!-- BM html/ модалка просмотра изображений -->
     <div class="popup" id="view-image">
       <div class="popup__image-container">
