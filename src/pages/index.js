@@ -53,16 +53,7 @@ activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 enableValidate(validationOpt, modUserProf, modAddPlace);
 
-function onLikeCard(id) {
-  // const id = evt.target.closest.querySelector(".elements__item");
-  console.log(`Попытка лайка ${id}`);
-  // TODO доделать отправку запроса на сервер
-}
-
-function onDeleteCard() {
-  console.log("Попытка удаления");
-}
-
+// BM js/ создание карточек
 function renderCards(arrCards, cardObg, remoteProfile) {
   for (let data of arrCards) {
     insertCard(
@@ -76,29 +67,50 @@ function renderCards(arrCards, cardObg, remoteProfile) {
   }
 }
 
+// BM js/ просмотр изображений
 function onShow(name, url) {
   getDataImage(name, url, modImage);
   initShow(modImage, { type: "simple" });
 }
 
+// BM js/ редактирование профиля
 function onEdit(modUserProf) {
   // debugger;
   initJobData(uiCtrl, modUserProf);
   initShow(modUserProf, { type: "form", cb: onSaveProfile, reset: false });
 }
 
+// BM JS/ Сохранение профиля
 function onSaveProfile(modUserProf) {
   // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
+  const dataForm = getDataForm(modUserProf, modUserProfOpt);
+  api.saveUserProfile(dataForm).then((newRemoteUserData) => {
+    console.log(newRemoteUserData);
+    renderUserProfile(newRemoteUserData, uiCtrl);
+  });
 
-  console.log(getDataForm(modUserProf, modUserProfOpt));
   // debugger;
   // renderUserProfile(userData, uiCtrl);
 }
 
+// BM JS/ Лайк карточки
+function onLikeCard(id) {
+  // const id = evt.target.closest.querySelector(".elements__item");
+  console.log(`Попытка лайка ${id}`);
+  // TODO доделать отправку запроса на сервер
+}
+
+// BM JS/ Удаление карточки
+function onDeleteCard() {
+  console.log("Попытка удаления");
+}
+
+// BM JS/ Открытие модалки сохраниения карточки
 function onAddCard(modAddPlace) {
   initShow(modAddPlace, { type: "form", cb: onSaveCard, reset: true });
 }
 
+// BM JS/Сохранение карточки
 function onSaveCard() {
   insertCard(
     getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),

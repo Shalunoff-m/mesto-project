@@ -10,7 +10,7 @@ export function insertCard(card, cardObj) {
 }
 
 export function getCard(data, cardObg, remoteProfile, cbCard) {
-  console.log(data);
+  // console.log(data);
   // console.log(remoteProfile);
   const template = cardObg.template.content;
   // Клонируем элементы шаблона
