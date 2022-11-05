@@ -9,6 +9,7 @@ export const api = {
   cards,
   profile,
   getServerData,
+  saveUserProfile,
 };
 
 function getServerData(opt) {
@@ -16,6 +17,23 @@ function getServerData(opt) {
     headers: {
       authorization: token,
     },
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+function saveUserProfile() {
+  // TODO Подставить данные из формы
+  return fetch(`${address}/v1/${group}/me`, {
+    method: "PATCH",
+    headers: {
+      authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Какое-то имя",
+      about: "Какие-то занятия",
+    }),
   }).then((res) => {
     return res.json();
   });

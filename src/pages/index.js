@@ -40,6 +40,7 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .then(([remoteProfile, cards]) => {
     // console.log(remoteProfile, cards);
     renderUserProfile(remoteProfile, uiCtrl);
+    renderCards(cards, cardObg, remoteProfile);
   })
   .catch((errData) => {
     console.log(errData);
@@ -47,14 +48,31 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
 
 //
 // api.getServerData(renderUserProfile, uiCtrl);
-renderCards(initialCards, cardObg);
+
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 enableValidate(validationOpt, modUserProf, modAddPlace);
 
-function renderCards(arrCards, cardObg) {
+function onLikeCard(id) {
+  // const id = evt.target.closest.querySelector(".elements__item");
+  console.log(`Попытка лайка ${id}`);
+  // TODO доделать отправку запроса на сервер
+}
+
+function onDeleteCard() {
+  console.log("Попытка удаления");
+}
+
+function renderCards(arrCards, cardObg, remoteProfile) {
   for (let data of arrCards) {
-    insertCard(getCard(data, cardObg, onShow), cardObg);
+    insertCard(
+      getCard(data, cardObg, remoteProfile, {
+        onLikeCard,
+        onDeleteCard,
+        onShow,
+      }),
+      cardObg
+    );
   }
 }
 
@@ -70,9 +88,11 @@ function onEdit(modUserProf) {
 }
 
 function onSaveProfile(modUserProf) {
-  saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
-  debugger;
-  renderUserProfile(userData, uiCtrl);
+  // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
+
+  console.log(getDataForm(modUserProf, modUserProfOpt));
+  // debugger;
+  // renderUserProfile(userData, uiCtrl);
 }
 
 function onAddCard(modAddPlace) {
