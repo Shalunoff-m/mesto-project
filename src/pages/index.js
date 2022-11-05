@@ -14,7 +14,7 @@ import {
   initJobData,
   saveUserData,
 } from "../components/profile";
-import { initShowImage, initShow, resetForm } from "./../components/modal";
+import { getDataImage, initShow } from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,
@@ -49,14 +49,13 @@ function renderCards(arrCards, cardObg) {
 }
 
 function onShow(name, url) {
-  initShowImage(name, url, modImage);
-  initShow(modImage);
+  getDataImage(name, url, modImage);
+  initShow(modImage, { type: "simple" });
 }
 
 function onEdit(modUserProf) {
-  api.getProfile(initJobData, modUserProf);
-  // initJobData(userData, modUserProf);
-  initShow(modUserProf, onSaveProfile);
+  initJobData(modUserProf, userData);
+  initShow(modUserProf, { type: "form", cb: onSaveProfile, reset: false });
 }
 
 function onSaveProfile(modUserProf) {
@@ -65,9 +64,7 @@ function onSaveProfile(modUserProf) {
 }
 
 function onAddCard(modAddPlace) {
-  //
-  resetForm(modAddPlace);
-  initShow(modAddPlace, onSaveCard);
+  initShow(modAddPlace, { type: "form", cb: onSaveCard, reset: true });
 }
 
 function onSaveCard() {
