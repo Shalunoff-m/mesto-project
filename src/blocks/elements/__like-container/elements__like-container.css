@@ -1,0 +1,12 @@
+.elements__like-container{
+  display: flex;
+  outline: 1px solid red;
+  /* height: 100%; */
+
+  flex-direction:column;
+  gap: 3px;
+  width: auto;
+  align-items: center;
+  margin-right: 22px;
+  margin-top: 3px
+}
