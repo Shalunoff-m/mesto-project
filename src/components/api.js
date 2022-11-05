@@ -40,16 +40,15 @@ function saveUserProfile(dataForm) {
 }
 
 function saveNewCard(dataForm) {
-  // TODO Подставить данные из формы
-  return fetch(`${address}/v1/${group}/${profile}`, {
-    method: "PATCH",
+  return fetch(`${address}/v1/${group}/${cards}`, {
+    method: "POST",
     headers: {
       authorization: token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       name: dataForm.name,
-      about: dataForm.job,
+      link: dataForm.link,
     }),
   }).then((res) => {
     return res.json();

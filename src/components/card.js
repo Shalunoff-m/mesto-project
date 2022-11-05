@@ -5,8 +5,13 @@
   }
 } */
 
-export function insertCard(card, cardObj) {
-  cardObj.container.prepend(card);
+export function insertCard(card, cardObj, opt) {
+  if (opt.to === "start") {
+    cardObj.container.prepend(card);
+  }
+  if (opt.to === "end") {
+    cardObj.container.append(card);
+  }
 }
 
 export function getCard(data, cardObg, remoteProfile, cbCard) {
@@ -55,9 +60,9 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
 }
 
 function checkLike(data, remoteProfile) {
-  // const { _id } = remoteProfile;
+  const { _id } = remoteProfile;
   // HACK Здесь подставлен чужой id для проверки
-  const _id = "ceab3c71e9e6563c74cf0b8f";
+  // const _id = "ceab3c71e9e6563c74cf0b8f";
   const { likes } = data;
   let answer = likes.some((like) => {
     return like._id === _id;
@@ -66,9 +71,9 @@ function checkLike(data, remoteProfile) {
 }
 
 function checkOwner(data, remoteProfile) {
-  // const { _id } = remoteProfile;
+  const { _id } = remoteProfile;
   // HACK Здесь подставлен чужой id для проверки
-  const _id = "ceab3c71e9e6563c74cf0b8f";
+  // const _id = "ceab3c71e9e6563c74cf0b8f";
   const { owner } = data;
   // console.log(owner._id === _id);
   return owner._id === _id;

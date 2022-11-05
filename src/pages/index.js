@@ -62,7 +62,8 @@ function renderCards(arrCards, cardObg, remoteProfile) {
         onDeleteCard,
         onShow,
       }),
-      cardObg
+      cardObg,
+      { to: "end" }
     );
   }
 }
@@ -112,8 +113,18 @@ function onAddCard(modAddPlace) {
 
 // BM JS/Сохранение карточки
 function onSaveCard() {
-  insertCard(
-    getCard(getDataForm(modAddPlace, modAddPlaceOpt), cardObg, onShow),
-    cardObg
-  );
+  Promise.all([
+    api.getServerData(api.profile),
+    api.saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt)),
+  ]).then(([remoteProfile, newCard]) => {
+    insertCard(
+      getCard(newCard, cardObg, remoteProfile, {
+        onLikeCard,
+        onDeleteCard,
+        onShow,
+      }),
+      cardObg,
+      { to: "start" }
+    );
+  });
 }
