@@ -26,11 +26,6 @@ export const initialCards = [
   },
 ];
 
-export const userData = {
-  name: "Жак-Ив Кусто",
-  job: "Исследователь океана",
-};
-
 export const uiOpt = {
   base: document,
   elements: {

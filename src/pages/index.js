@@ -22,7 +22,6 @@ import {
   modAddPlaceOpt,
   cardsOpt,
   initialCards,
-  userData,
   validationOpt,
 } from "./../components/options";
 
@@ -38,12 +37,15 @@ const cardObg = getObj(cardsOpt);
 // console.log(api.getServerData());
 
 Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
-  .then(([profile, cards]) => console.log(profile, cards))
+  .then(([remoteProfile, cards]) => {
+    // console.log(remoteProfile, cards);
+    renderUserProfile(remoteProfile, uiCtrl);
+  })
   .catch((errData) => {
     console.log(errData);
   });
 
-// renderUserProfile(api.getServerData(), uiCtrl);
+//
 // api.getServerData(renderUserProfile, uiCtrl);
 renderCards(initialCards, cardObg);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
@@ -62,12 +64,14 @@ function onShow(name, url) {
 }
 
 function onEdit(modUserProf) {
-  initJobData(modUserProf, userData);
+  // debugger;
+  initJobData(uiCtrl, modUserProf);
   initShow(modUserProf, { type: "form", cb: onSaveProfile, reset: false });
 }
 
 function onSaveProfile(modUserProf) {
   saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
+  debugger;
   renderUserProfile(userData, uiCtrl);
 }
 
