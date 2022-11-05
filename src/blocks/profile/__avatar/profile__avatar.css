@@ -1,7 +1,7 @@
 .profile__avatar {
   overflow: hidden;
-  width: 100%;
-  padding-bottom: 100%;
+  width: 120px;
+  padding-bottom: 120px;
   position: relative;
   border-radius: 60px;
   cursor: pointer;

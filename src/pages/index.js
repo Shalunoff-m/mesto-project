@@ -35,8 +35,16 @@ const modUserProf = getObj(modUserProfOpt);
 const modAddPlace = getObj(modAddPlaceOpt);
 const cardObg = getObj(cardsOpt);
 
-// renderUserProfile(api.getProfile(), uiCtrl);
-api.getProfile(renderUserProfile, uiCtrl);
+// console.log(api.getServerData());
+
+Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
+  .then(([profile, cards]) => console.log(profile, cards))
+  .catch((errData) => {
+    console.log(errData);
+  });
+
+// renderUserProfile(api.getServerData(), uiCtrl);
+// api.getServerData(renderUserProfile, uiCtrl);
 renderCards(initialCards, cardObg);
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
