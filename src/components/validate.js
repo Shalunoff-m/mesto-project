@@ -67,3 +67,9 @@ export function enableValidate(validationOpt, ...arrModal) {
     formError.textContent = validationOpt.validInput;
   }
 }
+
+// сброс всех полей формы
+export function resetForm(popup) {
+  popup.form.reset();
+  popup.savebutton.setAttribute("disabled", true);
+}

@@ -1,25 +1,32 @@
-export function initShowImage(name, url, modImage) {
+import { resetForm } from "./validate";
+
+export function getDataImage(name, url, modImage) {
   // debugger;
   modImage.description.textContent = name;
   modImage.image.setAttribute("src", url);
   modImage.image.setAttribute("alt", name);
 }
 
-export function initShow(popup, cbForm) {
+export function initShow(popup, options) {
   // берем элементы
-  const { closeButton, modal } = popup;
   let form = false;
-  if (popup.form) {
+
+  const { closeButton, modal } = popup;
+  if (options.type === "form") {
     form = popup.form;
   }
 
   // вешаем слушатели
+
   closeButton.addEventListener("click", closePopup);
   modal.addEventListener("click", closePopup);
   document.addEventListener("keydown", closePopup);
   // Слушатель на форму, если она есть
-  if (form) {
+  if (options.type === "form") {
     form.addEventListener("submit", sendData);
+  }
+  if (options.reset === true) {
+    resetForm(popup);
   }
   // Открываем сам popup
   openPopup(modal);
@@ -27,7 +34,7 @@ export function initShow(popup, cbForm) {
   // Функция обработки поведения формы
   function sendData(evt) {
     evt.preventDefault();
-    cbForm(popup);
+    options.cb(popup);
     closePopup(evt);
   }
 
@@ -45,7 +52,7 @@ export function initShow(popup, cbForm) {
       // закрываем активное модальное окно
       modal.classList.remove("popup_opened");
       // Если есть форма, то снимаем слушатель и с неё
-      if (form) {
+      if (options.type === "form") {
         form.removeEventListener("submit", sendData);
       }
     }
@@ -69,10 +76,4 @@ export function initShow(popup, cbForm) {
   function openPopup(modal) {
     modal.classList.add("popup_opened");
   }
-}
-
-// сброс всех полей формы
-export function resetForm(popup) {
-  popup.form.reset();
-  popup.savebutton.disabled = true;
 }
