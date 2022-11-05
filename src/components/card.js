@@ -15,7 +15,7 @@ export function insertCard(card, cardObj, opt) {
 }
 
 export function getCard(data, cardObg, remoteProfile, cbCard) {
-  // console.log(data);
+  console.log(data);
   // console.log(remoteProfile);
   const template = cardObg.template.content;
   // Клонируем элементы шаблона
@@ -24,21 +24,29 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
   const $Name = $newCard.querySelector(".elements__caption");
   const $Image = $newCard.querySelector(".elements__image");
   const $like = $newCard.querySelector(".elements__like-button");
+  const $counter = $newCard.querySelector(".elements__like-counter");
   const $delete = $newCard.querySelector(".elements__delete-button");
 
   $Name.textContent = data.name;
   $Image.setAttribute("src", data.link);
   $Image.setAttribute("alt", data.name);
   $cardElement.id = data._id;
+  $counter.textContent = data.likes.length;
 
   $like.addEventListener("click", (evt) => {
     // cbLike($like);
-    cbCard.onLikeCard($cardElement.id);
+    // debugger;
+    if (isActive($like)) {
+      cbCard.onLikeCard($cardElement, $like, { act: "dislike" });
+    } else {
+      cbCard.onLikeCard($cardElement, $like, { act: "like" });
+    }
+
     // toggleLike($like);
   });
   $delete.addEventListener("click", (evt) => {
     // cbDelete(evt, $cardElement);
-    cbCard.onDeleteCard();
+    cbCard.onDeleteCard($cardElement);
     // deleteCard(evt, $cardElement);
   });
   $Image.addEventListener("click", () => {
@@ -57,6 +65,18 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
   // Назначаем параметры изображения
 
   return $newCard;
+}
+
+function isActive(likeButton) {
+  if (likeButton.classList.contains("elements__like-button_active")) {
+    return true;
+  }
+  return false;
+}
+
+export function setCounter(res, card) {
+  const count = card.querySelector(".elements__like-counter");
+  count.textContent = res.likes.length;
 }
 
 function checkLike(data, remoteProfile) {
@@ -83,6 +103,6 @@ export function toggleLike(button) {
   button.classList.toggle("elements__like-button_active");
 }
 
-export function deleteCard(evt, $card) {
+export function deleteCard($card) {
   $card.remove();
 }

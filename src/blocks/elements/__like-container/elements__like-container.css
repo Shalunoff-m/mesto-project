@@ -1,8 +1,5 @@
 .elements__like-container{
   display: flex;
-  outline: 1px solid red;
-  /* height: 100%; */
-
   flex-direction:column;
   gap: 3px;
   width: auto;

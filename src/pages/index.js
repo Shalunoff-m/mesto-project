@@ -7,7 +7,13 @@ import "./index.css";
 import { api } from "./../components/api";
 import { getObj, getDataForm } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { getCard, insertCard } from "./../components/card";
+import {
+  getCard,
+  insertCard,
+  deleteCard,
+  toggleLike,
+  setCounter,
+} from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
@@ -95,15 +101,32 @@ function onSaveProfile(modUserProf) {
 }
 
 // BM JS/ Лайк карточки
-function onLikeCard(id) {
+function onLikeCard(card, likeButton, opt) {
   // const id = evt.target.closest.querySelector(".elements__item");
-  console.log(`Попытка лайка ${id}`);
+
+  if (opt.act === "dislike") {
+    api.removeLike(card.id).then((res) => {
+      setCounter(res, card);
+      toggleLike(likeButton);
+    });
+    // запрос на удаление
+  } else {
+    // запрос на установку
+    api.addLike(card.id).then((res) => {
+      setCounter(res, card);
+      toggleLike(likeButton);
+    });
+  }
+
   // TODO доделать отправку запроса на сервер
 }
 
 // BM JS/ Удаление карточки
-function onDeleteCard() {
+function onDeleteCard(card) {
   console.log("Попытка удаления");
+  api.deleteCard(card.id).then(() => {
+    deleteCard(card);
+  });
 }
 
 // BM JS/ Открытие модалки сохраниения карточки

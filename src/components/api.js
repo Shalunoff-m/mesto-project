@@ -3,6 +3,7 @@ const group = "plus-cohort-16";
 const address = "https://nomoreparties.co";
 const profile = "users/me";
 const cards = "cards";
+const like = "likes";
 export const api = {
   token,
   group,
@@ -11,10 +12,46 @@ export const api = {
   getServerData,
   saveUserProfile,
   saveNewCard,
+  deleteCard,
+  addLike,
+  removeLike,
 };
 
 function getServerData(opt) {
   return fetch(`${address}/v1/${group}/${opt}`, {
+    headers: {
+      authorization: token,
+    },
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+function deleteCard(id) {
+  return fetch(`${address}/v1/${group}/${cards}/${id}`, {
+    method: "DELETE",
+    headers: {
+      authorization: token,
+    },
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+function addLike(id) {
+  return fetch(`${address}/v1/${group}/${cards}/${like}/${id}`, {
+    method: "PUT",
+    headers: {
+      authorization: token,
+    },
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+function removeLike(id) {
+  return fetch(`${address}/v1/${group}/${cards}/${like}/${id}`, {
+    method: "DELETE",
     headers: {
       authorization: token,
     },
