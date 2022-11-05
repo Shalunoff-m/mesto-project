@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  max-width: 90%;
+  max-width: 80%;
   position: relative;
   align-items: flex-start;
 }
@@ -11,12 +11,6 @@
   .profile__profile-info {
     justify-content: center;
     align-items: center;
-    max-width: 80%;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .profile__profile-info {
-    width: 80%;
-  }
-}
