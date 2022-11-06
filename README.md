@@ -16,3 +16,5 @@
 
 ---
 Работы выполнил студент 16 когорты. **Шалунов Максим**
+
+Deploy проекта на GH-PAGES: <https://shalunoff-m.github.io/mesto-project/>
