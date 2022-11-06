@@ -110,4 +110,7 @@ export const validationOpt = {
   inputError: "basic-data-input__input_type_error",
   labelError: "basic-data-input__input-error_active",
   validInput: "Верно",
+  savebutton: ".popup__submit",
+  form: ".popup__form",
+  popup: ".popup",
 };

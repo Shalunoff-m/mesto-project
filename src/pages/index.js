@@ -76,7 +76,7 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
-enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
+enableValidate(validationOpt);
 
 // BM js/ глобальный обработчик форм
 function onFormAction(evt) {
