@@ -15,13 +15,7 @@ import {
   setButtonText,
 } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import {
-  getCard,
-  insertCard,
-  deleteCard,
-  toggleLike,
-  setCounter,
-} from "./../components/card";
+import { getCard, insertCard, deleteCard } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
@@ -141,7 +135,6 @@ function renderCards(arrCards, cardObg, userId) {
   for (let data of arrCards) {
     insertCard(
       getCard(data, cardObg, userId, {
-        onLikeCard,
         onDeleteCard,
         onShow,
       }),
@@ -167,33 +160,6 @@ function onShow(name, url) {
 function onEdit(modUserProf) {
   initJobData(uiCtrl, modUserProf);
   openPopup(modUserProf.modal, { modal: modUserProf, reset: false });
-}
-
-// BM JS/ Лайк карточки
-function onLikeCard(card, likeButton, opt) {
-  // запрос на удаление
-  if (opt.act === "dislike") {
-    api
-      .removeLike(card.id)
-      .then((res) => {
-        setCounter(res, card);
-        toggleLike(likeButton);
-      })
-      .catch((errData) => {
-        console.log(errData);
-      });
-  } else {
-    // запрос на установку
-    api
-      .addLike(card.id)
-      .then((res) => {
-        setCounter(res, card);
-        toggleLike(likeButton);
-      })
-      .catch((errData) => {
-        console.log(errData);
-      });
-  }
 }
 
 // BM JS/ Удаление карточки

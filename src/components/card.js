@@ -1,3 +1,5 @@
+import { api } from "./api";
+
 export function insertCard(card, cardObj, opt) {
   if (opt.to === "start") {
     cardObj.container.prepend(card);
@@ -26,9 +28,9 @@ export function getCard(data, cardObg, userId, cbCard) {
 
   $like.addEventListener("click", (evt) => {
     if (isActive($like)) {
-      cbCard.onLikeCard($cardElement, $like, { act: "dislike" });
+      onLikeCard($cardElement, $like, { act: "dislike" });
     } else {
-      cbCard.onLikeCard($cardElement, $like, { act: "like" });
+      onLikeCard($cardElement, $like, { act: "like" });
     }
   });
   $delete.addEventListener("click", (evt) => {
@@ -78,4 +80,31 @@ export function toggleLike(button) {
 
 export function deleteCard($card) {
   $card.remove();
+}
+
+// BM JS/ Лайк карточки
+function onLikeCard(card, likeButton, opt) {
+  // запрос на удаление
+  if (opt.act === "dislike") {
+    api
+      .removeLike(card.id)
+      .then((res) => {
+        setCounter(res, card);
+        toggleLike(likeButton);
+      })
+      .catch((errData) => {
+        console.log(errData);
+      });
+  } else {
+    // запрос на установку
+    api
+      .addLike(card.id)
+      .then((res) => {
+        setCounter(res, card);
+        toggleLike(likeButton);
+      })
+      .catch((errData) => {
+        console.log(errData);
+      });
+  }
 }
