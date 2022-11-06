@@ -10,6 +10,8 @@ import {
   getDataForm,
   hideLoading,
   showLoading,
+  getButtonText,
+  setButtonText,
 } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
 import {
@@ -25,7 +27,13 @@ import {
   initJobData,
   initAvatarData,
 } from "../components/profile";
-import { getDataImage, initShow } from "./../components/modal";
+import {
+  getDataImage,
+  initShow,
+  activateModal,
+  closePopup,
+  openPopup,
+} from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,
@@ -35,6 +43,7 @@ import {
   validationOpt,
   modAvatarOpt,
   loadingOpt,
+  submitOpt,
 } from "./../components/options";
 
 //  ----------------------------------
@@ -47,12 +56,84 @@ const modAddPlace = getObj(modAddPlaceOpt);
 const modAvatar = getObj(modAvatarOpt);
 const cardObg = getObj(cardsOpt);
 const loadTarget = getObj(loadingOpt);
+let userId = "";
 showLoading(loadTarget);
+
+activateModal(onFormAction);
+
+// BM js/ глобальный обработчик форм
+function onFormAction(evt) {
+  switch (evt.target.id) {
+    // BM JS/Сохранение карточки
+    case submitOpt.onAddNewCard: {
+      let buttonText = getButtonText(modAddPlace.savebutton);
+      setButtonText("Сохранение...", modAddPlace.savebutton);
+      api
+        .saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt))
+        .then((newCard) => {
+          insertCard(
+            getCard(newCard, cardObg, userId, {
+              onLikeCard,
+              onDeleteCard,
+              onShow,
+            }),
+            cardObg,
+            { to: "start" }
+          );
+          setButtonText(buttonText, modAddPlace.savebutton);
+          closePopup(modAddPlace.modal, evt);
+        })
+        .catch((errData) => {
+          console.log(errData);
+        });
+
+      break;
+    }
+    // BM JS/ Сохранение профиля
+    case submitOpt.onChangeProfile: {
+      let buttonText = getButtonText(modUserProf.savebutton);
+      setButtonText("Сохранение...", modUserProf.savebutton);
+      const dataForm = getDataForm(modUserProf, modUserProfOpt);
+      api
+        .saveUserProfile(dataForm)
+        .then((newRemoteUserData) => {
+          renderUserProfile(newRemoteUserData, uiCtrl);
+          setButtonText(buttonText, modUserProf.savebutton);
+          closePopup(modUserProf.modal, evt);
+        })
+        .catch((errData) => {
+          console.log(errData);
+        });
+
+      break;
+    }
+    // BM js/ сохранение аватара профиля
+    case submitOpt.onChangeAvatar: {
+      let buttonText = getButtonText(modAvatar.savebutton);
+      setButtonText("Сохранение...", modAvatar.savebutton);
+
+      const avaData = getDataForm(modAvatar, modAvatarOpt);
+      api
+        .saveAvatar(avaData)
+        .then((answer) => {
+          renderUserProfile(answer, uiCtrl);
+          setButtonText(buttonText, modAvatar.savebutton);
+          closePopup(modAvatar.modal, evt);
+        })
+        .catch((errData) => {
+          console.log(errData);
+        });
+      console.log("Смена Авы");
+      break;
+    }
+  }
+}
 
 Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .then(([remoteProfile, cards]) => {
+    userId = remoteProfile._id;
     renderUserProfile(remoteProfile, uiCtrl);
-    renderCards(cards, cardObg, remoteProfile);
+    renderCards(cards, cardObg, userId);
   })
   .catch((errData) => {
     console.log(errData);
@@ -66,11 +147,11 @@ activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
 enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
-// BM js/ создание карточек
-function renderCards(arrCards, cardObg, remoteProfile) {
+// BM js/ глобальная функция создание карточек
+function renderCards(arrCards, cardObg, userId) {
   for (let data of arrCards) {
     insertCard(
-      getCard(data, cardObg, remoteProfile, {
+      getCard(data, cardObg, userId, {
         onLikeCard,
         onDeleteCard,
         onShow,
@@ -84,66 +165,24 @@ function renderCards(arrCards, cardObg, remoteProfile) {
 // BM js/ открытие модалки аватара
 function onChangeAvatar() {
   initAvatarData(uiCtrl, modAvatar);
-  initShow(modAvatar, {
-    type: "form",
-    cb: onSaveAvatar,
-    reset: false,
-  });
-}
-
-// BM js/ сохранение аватара профиля
-function onSaveAvatar(modAvatar, onComplete, evt) {
-  const avaData = getDataForm(modAvatar, modAvatarOpt);
-  api
-    .saveAvatar(avaData)
-    .then((answer) => {
-      onComplete(modAvatar, evt);
-      renderUserProfile(answer, uiCtrl);
-    })
-    .catch((errData) => {
-      console.log(errData);
-    });
+  openPopup(modAvatar.modal, { modal: modAvatar, reset: false });
 }
 
 // BM js/ просмотр изображений
 function onShow(name, url) {
   getDataImage(name, url, modImage);
-  initShow(modImage, { type: "simple" });
+  openPopup(modImage.modal, { modal: modImage, reset: false });
 }
 
 // BM js/ редактирование профиля
 function onEdit(modUserProf) {
-  // debugger;
   initJobData(uiCtrl, modUserProf);
-  initShow(modUserProf, {
-    type: "form",
-    cb: onSaveProfile,
-    reset: false,
-  });
-}
-
-// BM JS/ Сохранение профиля
-function onSaveProfile(modUserProf, onComplete, evt) {
-  // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
-  const dataForm = getDataForm(modUserProf, modUserProfOpt);
-  api
-    .saveUserProfile(dataForm)
-    .then((newRemoteUserData) => {
-      onComplete(modUserProf, evt);
-      renderUserProfile(newRemoteUserData, uiCtrl);
-    })
-    .catch((errData) => {
-      console.log(errData);
-    });
-
-  // debugger;
-  // renderUserProfile(userData, uiCtrl);
+  openPopup(modUserProf.modal, { modal: modUserProf, reset: false });
 }
 
 // BM JS/ Лайк карточки
 function onLikeCard(card, likeButton, opt) {
-  // const id = evt.target.closest.querySelector(".elements__item");
-
+  // запрос на удаление
   if (opt.act === "dislike") {
     api
       .removeLike(card.id)
@@ -154,7 +193,6 @@ function onLikeCard(card, likeButton, opt) {
       .catch((errData) => {
         console.log(errData);
       });
-    // запрос на удаление
   } else {
     // запрос на установку
     api
@@ -181,30 +219,7 @@ function onDeleteCard(card) {
     });
 }
 
-// BM JS/ Открытие модалки сохраниения карточки
+// BM JS/ Открытие модалки сохранения карточки
 function onAddCard(modAddPlace) {
-  initShow(modAddPlace, { type: "form", cb: onSaveCard, reset: true });
-}
-
-// BM JS/Сохранение карточки
-function onSaveCard(modAddPlace, onComplete, evt) {
-  Promise.all([
-    api.getServerData(api.profile),
-    api.saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt)),
-  ])
-    .then(([remoteProfile, newCard]) => {
-      onComplete(modAddPlace, evt);
-      insertCard(
-        getCard(newCard, cardObg, remoteProfile, {
-          onLikeCard,
-          onDeleteCard,
-          onShow,
-        }),
-        cardObg,
-        { to: "start" }
-      );
-    })
-    .catch((errData) => {
-      console.log(errData);
-    });
+  openPopup(modAddPlace.modal, { modal: modAddPlace, reset: true });
 }

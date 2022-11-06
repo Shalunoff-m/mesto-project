@@ -1,10 +1,3 @@
-/* export function renderCards(arrCards, profileData, onShow) {
-  for (let data of arrCards) {
-    const $newCard = getCard(data, profileData, toggleLike, deleteCard, onShow);
-    profileData.container.prepend($newCard);
-  }
-} */
-
 export function insertCard(card, cardObj, opt) {
   if (opt.to === "start") {
     cardObj.container.prepend(card);
@@ -14,7 +7,7 @@ export function insertCard(card, cardObj, opt) {
   }
 }
 
-export function getCard(data, cardObg, remoteProfile, cbCard) {
+export function getCard(data, cardObg, userId, cbCard) {
   const template = cardObg.template.content;
   // Клонируем элементы шаблона
   const $newCard = template.cloneNode(true);
@@ -32,36 +25,25 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
   $counter.textContent = data.likes.length;
 
   $like.addEventListener("click", (evt) => {
-    // cbLike($like);
-    // debugger;
     if (isActive($like)) {
       cbCard.onLikeCard($cardElement, $like, { act: "dislike" });
     } else {
       cbCard.onLikeCard($cardElement, $like, { act: "like" });
     }
-
-    // toggleLike($like);
   });
   $delete.addEventListener("click", (evt) => {
-    // cbDelete(evt, $cardElement);
     cbCard.onDeleteCard($cardElement);
-    // deleteCard(evt, $cardElement);
   });
   $image.addEventListener("click", () => {
-    const name = $name.textContent;
-    const url = $image.getAttribute("src");
-    cbCard.onShow(name, url);
+    cbCard.onShow(data.name, data.link);
   });
 
-  if (checkLike(data, remoteProfile)) {
+  if (checkLike(data, userId)) {
     toggleLike($like);
   }
-  if (!checkOwner(data, remoteProfile)) {
+  if (!checkOwner(data, userId)) {
     $delete.remove();
   }
-
-  // Назначаем параметры изображения
-
   return $newCard;
 }
 
@@ -77,19 +59,17 @@ export function setCounter(res, card) {
   count.textContent = res.likes.length;
 }
 
-function checkLike(data, remoteProfile) {
-  const { _id } = remoteProfile;
+function checkLike(data, userId) {
   const { likes } = data;
-  let answer = likes.some((like) => {
-    return like._id === _id;
+  const answer = likes.some((like) => {
+    return like._id === userId;
   });
   return answer;
 }
 
-function checkOwner(data, remoteProfile) {
-  const { _id } = remoteProfile;
+function checkOwner(data, userId) {
   const { owner } = data;
-  return owner._id === _id;
+  return owner._id === userId;
 }
 
 export function toggleLike(button) {

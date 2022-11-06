@@ -26,6 +26,12 @@
 //   },
 // ];
 
+export const submitOpt = {
+  onChangeAvatar: "popup-avatar",
+  onChangeProfile: "popupEditForm",
+  onAddNewCard: "popupNewPlace",
+};
+
 export const uiOpt = {
   base: document,
   elements: {

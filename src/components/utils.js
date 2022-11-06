@@ -64,3 +64,10 @@ export function hideLoading(loadTarget) {
   loadTarget.loadbar.classList.remove("content__loading_show");
   loadTarget.content.classList.remove("content_hidden");
 }
+
+export function getButtonText(button) {
+  return button.textContent;
+}
+export function setButtonText(text, button) {
+  button.textContent = text;
+}
