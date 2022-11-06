@@ -3,6 +3,7 @@
 import "./index.css";
 //  ----------------------------------
 // импорт js модулей
+// BM js/ глобальное подключение модулей
 
 import { api } from "./../components/api";
 import {
@@ -26,6 +27,7 @@ import {
   activateBt,
   initJobData,
   initAvatarData,
+  apiSaveAvatar,
 } from "../components/profile";
 import {
   getDataImage,
@@ -130,23 +132,13 @@ function onFormAction(evt) {
     }
     // BM js/ сохранение аватара профиля
     case submitOpt.onChangeAvatar: {
-      let buttonText = getButtonText(modAvatar.savebutton);
-      setButtonText("Сохранение...", modAvatar.savebutton);
-
-      const avaData = getDataForm(modAvatar, modAvatarOpt);
-      api
-        .saveAvatar(avaData)
-        .then((answer) => {
-          renderUserProfile(answer, uiCtrl);
-          closePopup(modAvatar.modal, evt);
-        })
-        .catch((errData) => {
-          console.log(errData);
-        })
-        .finally(() => {
-          setButtonText(buttonText, modAvatar.savebutton);
-        });
-      console.log("Смена Авы");
+      // функция запроса изменения в профиль
+      apiSaveAvatar({
+        evt: evt,
+        popup: modAvatar,
+        settings: modAvatarOpt,
+        ui: uiCtrl,
+      });
       break;
     }
   }
