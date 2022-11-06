@@ -70,6 +70,7 @@ export function enableValidate(validationOpt, ...arrModal) {
 
 // сброс всех полей формы
 export function resetForm(popup) {
+  // debugger;
   popup.form.reset();
   popup.savebutton.setAttribute("disabled", true);
 }

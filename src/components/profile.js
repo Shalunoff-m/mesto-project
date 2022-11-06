@@ -14,13 +14,6 @@ export function initJobData(uiCtrl, modUserProf) {
   modUserProf.job.value = uiCtrl.labelUserJob.textContent;
 }
 
-export function saveUserData(profile, userData) {
-  // debugger;
-  userData.name = profile.name;
-  userData.about = profile.about;
-  userData.avatar = profile.avatar;
-  userData.id = profile._id;
-  userData.cohort = profile.cohort;
-  // userData.name = data.name;
-  // userData.job = data.job;
+export function initAvatarData(uiCtrl, modAvatar) {
+  modAvatar.link.value = uiCtrl.photo.getAttribute("src");
 }

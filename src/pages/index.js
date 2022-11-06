@@ -18,7 +18,7 @@ import {
   renderUserProfile,
   activateBt,
   initJobData,
-  saveUserData,
+  initAvatarData,
 } from "../components/profile";
 import { getDataImage, initShow } from "./../components/modal";
 import {
@@ -61,7 +61,7 @@ activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
 // TODO Здесь нужно написать колбек инициализ окно аватарки и передать его, а в него передать ссылку на нынешний аватар
 /* Короче модалка есть, нужно написать обработчик на переброс активной ссылки, после чего написать АПИ запрос на обновление фото на сервере, и из ответа прорендерить новое фото на страницу */
-activateBt(uiCtrl.uiEditAvatarButton, onAddCard, modAvatar);
+activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
 enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
 // BM js/ создание карточек
@@ -79,6 +79,27 @@ function renderCards(arrCards, cardObg, remoteProfile) {
   }
 }
 
+// BM js/ открытие модалки аватара
+function onChangeAvatar() {
+  initAvatarData(uiCtrl, modAvatar);
+  initShow(modAvatar, {
+    type: "form",
+    cb: onSaveAvatar,
+    reset: false,
+  });
+}
+
+// BM js/ сохранение аватара профиля
+function onSaveAvatar() {
+  const avaData = getDataForm(modAvatar, modAvatarOpt);
+  // console.log(avaData);
+  api.saveAvatar(avaData).then((answer) => {
+    // console.log(answer);
+
+    renderUserProfile(answer, uiCtrl);
+  });
+}
+
 // BM js/ просмотр изображений
 function onShow(name, url) {
   getDataImage(name, url, modImage);
@@ -89,7 +110,11 @@ function onShow(name, url) {
 function onEdit(modUserProf) {
   // debugger;
   initJobData(uiCtrl, modUserProf);
-  initShow(modUserProf, { type: "form", cb: onSaveProfile, reset: false });
+  initShow(modUserProf, {
+    type: "form",
+    cb: onSaveProfile,
+    reset: false,
+  });
 }
 
 // BM JS/ Сохранение профиля

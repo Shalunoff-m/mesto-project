@@ -15,6 +15,7 @@ export const api = {
   deleteCard,
   addLike,
   removeLike,
+  saveAvatar,
 };
 
 function getServerData(opt) {
@@ -86,6 +87,21 @@ function saveNewCard(dataForm) {
     body: JSON.stringify({
       name: dataForm.name,
       link: dataForm.link,
+    }),
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+function saveAvatar(data) {
+  return fetch(`${address}/v1/${group}/${profile}/avatar`, {
+    method: "PATCH",
+    headers: {
+      authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      avatar: data.link,
     }),
   }).then((res) => {
     return res.json();

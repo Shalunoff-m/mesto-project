@@ -39,7 +39,7 @@ export const uiOpt = {
 };
 
 export const modAvatarOpt = {
-  base: document,
+  base: "#popup-avatar",
   elements: {
     modal: { key: "#popup-avatar", type: "base" },
     form: { key: "popup-avatar", type: "formMain" },
