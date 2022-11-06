@@ -34,7 +34,17 @@ export function initShow(popup, options) {
   // Функция обработки поведения формы
   function sendData(evt) {
     evt.preventDefault();
-    options.cb(popup);
+    onStartExchange(popup, options, evt);
+    // options.cb(popup);
+    // closePopup(evt);
+  }
+
+  function onStartExchange(popup, options, evt) {
+    popup.savebutton.textContent = "Сохранение...";
+    options.cb(popup, onComplete, evt);
+  }
+  function onComplete(modal, evt) {
+    modal.savebutton.textContent = "Сохранить";
     closePopup(evt);
   }
 

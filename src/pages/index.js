@@ -89,13 +89,22 @@ function onChangeAvatar() {
   });
 }
 
+/*
+function onSaveProfile(modUserProf, onComplete, evt) {
+  // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
+  const dataForm = getDataForm(modUserProf, modUserProfOpt);
+  api.saveUserProfile(dataForm).then((newRemoteUserData) => {
+    onComplete(modUserProf, evt);
+    console.log(newRemoteUserData);
+    renderUserProfile(newRemoteUserData, uiCtrl);
+  }); */
+
 // BM js/ сохранение аватара профиля
-function onSaveAvatar() {
+function onSaveAvatar(modAvatar, onComplete, evt) {
   const avaData = getDataForm(modAvatar, modAvatarOpt);
   // console.log(avaData);
   api.saveAvatar(avaData).then((answer) => {
-    // console.log(answer);
-
+    onComplete(modAvatar, evt);
     renderUserProfile(answer, uiCtrl);
   });
 }
@@ -118,10 +127,11 @@ function onEdit(modUserProf) {
 }
 
 // BM JS/ Сохранение профиля
-function onSaveProfile(modUserProf) {
+function onSaveProfile(modUserProf, onComplete, evt) {
   // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
   const dataForm = getDataForm(modUserProf, modUserProfOpt);
   api.saveUserProfile(dataForm).then((newRemoteUserData) => {
+    onComplete(modUserProf, evt);
     console.log(newRemoteUserData);
     renderUserProfile(newRemoteUserData, uiCtrl);
   });
@@ -163,11 +173,12 @@ function onAddCard(modAddPlace) {
 }
 
 // BM JS/Сохранение карточки
-function onSaveCard() {
+function onSaveCard(modAddPlace, onComplete, evt) {
   Promise.all([
     api.getServerData(api.profile),
     api.saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt)),
   ]).then(([remoteProfile, newCard]) => {
+    onComplete(modAddPlace, evt);
     insertCard(
       getCard(newCard, cardObg, remoteProfile, {
         onLikeCard,
