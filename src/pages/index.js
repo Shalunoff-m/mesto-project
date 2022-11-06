@@ -15,7 +15,7 @@ import {
   setButtonText,
 } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { getCard, insertCard, deleteCard } from "./../components/card";
+import { getCard, insertCard } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
@@ -135,7 +135,6 @@ function renderCards(arrCards, cardObg, userId) {
   for (let data of arrCards) {
     insertCard(
       getCard(data, cardObg, userId, {
-        onDeleteCard,
         onShow,
       }),
       cardObg,
@@ -160,18 +159,6 @@ function onShow(name, url) {
 function onEdit(modUserProf) {
   initJobData(uiCtrl, modUserProf);
   openPopup(modUserProf.modal, { modal: modUserProf, reset: false });
-}
-
-// BM JS/ Удаление карточки
-function onDeleteCard(card) {
-  api
-    .deleteCard(card.id)
-    .then(() => {
-      deleteCard(card);
-    })
-    .catch((errData) => {
-      console.log(errData);
-    });
 }
 
 // BM JS/ Открытие модалки сохранения карточки

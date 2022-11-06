@@ -34,7 +34,7 @@ export function getCard(data, cardObg, userId, cbCard) {
     }
   });
   $delete.addEventListener("click", (evt) => {
-    cbCard.onDeleteCard($cardElement);
+    onDeleteCard($cardElement);
   });
   $image.addEventListener("click", () => {
     cbCard.onShow(data.name, data.link);
@@ -107,4 +107,16 @@ function onLikeCard(card, likeButton, opt) {
         console.log(errData);
       });
   }
+}
+
+// BM JS/ Удаление карточки
+function onDeleteCard(card) {
+  api
+    .deleteCard(card.id)
+    .then(() => {
+      deleteCard(card);
+    })
+    .catch((errData) => {
+      console.log(errData);
+    });
 }
