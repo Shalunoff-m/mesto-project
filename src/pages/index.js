@@ -32,7 +32,6 @@ import {
   modUserProfOpt,
   modAddPlaceOpt,
   cardsOpt,
-  initialCards,
   validationOpt,
   modAvatarOpt,
   loadingOpt,
@@ -62,13 +61,8 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
     hideLoading(loadTarget);
   });
 
-//
-// api.getServerData(renderUserProfile, uiCtrl);
-
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
-// TODO Здесь нужно написать колбек инициализ окно аватарки и передать его, а в него передать ссылку на нынешний аватар
-/* Короче модалка есть, нужно написать обработчик на переброс активной ссылки, после чего написать АПИ запрос на обновление фото на сервере, и из ответа прорендерить новое фото на страницу */
 activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
 enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
@@ -174,7 +168,7 @@ function onLikeCard(card, likeButton, opt) {
       });
   }
 }
-// TODO Не хватает одного окна подтверждения удаления
+
 // BM JS/ Удаление карточки
 function onDeleteCard(card) {
   api

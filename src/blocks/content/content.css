@@ -1,8 +1,12 @@
 .content {
   font-family: "Inter", Verdana, sans-serif;
+  opacity: 100%;
+  visibility: visible;
   color: white;
   display: flex;
   flex-basis: 100%;
   flex-wrap: wrap;
   position: relative;
+  transition: opacity 0.5s, visibility 0.5s;
+
 }
