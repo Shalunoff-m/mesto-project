@@ -29,7 +29,6 @@ import {
 } from "../components/profile";
 import {
   getDataImage,
-  initShow,
   activateModal,
   closePopup,
   openPopup,
@@ -60,6 +59,24 @@ let userId = "";
 showLoading(loadTarget);
 
 activateModal(onFormAction);
+
+Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
+  .then(([remoteProfile, cards]) => {
+    userId = remoteProfile._id;
+    renderUserProfile(remoteProfile, uiCtrl);
+    renderCards(cards, cardObg, userId);
+  })
+  .catch((errData) => {
+    console.log(errData);
+  })
+  .finally(() => {
+    hideLoading(loadTarget);
+  });
+
+activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
+activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
+activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
+enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
 // BM js/ глобальный обработчик форм
 function onFormAction(evt) {
@@ -134,24 +151,6 @@ function onFormAction(evt) {
     }
   }
 }
-
-Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
-  .then(([remoteProfile, cards]) => {
-    userId = remoteProfile._id;
-    renderUserProfile(remoteProfile, uiCtrl);
-    renderCards(cards, cardObg, userId);
-  })
-  .catch((errData) => {
-    console.log(errData);
-  })
-  .finally(() => {
-    hideLoading(loadTarget);
-  });
-
-activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
-activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
-activateBt(uiCtrl.uiEditAvatarButton, onChangeAvatar, modAvatar);
-enableValidate(validationOpt, modUserProf, modAddPlace, modAvatar);
 
 // BM js/ глобальная функция создание карточек
 function renderCards(arrCards, cardObg, userId) {
