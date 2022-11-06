@@ -133,12 +133,12 @@ export function apiAddCard(opt) {
       insertCard(getCard(newCard, opt.cardData, opt.id, opt.cb), opt.cardData, {
         to: "start",
       });
+      closePopup(opt.popup.modal, opt.evt);
     })
     .catch((errData) => {
       console.log(errData);
     })
     .finally(() => {
       setButtonText(buttonText, opt.popup.savebutton);
-      closePopup(opt.popup.modal, opt.evt);
     });
 }
