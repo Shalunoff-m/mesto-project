@@ -111,6 +111,7 @@ export const validationOpt = {
   labelError: "basic-data-input__input-error_active",
   validInput: "Верно",
   savebutton: ".popup__submit",
+  input: ".basic-data-input__input",
   form: ".popup__form",
   popup: ".popup",
 };

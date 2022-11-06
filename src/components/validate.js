@@ -6,10 +6,15 @@ export function enableValidate(opt) {
   });
 
   function setEventListeners(form, bt) {
-    const inputList = Array.from(
-      form.querySelectorAll(".basic-data-input__input")
-    );
+    const inputList = Array.from(form.querySelectorAll(`${opt.input}`));
     toggleButtonState(inputList, bt);
+    //
+    form.addEventListener("reset", () => {
+      setTimeout(() => {
+        toggleButtonState(inputList, bt);
+      }, 0);
+    });
+    //
     inputList.forEach((input) => {
       input.addEventListener("input", () => {
         isValid(form, input);
