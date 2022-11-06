@@ -55,16 +55,6 @@ export function getDataForm(modal, opt) {
   return data;
 }
 
-export function showLoading(loadTarget) {
-  loadTarget.loadbar.classList.add("content__loading_show");
-  loadTarget.content.classList.add("content_hidden");
-}
-
-export function hideLoading(loadTarget) {
-  loadTarget.loadbar.classList.remove("content__loading_show");
-  loadTarget.content.classList.remove("content_hidden");
-}
-
 export function getButtonText(button) {
   return button.textContent;
 }

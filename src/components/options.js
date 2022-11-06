@@ -44,14 +44,6 @@ export const uiOpt = {
   },
 };
 
-export const loadingOpt = {
-  base: document,
-  elements: {
-    loadbar: { key: ".content__loading", type: "simple" },
-    content: { key: ".content", type: "simple" },
-  },
-};
-
 export const modAvatarOpt = {
   base: "#popup-avatar",
   elements: {

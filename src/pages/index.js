@@ -6,7 +6,7 @@ import "./index.css";
 // BM js/ глобальное подключение модулей
 
 import { api } from "./../components/api";
-import { getObj, hideLoading, showLoading } from "./../components/utils";
+import { getObj } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
 import { getCard, insertCard, apiAddCard } from "./../components/card";
 import {
@@ -26,7 +26,6 @@ import {
   cardsOpt,
   validationOpt,
   modAvatarOpt,
-  loadingOpt,
   submitOpt,
 } from "./../components/options";
 
@@ -39,9 +38,7 @@ const modUserProf = getObj(modUserProfOpt);
 const modAddPlace = getObj(modAddPlaceOpt);
 const modAvatar = getObj(modAvatarOpt);
 const cardObg = getObj(cardsOpt);
-const loadTarget = getObj(loadingOpt);
 let userId = "";
-showLoading(loadTarget);
 
 activateModal(onFormAction);
 
@@ -54,9 +51,7 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .catch((errData) => {
     console.log(errData);
   })
-  .finally(() => {
-    hideLoading(loadTarget);
-  });
+  .finally(() => {});
 
 activateBt(uiCtrl.uiEditButton, onEdit, modUserProf);
 activateBt(uiCtrl.uiAddCardButton, onAddCard, modAddPlace);
