@@ -28,6 +28,7 @@ import {
   initJobData,
   initAvatarData,
   apiSaveAvatar,
+  apiSaveProfile,
 } from "../components/profile";
 import {
   getDataImage,
@@ -112,21 +113,12 @@ function onFormAction(evt) {
     }
     // BM JS/ Сохранение профиля
     case submitOpt.onChangeProfile: {
-      let buttonText = getButtonText(modUserProf.savebutton);
-      setButtonText("Сохранение...", modUserProf.savebutton);
-      const dataForm = getDataForm(modUserProf, modUserProfOpt);
-      api
-        .saveUserProfile(dataForm)
-        .then((newRemoteUserData) => {
-          renderUserProfile(newRemoteUserData, uiCtrl);
-          closePopup(modUserProf.modal, evt);
-        })
-        .catch((errData) => {
-          console.log(errData);
-        })
-        .finally(() => {
-          setButtonText(buttonText, modUserProf.savebutton);
-        });
+      apiSaveProfile({
+        evt: evt,
+        popup: modUserProf,
+        settings: modUserProfOpt,
+        ui: uiCtrl,
+      });
 
       break;
     }

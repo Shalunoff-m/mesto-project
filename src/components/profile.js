@@ -42,3 +42,21 @@ export function apiSaveAvatar(opt) {
     });
   console.log("Смена Авы");
 }
+
+export function apiSaveProfile(opt) {
+  let buttonText = getButtonText(opt.popup.savebutton);
+  setButtonText("Сохранение...", opt.popup.savebutton);
+  const dataForm = getDataForm(opt.popup, opt.settings);
+  api
+    .saveUserProfile(dataForm)
+    .then((newRemoteUserData) => {
+      renderUserProfile(newRemoteUserData, opt.ui);
+      closePopup(opt.popup.modal, opt.evt);
+    })
+    .catch((errData) => {
+      console.log(errData);
+    })
+    .finally(() => {
+      setButtonText(buttonText, opt.popup.savebutton);
+    });
+}
