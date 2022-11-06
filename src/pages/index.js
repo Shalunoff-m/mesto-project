@@ -6,14 +6,7 @@ import "./index.css";
 // BM js/ глобальное подключение модулей
 
 import { api } from "./../components/api";
-import {
-  getObj,
-  getDataForm,
-  hideLoading,
-  showLoading,
-  getButtonText,
-  setButtonText,
-} from "./../components/utils";
+import { getObj, hideLoading, showLoading } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
 import { getCard, insertCard, apiAddCard } from "./../components/card";
 import {
@@ -24,12 +17,7 @@ import {
   apiSaveAvatar,
   apiSaveProfile,
 } from "../components/profile";
-import {
-  getDataImage,
-  activateModal,
-  closePopup,
-  openPopup,
-} from "./../components/modal";
+import { getDataImage, activateModal, openPopup } from "./../components/modal";
 import {
   uiOpt,
   modImageShowOpt,

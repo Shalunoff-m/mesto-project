@@ -2,7 +2,7 @@
 visibility: hidden;
 opacity: 0;
 position: absolute;
-width: 100%;
+max-width: 100%;
 height: 70vh;
 display: flex;
 justify-content: center;
