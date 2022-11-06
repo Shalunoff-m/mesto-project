@@ -10,10 +10,12 @@ export function getDataImage(name, url, modImage) {
 export function initShow(popup, options) {
   // берем элементы
   let form = false;
+  let formButtonText = "";
 
   const { closeButton, modal } = popup;
   if (options.type === "form") {
     form = popup.form;
+    formButtonText = popup.savebutton.textContent;
   }
 
   // вешаем слушатели
@@ -44,7 +46,7 @@ export function initShow(popup, options) {
     options.cb(popup, onComplete, evt);
   }
   function onComplete(modal, evt) {
-    modal.savebutton.textContent = "Сохранить";
+    modal.savebutton.textContent = formButtonText;
     closePopup(evt);
   }
 

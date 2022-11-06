@@ -5,7 +5,12 @@ import "./index.css";
 // импорт js модулей
 
 import { api } from "./../components/api";
-import { getObj, getDataForm } from "./../components/utils";
+import {
+  getObj,
+  getDataForm,
+  hideLoading,
+  showLoading,
+} from "./../components/utils";
 import { enableValidate } from "./../components/validate";
 import {
   getCard,
@@ -30,6 +35,7 @@ import {
   initialCards,
   validationOpt,
   modAvatarOpt,
+  loadingOpt,
 } from "./../components/options";
 
 //  ----------------------------------
@@ -41,6 +47,8 @@ const modUserProf = getObj(modUserProfOpt);
 const modAddPlace = getObj(modAddPlaceOpt);
 const modAvatar = getObj(modAvatarOpt);
 const cardObg = getObj(cardsOpt);
+const loadTarget = getObj(loadingOpt);
+showLoading(loadTarget);
 
 Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .then(([remoteProfile, cards]) => {
@@ -49,6 +57,9 @@ Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   })
   .catch((errData) => {
     console.log(errData);
+  })
+  .finally(() => {
+    hideLoading(loadTarget);
   });
 
 //
