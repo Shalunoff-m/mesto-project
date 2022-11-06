@@ -5,6 +5,7 @@ const profile = "users/me";
 const cards = "cards";
 const like = "likes";
 const avatar = "avatar";
+const baseUrl = `${address}/v1/${group}/`;
 export const api = {
   token,
   group,
@@ -20,7 +21,7 @@ export const api = {
 };
 
 function getServerData(opt) {
-  return fetch(`${address}/v1/${group}/${opt}`, {
+  return fetch(`${baseUrl}${opt}`, {
     headers: {
       authorization: token,
     },
@@ -28,7 +29,7 @@ function getServerData(opt) {
 }
 
 function deleteCard(id) {
-  return fetch(`${address}/v1/${group}/${cards}/${id}`, {
+  return fetch(`${baseUrl}${cards}/${id}`, {
     method: "DELETE",
     headers: {
       authorization: token,
@@ -37,7 +38,7 @@ function deleteCard(id) {
 }
 
 function addLike(id) {
-  return fetch(`${address}/v1/${group}/${cards}/${like}/${id}`, {
+  return fetch(`${baseUrl}${cards}/${like}/${id}`, {
     method: "PUT",
     headers: {
       authorization: token,
@@ -46,7 +47,7 @@ function addLike(id) {
 }
 
 function removeLike(id) {
-  return fetch(`${address}/v1/${group}/${cards}/${like}/${id}`, {
+  return fetch(`${baseUrl}${cards}/${like}/${id}`, {
     method: "DELETE",
     headers: {
       authorization: token,
@@ -55,7 +56,7 @@ function removeLike(id) {
 }
 
 function saveUserProfile(dataForm) {
-  return fetch(`${address}/v1/${group}/${profile}`, {
+  return fetch(`${baseUrl}${profile}`, {
     method: "PATCH",
     headers: {
       authorization: token,
@@ -69,7 +70,7 @@ function saveUserProfile(dataForm) {
 }
 
 function saveNewCard(dataForm) {
-  return fetch(`${address}/v1/${group}/${cards}`, {
+  return fetch(`${baseUrl}${cards}`, {
     method: "POST",
     headers: {
       authorization: token,
@@ -83,7 +84,7 @@ function saveNewCard(dataForm) {
 }
 
 function saveAvatar(data) {
-  return fetch(`${address}/v1/${group}/${profile}/${avatar}`, {
+  return fetch(`${baseUrl}${profile}/${avatar}`, {
     method: "PATCH",
     headers: {
       authorization: token,
