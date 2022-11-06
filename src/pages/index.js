@@ -80,11 +80,13 @@ function onFormAction(evt) {
             cardObg,
             { to: "start" }
           );
-          setButtonText(buttonText, modAddPlace.savebutton);
           closePopup(modAddPlace.modal, evt);
         })
         .catch((errData) => {
           console.log(errData);
+        })
+        .finally(() => {
+          setButtonText(buttonText, modAddPlace.savebutton);
         });
 
       break;
@@ -98,11 +100,13 @@ function onFormAction(evt) {
         .saveUserProfile(dataForm)
         .then((newRemoteUserData) => {
           renderUserProfile(newRemoteUserData, uiCtrl);
-          setButtonText(buttonText, modUserProf.savebutton);
           closePopup(modUserProf.modal, evt);
         })
         .catch((errData) => {
           console.log(errData);
+        })
+        .finally(() => {
+          setButtonText(buttonText, modUserProf.savebutton);
         });
 
       break;
@@ -117,11 +121,13 @@ function onFormAction(evt) {
         .saveAvatar(avaData)
         .then((answer) => {
           renderUserProfile(answer, uiCtrl);
-          setButtonText(buttonText, modAvatar.savebutton);
           closePopup(modAvatar.modal, evt);
         })
         .catch((errData) => {
           console.log(errData);
+        })
+        .finally(() => {
+          setButtonText(buttonText, modAvatar.savebutton);
         });
       console.log("Смена Авы");
       break;
