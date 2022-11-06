@@ -28,8 +28,6 @@ export const api = {
   saveAvatar,
 };
 
-// TODO js/ попробовать сделать универсальную функцию запроса
-
 function getServerData(opt) {
   return fetch(`${config.baseUrl}${opt}`, {
     headers: config.headers,
