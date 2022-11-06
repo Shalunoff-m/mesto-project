@@ -5,7 +5,15 @@ const profile = "users/me";
 const cards = "cards";
 const like = "likes";
 const avatar = "avatar";
-const baseUrl = `${address}/v1/${group}/`;
+
+const config = {
+  baseUrl: `${address}/v1/${group}/`,
+  headers: {
+    authorization: token,
+    "Content-Type": "application/json",
+  },
+};
+
 export const api = {
   token,
   group,
@@ -20,48 +28,39 @@ export const api = {
   saveAvatar,
 };
 
+// TODO js/ попробовать сделать универсальную функцию запроса
+
 function getServerData(opt) {
-  return fetch(`${baseUrl}${opt}`, {
-    headers: {
-      authorization: token,
-    },
+  return fetch(`${config.baseUrl}${opt}`, {
+    headers: config.headers,
   }).then(checkResponce);
 }
 
 function deleteCard(id) {
-  return fetch(`${baseUrl}${cards}/${id}`, {
+  return fetch(`${config.baseUrl}${cards}/${id}`, {
     method: "DELETE",
-    headers: {
-      authorization: token,
-    },
+    headers: config.headers,
   }).then(checkResponce);
 }
 
 function addLike(id) {
-  return fetch(`${baseUrl}${cards}/${like}/${id}`, {
+  return fetch(`${config.baseUrl}${cards}/${like}/${id}`, {
     method: "PUT",
-    headers: {
-      authorization: token,
-    },
+    headers: config.headers,
   }).then(checkResponce);
 }
 
 function removeLike(id) {
-  return fetch(`${baseUrl}${cards}/${like}/${id}`, {
+  return fetch(`${config.baseUrl}${cards}/${like}/${id}`, {
     method: "DELETE",
-    headers: {
-      authorization: token,
-    },
+    headers: config.headers,
   }).then(checkResponce);
 }
 
 function saveUserProfile(dataForm) {
-  return fetch(`${baseUrl}${profile}`, {
+  return fetch(`${config.baseUrl}${profile}`, {
     method: "PATCH",
-    headers: {
-      authorization: token,
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: dataForm.name,
       about: dataForm.job,
@@ -70,12 +69,9 @@ function saveUserProfile(dataForm) {
 }
 
 function saveNewCard(dataForm) {
-  return fetch(`${baseUrl}${cards}`, {
+  return fetch(`${config.baseUrl}${cards}`, {
     method: "POST",
-    headers: {
-      authorization: token,
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: dataForm.name,
       link: dataForm.link,
@@ -84,12 +80,9 @@ function saveNewCard(dataForm) {
 }
 
 function saveAvatar(data) {
-  return fetch(`${baseUrl}${profile}/${avatar}`, {
+  return fetch(`${config.baseUrl}${profile}/${avatar}`, {
     method: "PATCH",
-    headers: {
-      authorization: token,
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       avatar: data.link,
     }),
