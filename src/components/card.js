@@ -15,8 +15,6 @@ export function insertCard(card, cardObj, opt) {
 }
 
 export function getCard(data, cardObg, remoteProfile, cbCard) {
-  // console.log(data);
-  // console.log(remoteProfile);
   const template = cardObg.template.content;
   // Клонируем элементы шаблона
   const $newCard = template.cloneNode(true);
@@ -91,7 +89,6 @@ function checkLike(data, remoteProfile) {
 function checkOwner(data, remoteProfile) {
   const { _id } = remoteProfile;
   const { owner } = data;
-  // console.log(owner._id === _id);
   return owner._id === _id;
 }
 

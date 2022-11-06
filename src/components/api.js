@@ -4,6 +4,7 @@ const address = "https://nomoreparties.co";
 const profile = "users/me";
 const cards = "cards";
 const like = "likes";
+const avatar = "avatar";
 export const api = {
   token,
   group,
@@ -23,9 +24,7 @@ function getServerData(opt) {
     headers: {
       authorization: token,
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function deleteCard(id) {
@@ -34,9 +33,7 @@ function deleteCard(id) {
     headers: {
       authorization: token,
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function addLike(id) {
@@ -45,9 +42,7 @@ function addLike(id) {
     headers: {
       authorization: token,
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function removeLike(id) {
@@ -56,9 +51,7 @@ function removeLike(id) {
     headers: {
       authorization: token,
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function saveUserProfile(dataForm) {
@@ -72,9 +65,7 @@ function saveUserProfile(dataForm) {
       name: dataForm.name,
       about: dataForm.job,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function saveNewCard(dataForm) {
@@ -88,13 +79,11 @@ function saveNewCard(dataForm) {
       name: dataForm.name,
       link: dataForm.link,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then(checkResponce);
 }
 
 function saveAvatar(data) {
-  return fetch(`${address}/v1/${group}/${profile}/avatar`, {
+  return fetch(`${address}/v1/${group}/${profile}/${avatar}`, {
     method: "PATCH",
     headers: {
       authorization: token,
@@ -103,7 +92,12 @@ function saveAvatar(data) {
     body: JSON.stringify({
       avatar: data.link,
     }),
-  }).then((res) => {
+  }).then(checkResponce);
+}
+
+function checkResponce(res) {
+  if (res.ok) {
     return res.json();
-  });
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
 }

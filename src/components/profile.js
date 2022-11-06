@@ -1,5 +1,4 @@
 export function renderUserProfile(userData, uiCtrl) {
-  // console.log(userData);
   uiCtrl.labelUserName.textContent = userData.name;
   uiCtrl.labelUserJob.textContent = userData.about;
   uiCtrl.photo.setAttribute("src", userData.avatar);

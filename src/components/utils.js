@@ -7,8 +7,6 @@ export function getObj(options) {
   const $result = {};
   let $form = {};
   for (let elem in options.elements) {
-    // console.log(elem);
-    // options.elements.key.type
     if (options.elements[elem].type === "base") {
       $result[elem] = document.querySelector(`${options.elements[elem].key}`);
     }
@@ -45,7 +43,6 @@ export function getDataForm(modal, opt) {
 
   for (let item in opt.elements) {
     if (opt.elements[item].type === "formElement") {
-      //   console.log(data[item]);
       data[item] = opt.elements[item].key;
     }
   }

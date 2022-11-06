@@ -42,11 +42,8 @@ const modAddPlace = getObj(modAddPlaceOpt);
 const modAvatar = getObj(modAvatarOpt);
 const cardObg = getObj(cardsOpt);
 
-console.log(modAvatar);
-
 Promise.all([api.getServerData(api.profile), api.getServerData(api.cards)])
   .then(([remoteProfile, cards]) => {
-    // console.log(remoteProfile, cards);
     renderUserProfile(remoteProfile, uiCtrl);
     renderCards(cards, cardObg, remoteProfile);
   })
@@ -89,24 +86,18 @@ function onChangeAvatar() {
   });
 }
 
-/*
-function onSaveProfile(modUserProf, onComplete, evt) {
-  // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
-  const dataForm = getDataForm(modUserProf, modUserProfOpt);
-  api.saveUserProfile(dataForm).then((newRemoteUserData) => {
-    onComplete(modUserProf, evt);
-    console.log(newRemoteUserData);
-    renderUserProfile(newRemoteUserData, uiCtrl);
-  }); */
-
 // BM js/ сохранение аватара профиля
 function onSaveAvatar(modAvatar, onComplete, evt) {
   const avaData = getDataForm(modAvatar, modAvatarOpt);
-  // console.log(avaData);
-  api.saveAvatar(avaData).then((answer) => {
-    onComplete(modAvatar, evt);
-    renderUserProfile(answer, uiCtrl);
-  });
+  api
+    .saveAvatar(avaData)
+    .then((answer) => {
+      onComplete(modAvatar, evt);
+      renderUserProfile(answer, uiCtrl);
+    })
+    .catch((errData) => {
+      console.log(errData);
+    });
 }
 
 // BM js/ просмотр изображений
@@ -130,11 +121,15 @@ function onEdit(modUserProf) {
 function onSaveProfile(modUserProf, onComplete, evt) {
   // saveUserData(getDataForm(modUserProf, modUserProfOpt), userData);
   const dataForm = getDataForm(modUserProf, modUserProfOpt);
-  api.saveUserProfile(dataForm).then((newRemoteUserData) => {
-    onComplete(modUserProf, evt);
-    console.log(newRemoteUserData);
-    renderUserProfile(newRemoteUserData, uiCtrl);
-  });
+  api
+    .saveUserProfile(dataForm)
+    .then((newRemoteUserData) => {
+      onComplete(modUserProf, evt);
+      renderUserProfile(newRemoteUserData, uiCtrl);
+    })
+    .catch((errData) => {
+      console.log(errData);
+    });
 
   // debugger;
   // renderUserProfile(userData, uiCtrl);
@@ -145,26 +140,40 @@ function onLikeCard(card, likeButton, opt) {
   // const id = evt.target.closest.querySelector(".elements__item");
 
   if (opt.act === "dislike") {
-    api.removeLike(card.id).then((res) => {
-      setCounter(res, card);
-      toggleLike(likeButton);
-    });
+    api
+      .removeLike(card.id)
+      .then((res) => {
+        setCounter(res, card);
+        toggleLike(likeButton);
+      })
+      .catch((errData) => {
+        console.log(errData);
+      });
     // запрос на удаление
   } else {
     // запрос на установку
-    api.addLike(card.id).then((res) => {
-      setCounter(res, card);
-      toggleLike(likeButton);
-    });
+    api
+      .addLike(card.id)
+      .then((res) => {
+        setCounter(res, card);
+        toggleLike(likeButton);
+      })
+      .catch((errData) => {
+        console.log(errData);
+      });
   }
 }
 // TODO Не хватает одного окна подтверждения удаления
 // BM JS/ Удаление карточки
 function onDeleteCard(card) {
-  console.log("Попытка удаления");
-  api.deleteCard(card.id).then(() => {
-    deleteCard(card);
-  });
+  api
+    .deleteCard(card.id)
+    .then(() => {
+      deleteCard(card);
+    })
+    .catch((errData) => {
+      console.log(errData);
+    });
 }
 
 // BM JS/ Открытие модалки сохраниения карточки
@@ -177,16 +186,20 @@ function onSaveCard(modAddPlace, onComplete, evt) {
   Promise.all([
     api.getServerData(api.profile),
     api.saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt)),
-  ]).then(([remoteProfile, newCard]) => {
-    onComplete(modAddPlace, evt);
-    insertCard(
-      getCard(newCard, cardObg, remoteProfile, {
-        onLikeCard,
-        onDeleteCard,
-        onShow,
-      }),
-      cardObg,
-      { to: "start" }
-    );
-  });
+  ])
+    .then(([remoteProfile, newCard]) => {
+      onComplete(modAddPlace, evt);
+      insertCard(
+        getCard(newCard, cardObg, remoteProfile, {
+          onLikeCard,
+          onDeleteCard,
+          onShow,
+        }),
+        cardObg,
+        { to: "start" }
+      );
+    })
+    .catch((errData) => {
+      console.log(errData);
+    });
 }
