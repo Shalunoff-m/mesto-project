@@ -1,4 +1,6 @@
 import { api } from "./api";
+import { getButtonText, setButtonText, getDataForm } from "./utils";
+import { closePopup } from "./modal";
 
 export function insertCard(card, cardObj, opt) {
   if (opt.to === "start") {
@@ -37,7 +39,7 @@ export function getCard(data, cardObg, userId, cbCard) {
     onDeleteCard($cardElement);
   });
   $image.addEventListener("click", () => {
-    cbCard.onShow(data.name, data.link);
+    cbCard(data.name, data.link);
   });
 
   if (checkLike(data, userId)) {
@@ -118,5 +120,25 @@ function onDeleteCard(card) {
     })
     .catch((errData) => {
       console.log(errData);
+    });
+}
+
+export function apiAddCard(opt) {
+  console.log(opt);
+  let buttonText = getButtonText(opt.popup.savebutton);
+  setButtonText("Сохранение...", opt.popup.savebutton);
+  api
+    .saveNewCard(getDataForm(opt.popup, opt.settings))
+    .then((newCard) => {
+      insertCard(getCard(newCard, opt.cardData, opt.id, opt.cb), opt.cardData, {
+        to: "start",
+      });
+    })
+    .catch((errData) => {
+      console.log(errData);
+    })
+    .finally(() => {
+      setButtonText(buttonText, opt.popup.savebutton);
+      closePopup(opt.popup.modal, opt.evt);
     });
 }

@@ -15,7 +15,7 @@ import {
   setButtonText,
 } from "./../components/utils";
 import { enableValidate } from "./../components/validate";
-import { getCard, insertCard } from "./../components/card";
+import { getCard, insertCard, apiAddCard } from "./../components/card";
 import {
   renderUserProfile,
   activateBt,
@@ -80,29 +80,14 @@ function onFormAction(evt) {
   switch (evt.target.id) {
     // BM JS/Сохранение карточки
     case submitOpt.onAddNewCard: {
-      let buttonText = getButtonText(modAddPlace.savebutton);
-      setButtonText("Сохранение...", modAddPlace.savebutton);
-      api
-        .saveNewCard(getDataForm(modAddPlace, modAddPlaceOpt))
-        .then((newCard) => {
-          insertCard(
-            getCard(newCard, cardObg, userId, {
-              onLikeCard,
-              onDeleteCard,
-              onShow,
-            }),
-            cardObg,
-            { to: "start" }
-          );
-          closePopup(modAddPlace.modal, evt);
-        })
-        .catch((errData) => {
-          console.log(errData);
-        })
-        .finally(() => {
-          setButtonText(buttonText, modAddPlace.savebutton);
-        });
-
+      apiAddCard({
+        evt: evt,
+        popup: modAddPlace,
+        settings: modAddPlaceOpt,
+        cardData: cardObg,
+        id: userId,
+        cb: onShow,
+      });
       break;
     }
     // BM JS/ Сохранение профиля
@@ -133,13 +118,7 @@ function onFormAction(evt) {
 // BM js/ глобальная функция создание карточек
 function renderCards(arrCards, cardObg, userId) {
   for (let data of arrCards) {
-    insertCard(
-      getCard(data, cardObg, userId, {
-        onShow,
-      }),
-      cardObg,
-      { to: "end" }
-    );
+    insertCard(getCard(data, cardObg, userId, onShow), cardObg, { to: "end" });
   }
 }
 
@@ -156,7 +135,7 @@ function onShow(name, url) {
 }
 
 // BM js/ редактирование профиля
-function onEdit(modUserProf) {
+function onEdit() {
   initJobData(uiCtrl, modUserProf);
   openPopup(modUserProf.modal, { modal: modUserProf, reset: false });
 }
