@@ -19,15 +19,15 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
   // Клонируем элементы шаблона
   const $newCard = template.cloneNode(true);
   const $cardElement = $newCard.querySelector(".elements__item");
-  const $Name = $newCard.querySelector(".elements__caption");
-  const $Image = $newCard.querySelector(".elements__image");
+  const $name = $newCard.querySelector(".elements__caption");
+  const $image = $newCard.querySelector(".elements__image");
   const $like = $newCard.querySelector(".elements__like-button");
   const $counter = $newCard.querySelector(".elements__like-counter");
   const $delete = $newCard.querySelector(".elements__delete-button");
 
-  $Name.textContent = data.name;
-  $Image.setAttribute("src", data.link);
-  $Image.setAttribute("alt", data.name);
+  $name.textContent = data.name;
+  $image.setAttribute("src", data.link);
+  $image.setAttribute("alt", data.name);
   $cardElement.id = data._id;
   $counter.textContent = data.likes.length;
 
@@ -47,9 +47,9 @@ export function getCard(data, cardObg, remoteProfile, cbCard) {
     cbCard.onDeleteCard($cardElement);
     // deleteCard(evt, $cardElement);
   });
-  $Image.addEventListener("click", () => {
-    const name = $Name.textContent;
-    const url = $Image.getAttribute("src");
+  $image.addEventListener("click", () => {
+    const name = $name.textContent;
+    const url = $image.getAttribute("src");
     cbCard.onShow(name, url);
   });
 
