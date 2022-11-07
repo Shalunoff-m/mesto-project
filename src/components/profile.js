@@ -24,7 +24,7 @@ export function initAvatarData(uiCtrl, modAvatar) {
 export function apiSaveAvatar(opt) {
   console.log(opt.evt);
   // debugger;
-  let buttonText = getButtonText(opt.popup.savebutton);
+  const buttonText = getButtonText(opt.popup.savebutton);
   setButtonText("Сохранение...", opt.popup.savebutton);
 
   const avaData = getDataForm(opt.popup, opt.settings);
@@ -44,7 +44,7 @@ export function apiSaveAvatar(opt) {
 }
 
 export function apiSaveProfile(opt) {
-  let buttonText = getButtonText(opt.popup.savebutton);
+  const buttonText = getButtonText(opt.popup.savebutton);
   setButtonText("Сохранение...", opt.popup.savebutton);
   const dataForm = getDataForm(opt.popup, opt.settings);
   api

@@ -125,7 +125,7 @@ function onDeleteCard(card) {
 
 export function apiAddCard(opt) {
   console.log(opt);
-  let buttonText = getButtonText(opt.popup.savebutton);
+  const buttonText = getButtonText(opt.popup.savebutton);
   setButtonText("Сохранение...", opt.popup.savebutton);
   api
     .saveNewCard(getDataForm(opt.popup, opt.settings))
