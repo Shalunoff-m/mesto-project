@@ -127,3 +127,7 @@ function onEdit() {
 function onAddCard(modAddPlace) {
   openPopup(modAddPlace.modal, { modal: modAddPlace, reset: true });
 }
+
+function test {
+  console.log('Hello');
+}
