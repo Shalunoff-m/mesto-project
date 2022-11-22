@@ -1,15 +1,20 @@
-export function enableValidate(validationOpt, ...arrModal) {
-  //
-  arrModal.forEach((currentForm) => {
-    //
-    setEventListeners(currentForm.form, currentForm.savebutton);
+export function enableValidate(opt) {
+  document.querySelectorAll(`${opt.form}`).forEach((currentForm) => {
+    const popup = currentForm.closest(`${opt.popup}`);
+    const saveButton = popup.querySelector(`${opt.savebutton}`);
+    setEventListeners(currentForm, saveButton);
   });
 
   function setEventListeners(form, bt) {
-    const inputList = Array.from(
-      form.querySelectorAll(".basic-data-input__input")
-    );
+    const inputList = Array.from(form.querySelectorAll(`${opt.input}`));
     toggleButtonState(inputList, bt);
+    //
+    form.addEventListener("reset", () => {
+      setTimeout(() => {
+        toggleButtonState(inputList, bt);
+      }, 0);
+    });
+    //
     inputList.forEach((input) => {
       input.addEventListener("input", () => {
         isValid(form, input);
@@ -17,7 +22,6 @@ export function enableValidate(validationOpt, ...arrModal) {
       });
     });
   }
-
   function isValid(form, input) {
     let validationMS = input.validationMessage;
     if (input.validity.valueMissing) {
@@ -25,13 +29,11 @@ export function enableValidate(validationOpt, ...arrModal) {
     } else {
       validationMS = input.validationMessage;
     }
-
     if (input.validity.patternMismatch) {
       input.setCustomValidity(input.dataset.errorMessage);
     } else {
       input.setCustomValidity("");
     }
-
     if (!input.validity.valid) {
       showInputError(form, input, validationMS);
     } else {
@@ -55,22 +57,21 @@ export function enableValidate(validationOpt, ...arrModal) {
 
   function showInputError(form, input, error) {
     const formError = form.querySelector(`.${input.id}-error`);
-    input.classList.add(validationOpt.inputError);
-    formError.classList.add(validationOpt.labelError);
+    input.classList.add(opt.inputError);
+    formError.classList.add(opt.labelError);
     formError.textContent = error;
   }
 
   function hideInputError(form, input) {
     const formError = form.querySelector(`.${input.id}-error`);
-    input.classList.remove(validationOpt.inputError);
-    formError.classList.remove(validationOpt.labelError);
-    formError.textContent = validationOpt.validInput;
+    input.classList.remove(opt.inputError);
+    formError.classList.remove(opt.labelError);
+    formError.textContent = opt.validInput;
   }
 }
 
 // сброс всех полей формы
 export function resetForm(popup) {
-  // debugger;
   popup.form.reset();
   popup.savebutton.setAttribute("disabled", true);
 }

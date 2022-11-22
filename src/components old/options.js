@@ -26,6 +26,12 @@
 //   },
 // ];
 
+export const submitOpt = {
+  onChangeAvatar: "popup-avatar",
+  onChangeProfile: "popupEditForm",
+  onAddNewCard: "popupNewPlace",
+};
+
 export const uiOpt = {
   base: document,
   elements: {
@@ -35,14 +41,6 @@ export const uiOpt = {
     uiEditButton: { key: ".profile__edit-button", type: "simple" },
     uiAddCardButton: { key: ".profile__add-button", type: "simple" },
     uiEditAvatarButton: { key: ".profile__avatar", type: "simple" },
-  },
-};
-
-export const loadingOpt = {
-  base: document,
-  elements: {
-    loadbar: { key: ".content__loading", type: "simple" },
-    content: { key: ".content", type: "simple" },
   },
 };
 
@@ -104,4 +102,8 @@ export const validationOpt = {
   inputError: "basic-data-input__input_type_error",
   labelError: "basic-data-input__input-error_active",
   validInput: "Верно",
+  savebutton: ".popup__submit",
+  input: ".basic-data-input__input",
+  form: ".popup__form",
+  popup: ".popup",
 };
