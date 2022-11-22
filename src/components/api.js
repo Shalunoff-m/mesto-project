@@ -8,7 +8,24 @@ export class Api {
   };
   static baseUrl = `${this.address}/v1/${this.group}/`;
 
+  static setParametr(opt) {
+    this.token = opt.token;
+    this.group = opt.group;
+    this.address = opt.address;
+  }
+
   constructor() {}
+
+  // Просмотреть полученные данные в консоли
+  showData(data) {
+    console.log(data);
+  }
+
+  getInfo() {
+    console.log(this.constructor.token);
+    console.log(this.constructor.group);
+    console.log(this.constructor.address);
+  }
 
   // Публичный метод получения данных профиля
   getProfileData() {
@@ -79,11 +96,6 @@ export class Api {
         avatar: data.link,
       }),
     }).then(this._checkResponce);
-  }
-
-  // Просмотреть полученные данные в консоли
-  showData(data) {
-    console.log(data);
   }
 
   // Внутренний обработчик возвращаемых данных

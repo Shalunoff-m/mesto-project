@@ -9,12 +9,16 @@ import { Api } from "./../components/api";
 // Основной код
 
 // BM js/ Основной js код
+
+// Проверка перенастройки сервера
+// Api.setParametr({
+//   token: "269e9438-b227-400f-84a0-3e13cb6c82c577777",
+//   group: "plus-cohort-20",
+//   address: "https://nomorepartiesawdawd.co",
+// });
+
+// Создаем инстанс для работы с апи
 const api = new Api();
-api
-  .getCards()
-  .then((data) => {
-    api.showData(data);
-  })
-  .catch((errData) => {
-    api.showData(errData);
-  });
+
+// Запрос параметров соединения с сервером
+api.getInfo();
