@@ -5,6 +5,7 @@ import "./index.css";
 // импорт js модулей
 // BM js/ глобальное подключение модулей
 import { Api } from "./../components/api";
+import { Popup } from "../components/popup";
 //  ----------------------------------
 // Основной код
 
@@ -19,6 +20,14 @@ import { Api } from "./../components/api";
 
 // Создаем инстанс для работы с апи
 const api = new Api();
+const popupAvatar = new Popup("#popup-avatar");
+const popupNewPlace = new Popup("#popup-new-place");
+popupAvatar.show();
 
 // Запрос параметров соединения с сервером
 api.getInfo();
+document
+  .querySelector(".profile__add-button")
+  .addEventListener("click", (evt) => {
+    popupNewPlace.open();
+  });
