@@ -6,9 +6,9 @@ export class Popup {
     this._closeButton = this._modal.querySelector(
       this.constructor.closeBtnSelector
     );
-    this._handleClose = this._handleClose.bind(this);
+    // this._handleClose = this._handleClose.bind(this);
   }
-  // Метод для тестирования
+  // Метод для тестирования данных
   show() {
     console.log({ modal: this._modal, btn: this._closeButton });
   }
@@ -30,11 +30,11 @@ export class Popup {
     return false;
   }
 
-  _handleClose(evt) {
+  _handleClose = (evt) => {
     if (this._checkClick(evt)) {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     this._modal.addEventListener("mousedown", this._handleClose);

@@ -22,12 +22,12 @@ import { Popup } from "../components/popup";
 const api = new Api();
 const popupAvatar = new Popup("#popup-avatar");
 const popupNewPlace = new Popup("#popup-new-place");
-popupAvatar.show();
 
 // Запрос параметров соединения с сервером
 api.getInfo();
 document
   .querySelector(".profile__add-button")
   .addEventListener("click", (evt) => {
-    popupNewPlace.open();
+    // popupNewPlace.open();
+    popupAvatar.open();
   });
