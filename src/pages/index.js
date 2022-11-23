@@ -8,7 +8,6 @@ import { Api } from "./../components/api";
 import { Card } from "./../components/card";
 import { Section } from "../components/section";
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
-import { initialCards } from "../components/utils/constants.js"
 //  ----------------------------------
 // Основной код
 
@@ -22,7 +21,7 @@ import { initialCards } from "../components/utils/constants.js"
 // });
 
 // Создаем инстанс для работы с апи
-/* const api = new Api(); */
+const api = new Api();
 
 // Запрос параметров соединения с сервером
 api.getInfo();
@@ -62,9 +61,9 @@ const insertCard = (data) => {
   return cardElement;
 };
 
-// Экземпляр секции
+// Инстанс секции
 const section = new Section({
-    items: initialCards,
+    items: api.getCards(),
     renderer: (card) => {
         section.addItem(insertCard(card));
     },
