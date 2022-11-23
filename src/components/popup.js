@@ -81,8 +81,6 @@ export class PopupWithForm extends Popup {
     this._form = document.forms[formName];
   }
 
-  showData() {}
-
   _getInputValues() {
     const data = {};
     Array.from(this._form.querySelectorAll("input")).forEach((element) => {
