@@ -21,7 +21,7 @@ import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
 // });
 
 // Создаем инстанс для работы с апи
-/* const api = new Api(); */
+const api = new Api();
 
 // Запрос параметров соединения с сервером
 api.getInfo();
@@ -61,14 +61,13 @@ const insertCard = (data) => {
   return cardElement;
 };
 
+// Инстанс секции
 const section = new Section({
-    items: initialCards,
+    items: api.getCards(),
     renderer: (card) => {
         section.addItem(insertCard(card));
     },
 }, '.content__elements')
-
-// api.getInfo();
 
 // Проверка на просмотр карточки
 /* const popupImage = new PopupWithImage("#view-image");
