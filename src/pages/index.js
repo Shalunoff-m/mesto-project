@@ -69,8 +69,6 @@ const section = new Section({
     },
 }, '.content__elements')
 
-// api.getInfo();
-
 // Проверка на просмотр карточки
 /* const popupImage = new PopupWithImage("#view-image");
 document
