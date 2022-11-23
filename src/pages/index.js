@@ -33,7 +33,7 @@ const insertCard = (data) => {
     cardSelector: "#card",
     userId: userId,
     handleCardClick: (name, link) => {
-      //здесь функция обработчик на окрытие попапа
+      PopupWithImage.open(name, link);
     },
     onDeleteCard: (id) => {},
     setLike: (id) => {
