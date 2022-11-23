@@ -5,6 +5,7 @@ import "./index.css";
 // импорт js модулей
 // BM js/ глобальное подключение модулей
 import { Api } from "./../components/api";
+import { Card } from "./../components/card";
 //  ----------------------------------
 // Основной код
 
@@ -22,3 +23,39 @@ const api = new Api();
 
 // Запрос параметров соединения с сервером
 api.getInfo();
+
+//Создание новой карточки (привяжем к Section)
+const insertCard = (data) => {
+    const card = new Card({
+        data: data,
+        cardSelector: '#card',
+        userId: userId,
+        handleCardClick: (name,link) => {
+            //здесь функция обработчик на окрытие попапа
+        },
+        onDeleteCard: (id) => {
+
+        },
+        setLike: (id) => {
+            api.addLike(id)
+                .then((data)=>{
+                    card.handleCardLike(data);
+                })
+                .catch((err) => {
+                    console.log(`Ошибка: ${err}`);
+                });
+        },
+        removeLike: (id) => {
+            api.removeLike(id)
+                .then((data) => {
+                    card.handleCardLike(data);
+                })
+                .catch((err) => {
+                    console.log(`Ошибка: ${err}`);
+                });
+        }
+
+    })
+    const cardElement = card.getCard();
+    return cardElement;
+};
