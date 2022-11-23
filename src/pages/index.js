@@ -37,7 +37,13 @@ document
   }); */
 
 // Проверка модалки формы
-/* const popupNewPlace = new PopupWithForm("#popup-new-place", {
+
+// PopupWithForm.reset({
+//   closeBtnSelector: "popup__close2",
+//   showPopupSelector: "popup2_opened",
+// });
+
+const popupNewPlace = new PopupWithForm("#popup-new-place", {
   formName: "popupNewPlace",
   handler: (data) => {
     console.log(data);
@@ -49,4 +55,4 @@ document
   .querySelector(".profile__add-button")
   .addEventListener("click", (evt) => {
     popupNewPlace.open();
-  }); */
+  });

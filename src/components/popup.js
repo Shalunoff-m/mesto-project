@@ -1,16 +1,20 @@
 export class Popup {
-  static closeBtnSelector = ".popup__close";
+  static closeBtnSelector = "popup__close";
+  static showPopupSelector = "popup_opened";
+
+  // статическая функция перенастройки класса
+  static reset(opt) {
+    this.closeBtnSelector = opt.closeBtnSelector;
+    this.showPopupSelector = opt.showPopupSelector;
+  }
 
   constructor(selector) {
     this._modal = document.querySelector(selector);
-    this._closeButton = this._modal.querySelector(
-      this.constructor.closeBtnSelector
-    );
   }
 
   open() {
     this._setKeyListener();
-    this._modal.classList.add("popup_opened");
+    this._modal.classList.add(this.constructor.showPopupSelector);
   }
 
   close() {
@@ -19,7 +23,8 @@ export class Popup {
   }
 
   _checkClick(evt) {
-    if (evt.target.classList.contains("popup__close")) return true;
+    if (evt.target.classList.contains(this.constructor.closeBtnSelector))
+      return true;
     if (evt.target.classList.contains("popup")) return true;
     if (evt.key === "Escape") return true;
     if (evt.type === "submit") return true;
