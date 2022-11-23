@@ -6,6 +6,7 @@ import "./index.css";
 // BM js/ глобальное подключение модулей
 import { Api } from "./../components/api";
 import { Card } from "./../components/card";
+import { Section } from "../components/section";
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
 //  ----------------------------------
 // Основной код
@@ -25,7 +26,7 @@ import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
 // Запрос параметров соединения с сервером
 api.getInfo();
 
-//Создание новой карточки (привяжем к Section)
+// Создание новой карточки
 const insertCard = (data) => {
   const card = new Card({
     data: data,
@@ -59,6 +60,14 @@ const insertCard = (data) => {
   const cardElement = card.getCard();
   return cardElement;
 };
+
+const section = new Section({
+    items: initialCards,
+    renderer: (card) => {
+        section.addItem(insertCard(card));
+    },
+}, '.content__elements')
+
 // api.getInfo();
 
 // Проверка на просмотр карточки
