@@ -8,27 +8,27 @@ export class Popup {
     );
   }
 
-  // Метод для тестирования данных
-  show() {
-    console.log({ modal: this._modal, btn: this._closeButton });
-  }
-
   open() {
-    this.setEventListeners();
+    this._setKeyListener();
     this._modal.classList.add("popup_opened");
   }
 
   close() {
     this._modal.classList.remove("popup_opened");
-    this._removeEventListeners();
+    this._removeKeyListener();
   }
 
   _checkClick(evt) {
     if (evt.target.classList.contains("popup__close")) return true;
     if (evt.target.classList.contains("popup")) return true;
     if (evt.key === "Escape") return true;
+    if (evt.type === "submit") return true;
     return false;
   }
+
+  handleEscClose = (evt) => {
+    this._handleClose(evt);
+  };
 
   _handleClose = (evt) => {
     if (this._checkClick(evt)) {
@@ -36,16 +36,20 @@ export class Popup {
     }
   };
 
-  setEventListeners() {
-    this._modal.addEventListener("mousedown", this._handleClose);
-    document.addEventListener("keydown", this._handleClose);
+  _setKeyListener() {
+    document.addEventListener("keydown", this.handleEscClose);
   }
 
-  _removeEventListeners() {
-    document.removeEventListener("keydown", this._handleClose);
+  _removeKeyListener() {
+    document.removeEventListener("keydown", this.handleEscClose);
+  }
+
+  setEventListeners() {
+    this._modal.addEventListener("mousedown", this._handleClose);
   }
 }
 
+// Попап с картинкой -----------------------------------------------
 export class PopupWithImage extends Popup {
   static imageSelector = ".popup__image";
   static textSelector = ".popup__imageName";
@@ -62,8 +66,38 @@ export class PopupWithImage extends Popup {
     this._text.textContent = text;
     super.open();
   }
+}
 
-  showData() {
-    console.log({ image: this._image, text: this._text });
+// Попап с формой -----------------------------------------------
+export class PopupWithForm extends Popup {
+  constructor(selector, { formName, handler }) {
+    super(selector);
+    this._formHandler = handler;
+    this._form = document.forms[formName];
+  }
+
+  showData() {}
+
+  _getInputValues() {
+    const data = {};
+    Array.from(this._form.querySelectorAll("input")).forEach((element) => {
+      data[element.name] = element.value;
+      // console.log(element);
+    });
+    return data;
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+    this._form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      this._formHandler(this._getInputValues());
+      this._handleClose(evt);
+    });
+  }
+
+  close() {
+    super.close();
+    this._form.reset();
   }
 }
