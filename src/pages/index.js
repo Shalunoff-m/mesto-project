@@ -19,14 +19,14 @@ import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
 // });
 
 // Создаем инстанс для работы с апи
-const api = new Api();
+/* const api = new Api(); */
 
 // Запрос параметров соединения с сервером
 // api.getInfo();
 
 // Проверка на просмотр карточки
-const popupImage = new PopupWithImage("#view-image");
-/* document
+/* const popupImage = new PopupWithImage("#view-image");
+document
   .querySelector(".profile__add-button")
   .addEventListener("click", (evt) => {
     // popupNewPlace.open();
@@ -36,7 +36,8 @@ const popupImage = new PopupWithImage("#view-image");
     });
   }); */
 
-const popupNewPlace = new PopupWithForm("#popup-new-place", {
+// Проверка модалки формы
+/* const popupNewPlace = new PopupWithForm("#popup-new-place", {
   formName: "popupNewPlace",
   handler: (data) => {
     console.log(data);
@@ -48,6 +49,4 @@ document
   .querySelector(".profile__add-button")
   .addEventListener("click", (evt) => {
     popupNewPlace.open();
-  });
-
-// Проверка модалки формы
+  }); */
