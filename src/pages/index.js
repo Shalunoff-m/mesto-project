@@ -8,6 +8,7 @@ import { Api } from "./../components/api";
 import { Card } from "./../components/card";
 import { Section } from "../components/section";
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
+import { initialCards } from "../components/utils/constants.js"
 //  ----------------------------------
 // Основной код
 
@@ -61,6 +62,7 @@ const insertCard = (data) => {
   return cardElement;
 };
 
+// Экземпляр секции
 const section = new Section({
     items: initialCards,
     renderer: (card) => {
