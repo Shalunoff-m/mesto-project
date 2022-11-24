@@ -22,7 +22,11 @@
           aria-label="Профиль пользователя"
         >
           <div class="profile__avatar">
-            <img src="" class="profile__photo" alt="Фото Профиля" />
+            <img
+              src="https://images.unsplash.com/photo-1669178082499-341906b2ab28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=445&q=80"
+              class="profile__photo"
+              alt="Фото Профиля"
+            />
           </div>
           <div class="profile__profile-info">
             <div class="profile__row">
@@ -152,7 +156,7 @@
       <div class="popup__container">
         <h2 class="popup__header">Обновить аватар</h2>
         <form
-          id="popup-avatar"
+          id="popup-avatar-form"
           name="popup-avatar"
           class="popup__form"
           action="#"
@@ -163,7 +167,7 @@
               required
               type="url"
               class="basic-data-input__input"
-              name="link"
+              name="avatar"
               id="avatar-link"
               value=""
               placeholder="Вставьте ссылку на изображение профиля"

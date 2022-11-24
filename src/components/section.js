@@ -1,15 +1,16 @@
 export class Section {
-    constructor({items, renderer}, cardSelector) {
-        this._items = items;
-        this._renderer = renderer;
-        this._container = document.querySelector(cardSelector);
-    }
+  constructor({ items, renderer }, cardSelector) {
+    this._items = items;
+    this._renderer = renderer;
+    this._container = document.querySelector(cardSelector);
+  }
 
-    renderItems() {
-        this._items.forEach(this._renderer);
-    }
+  renderItems() {
+    this._items.forEach(this._renderer);
+  }
 
-    addItem() {
-        this._container.prepend(element);
-    }
+  // FIXME Скорее всего здесь не хватает аргумента при передаче
+  addItem() {
+    this._container.prepend(element);
+  }
 }
