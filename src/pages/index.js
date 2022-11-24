@@ -7,7 +7,9 @@ import "./index.css";
 import { Api } from "./../components/api";
 import { Card } from "./../components/card";
 import { Section } from "../components/section";
+import { FormValidator } from "./../components/FormValidator"
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
+import { settings } from "./../components/utils/constants"
 //  ----------------------------------
 // Основной код
 
