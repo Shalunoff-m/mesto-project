@@ -37,18 +37,20 @@ const cardSection = new Section(
             console.log("Была попытка просмотра изображений");
           },
           onlike: (id) => {
-            // [x] Сделано
-            console.log(id);
+            // [ ]
             api.addLike(id).then((newData) => {
-              card.checkLike(newData);
+              card.setCounter(newData.likes);
+              card.toggleLike();
+              console.log("Был успешный лайк");
             });
-            console.log("Был лайк");
           },
           onDislike: (id) => {
-            // [x] Сделано
-            console.log(id);
+            // [ ]
+
             api.removeLike(id).then((newData) => {
-              card.checkLike(newData);
+              card.setCounter(newData.likes);
+              card.toggleLike();
+              console.log("Был успешный дизлайк");
             });
           },
           onDelete: () => {
