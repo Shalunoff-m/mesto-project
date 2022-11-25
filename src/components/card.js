@@ -67,11 +67,11 @@ export class Card {
     });
 
     this._image.addEventListener("click", () => {
-      this._onClick();
+      this._onClick({ src: this._link, text: this._name });
     });
 
     this._deleteButton.addEventListener("click", () => {
-      this._onDelete();
+      this._onDelete(this._id);
     });
   }
 
