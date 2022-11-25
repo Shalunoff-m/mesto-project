@@ -18,7 +18,6 @@ import { UserInfo } from "../components/UserInfo";
 //  ----------------------------------
 // Основной код
 
-// Объявляем инстансы
 // Активация апи
 const api = new Api();
 
@@ -26,24 +25,66 @@ const api = new Api();
 const popupPhotoShow = new PopupWithImage("#view-image");
 popupPhotoShow.setEventListeners();
 
+// Создание и активация окна аватара
+const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
+  formName: "popup-avatar",
+  handler: (data) => {
+    popupAvatarEdit.setButtonName("Сохранение...");
+    api.saveAvatar(data).then((newProfileData) => {
+      userInfo.setUserInfo(newProfileData);
+      popupAvatarEdit.restoreButtonName();
+    });
+    console.log(data);
+  },
+});
+popupAvatarEdit.setEventListeners();
+
 // Создание и активация окна новой карточки
 const popupNewCard = new PopupWithForm("#popup-new-place", {
   formName: "popupNewPlace",
   handler: (data) => {
+    popupNewCard.setButtonName("Сохранение...");
     api.saveNewCard(data).then((newCardData) => {
       cardSection.renderItem(newCardData);
+      popupNewCard.restoreButtonName();
     });
     console.log(data);
   },
 });
 popupNewCard.setEventListeners();
 
+// Создание и активация окна профиля
+const popupUserInfo = new PopupWithForm("#popup-edit-job", {
+  formName: "popupEditForm",
+  handler: (data) => {
+    popupUserInfo.setButtonName("Сохранение...");
+    api.saveUserdata(data).then((newUserData) => {
+      userInfo.setUserInfo(newUserData);
+      popupUserInfo.restoreButtonName();
+    });
+    console.log(data);
+  },
+});
+popupUserInfo.setEventListeners();
+
 // Активация кнопок интерфейса
 activeElement({
   selector: UIButtons.addCard,
   handler: () => {
     popupNewCard.open();
-    console.log("press add button");
+  },
+});
+activeElement({
+  selector: UIButtons.editInfo,
+  handler: () => {
+    popupUserInfo.open(userInfo.getUserInfo());
+  },
+});
+activeElement({
+  selector: UIButtons.changeAvatar,
+  handler: () => {
+    // console.log("Click ava");
+    popupAvatarEdit.open(userInfo.getUserInfo());
   },
 });
 

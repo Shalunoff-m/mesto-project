@@ -8,7 +8,7 @@ export const settings = {
 export const UIButtons = {
   editInfo: ".profile__edit-button",
   addCard: ".profile__add-button",
-  changeAvatar: ".profile__photo",
+  changeAvatar: ".profile__avatar",
 };
 
 export function activeElement({ selector, handler }) {
