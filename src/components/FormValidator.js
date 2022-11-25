@@ -21,10 +21,10 @@ export class FormValidator {
     };
 
     toggleButtonState() {
-        if (hasInvalidInput(inputList)) {
-            this._bt.disabled = true;
+        if (this._hasInvalidInput()) {
+            this._submitButton.disabled = true;
           } else {
-            this._bt.disabled = false;
+            this._submitButton.disabled = false;
           }
     }
 

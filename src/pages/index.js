@@ -7,9 +7,10 @@ import "./index.css";
 import { Api } from "./../components/api";
 import { Card } from "./../components/card";
 import { Section } from "../components/section";
-import { FormValidator } from "./../components/FormValidator"
+import { FormValidator } from "./../components/FormValidator";
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
-import { settings } from "./../components/utils/constants"
+import { settings } from "./../components/utils/constants";
+import { UserInfo } from "../components/UserInfo";
 //  ----------------------------------
 // Основной код
 
@@ -24,9 +25,37 @@ import { settings } from "./../components/utils/constants"
 
 // Создаем инстанс для работы с апи
 const api = new Api();
+const userInfo = new UserInfo({
+  name: "profile__name",
+  job: "profile__job",
+  photo: "profile__photo",
+});
+
+// TODO Решить как лучше внедрять Api, непосредственно передать сам метод Апи, или все таки вызывать метод из индекса, а его данные передавать методу.
+api.getProfileData().then((data) => {
+  userInfo.setUserInfo(data);
+  // console.log();
+});
+
+const popupAvatar = new PopupWithForm("#popup-avatar", {
+  formName: "popup-avatar-form",
+  handler: (data) => {
+    // console.log(data);
+    api.saveAvatar(data).then((newData) => {
+      userInfo.setUserInfo(newData);
+    });
+  },
+});
+popupAvatar.setEventListeners();
+
+document
+  .querySelector(".profile__add-button")
+  .addEventListener("click", (evt) => {
+    popupAvatar.open(userInfo.getUserInfo());
+  });
 
 // Запрос параметров соединения с сервером
-api.getInfo();
+// api.getInfo();
 
 // Создание новой карточки
 const insertCard = (data) => {
@@ -64,12 +93,15 @@ const insertCard = (data) => {
 };
 
 // Инстанс секции
-const section = new Section({
+const section = new Section(
+  {
     items: api.getCards(),
     renderer: (card) => {
-        section.addItem(insertCard(card));
+      section.addItem(insertCard(card));
     },
-}, '.content__elements')
+  },
+  ".content__elements"
+);
 
 // Проверка на просмотр карточки
 /* const popupImage = new PopupWithImage("#view-image");
@@ -89,17 +121,3 @@ document
 //   closeBtnSelector: "popup__close2",
 //   showPopupSelector: "popup2_opened",
 // });
-
-const popupNewPlace = new PopupWithForm("#popup-new-place", {
-  formName: "popupNewPlace",
-  handler: (data) => {
-    console.log(data);
-  },
-});
-popupNewPlace.setEventListeners();
-
-document
-  .querySelector(".profile__add-button")
-  .addEventListener("click", (evt) => {
-    popupNewPlace.open();
-  });

@@ -99,6 +99,20 @@ export class PopupWithForm extends Popup {
     });
   }
 
+  open(data) {
+    if (data) {
+      this._setFormData(data);
+    }
+    super.open();
+  }
+
+  _setFormData(data) {
+    // debugger;
+    Array.from(this._form.elements).forEach((element) => {
+      element.value = data[element.name];
+    });
+  }
+
   close() {
     super.close();
     this._form.reset();

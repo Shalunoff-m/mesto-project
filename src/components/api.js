@@ -93,7 +93,7 @@ export class Api {
       method: "PATCH",
       headers: this.constructor.headers,
       body: JSON.stringify({
-        avatar: data.link,
+        avatar: data.avatar,
       }),
     }).then(this._checkResponce);
   }
