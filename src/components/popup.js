@@ -75,10 +75,31 @@ export class PopupWithImage extends Popup {
 
 // Попап с формой -----------------------------------------------
 export class PopupWithForm extends Popup {
+  static submitButton = "popup__submit";
+
   constructor(selector, { formName, handler }) {
     super(selector);
     this._formHandler = handler;
     this._form = document.forms[formName];
+    this._submitButton = this._form.querySelector(
+      `.${this.constructor.submitButton}`
+    );
+    this._buttonName = this._submitButton.textContent;
+  }
+
+  // Сохранение названия кнопки
+  saveButtonName() {
+    this._buttonName = this._submitButton.textContent;
+  }
+
+  // Установка нового текста на кнопке
+  setButtonName(text) {
+    this._submitButton.textContent = text;
+  }
+
+  // Восстановление названия кнопки из хранилища
+  restoreButtonName() {
+    this._submitButton.textContent = this._buttonName;
   }
 
   _getInputValues() {

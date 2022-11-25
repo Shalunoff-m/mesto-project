@@ -47,6 +47,9 @@ const popupAvatar = new PopupWithForm("#popup-avatar", {
   },
 });
 popupAvatar.setEventListeners();
+popupAvatar.saveButtonName();
+popupAvatar.setButtonName("Прыщ");
+popupAvatar.restoreButtonName();
 
 document
   .querySelector(".profile__add-button")
