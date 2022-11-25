@@ -87,11 +87,6 @@ export class PopupWithForm extends Popup {
     this._buttonName = this._submitButton.textContent;
   }
 
-  // Сохранение названия кнопки
-  saveButtonName() {
-    this._buttonName = this._submitButton.textContent;
-  }
-
   // Установка нового текста на кнопке
   setButtonName(text) {
     this._submitButton.textContent = text;
