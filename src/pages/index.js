@@ -36,6 +36,9 @@ const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
     api.saveAvatar(data).then((newProfileData) => {
       userInfo.setUserInfo(newProfileData);
       popupAvatarEdit.restoreButtonName();
+    })
+    .catch((error) => {
+      console.log(error);
     });
     console.log(data);
   },
@@ -50,6 +53,9 @@ const popupNewCard = new PopupWithForm("#popup-new-place", {
     api.saveNewCard(data).then((newCardData) => {
       cardSection.renderItem(newCardData);
       popupNewCard.restoreButtonName();
+    })
+    .catch((error) => {
+      console.log(error);
     });
     console.log(data);
   },
@@ -64,6 +70,9 @@ const popupUserInfo = new PopupWithForm("#popup-edit-job", {
     api.saveUserdata(data).then((newUserData) => {
       userInfo.setUserInfo(newUserData);
       popupUserInfo.restoreButtonName();
+    })
+    .catch((error) => {
+      console.log(error);
     });
     console.log(data);
   },
