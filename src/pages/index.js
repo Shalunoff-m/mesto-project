@@ -13,6 +13,9 @@ import {
   settings,
   activeElement,
   UIButtons,
+  popupAddCard,
+  popupEditAvatar,
+  popupEditProfile
 } from "./../components/utils/constants";
 import { UserInfo } from "../components/UserInfo";
 //  ----------------------------------
@@ -145,5 +148,13 @@ Promise.all([api.getProfileData(), api.getCards()]).then(
     cardSection.renderItems(cards);
 
     // const card = new Card();
-  }
+  };
+
+//Валидация
+const editProfileValidator = new FormValidator(settings, popupEditProfile);
+editProfileValidator.enableValidation();
+const addCardValidator = new FormValidator(settings, popupAddCard);
+addCardValidator.enableValidation();
+const editAvatarValidator = new FormValidator(settings, popupEditAvatar);
+editAvatarValidator.enableValidation();
 );

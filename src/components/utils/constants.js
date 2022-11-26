@@ -15,4 +15,8 @@ export function activeElement({ selector, handler }) {
   document.querySelector(selector).addEventListener("mousedown", () => {
     handler();
   });
-}
+};
+
+export const popupEditProfile = document.querySelector('#popup-edit-job');
+export const popupAddCard = document.querySelector('#popup-new-place');
+export const popupEditAvatar = document.querySelector('#popup-avatar');
