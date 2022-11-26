@@ -94,19 +94,21 @@ activeElement({
   selector: UIButtons.addCard,
   handler: () => {
     popupNewCard.open();
+    addCardValidator.toggleButtonState();
   },
 });
 activeElement({
   selector: UIButtons.editInfo,
   handler: () => {
     popupUserInfo.open(userInfo.getUserInfo());
+    editProfileValidator.toggleButtonState();
   },
 });
 activeElement({
   selector: UIButtons.changeAvatar,
   handler: () => {
-    // console.log("Click ava");
     popupAvatarEdit.open(userInfo.getUserInfo());
+    editAvatarValidator.toggleButtonState();
   },
 });
 
