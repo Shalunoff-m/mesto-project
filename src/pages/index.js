@@ -38,11 +38,13 @@ const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
       .saveAvatar(data)
       .then((newProfileData) => {
         userInfo.setUserInfo(newProfileData);
-        popupAvatarEdit.restoreButtonName();
         popupAvatarEdit.close();
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        popupAvatarEdit.restoreButtonName();
       });
     console.log(data);
   },
@@ -58,11 +60,13 @@ const popupNewCard = new PopupWithForm("#popup-new-place", {
       .saveNewCard(data)
       .then((newCardData) => {
         cardSection.renderItem(newCardData);
-        popupNewCard.restoreButtonName();
         popupNewCard.close();
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        popupNewCard.restoreButtonName();
       });
     console.log(data);
   },
@@ -78,11 +82,13 @@ const popupUserInfo = new PopupWithForm("#popup-edit-job", {
       .saveUserdata(data)
       .then((newUserData) => {
         userInfo.setUserInfo(newUserData);
-        popupUserInfo.restoreButtonName();
         popupUserInfo.close();
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        popupUserInfo.restoreButtonName();
       });
     console.log(data);
   },
