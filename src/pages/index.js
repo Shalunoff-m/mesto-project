@@ -8,14 +8,14 @@ import { Api } from "./../components/api";
 import { Card } from "./../components/card";
 import { Section } from "../components/section";
 import { FormValidator } from "./../components/FormValidator";
-import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
+import { PopupWithImage, PopupWithForm } from "../components/popup";
 import {
   settings,
   activeElement,
   UIButtons,
   popupAddCard,
   popupEditAvatar,
-  popupEditProfile
+  popupEditProfile,
 } from "./../components/utils/constants";
 import { UserInfo } from "../components/UserInfo";
 //  ----------------------------------
@@ -149,8 +149,8 @@ Promise.all([api.getProfileData(), api.getCards()]).then(
 
     // const card = new Card();
   }
-  );
-  
+);
+
 //Валидация
 const editProfileValidator = new FormValidator(settings, popupEditProfile);
 editProfileValidator.enableValidation();
