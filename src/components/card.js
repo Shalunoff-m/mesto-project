@@ -51,7 +51,7 @@ export class Card {
     this._checkDeleteButton();
 
     this._checklike();
-    console.log(this._data);
+    // console.log(this._data);
 
     return this._element;
   }
