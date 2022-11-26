@@ -39,6 +39,7 @@ const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
       .then((newProfileData) => {
         userInfo.setUserInfo(newProfileData);
         popupAvatarEdit.restoreButtonName();
+        popupAvatarEdit.close();
       })
       .catch((error) => {
         console.log(error);
@@ -58,6 +59,7 @@ const popupNewCard = new PopupWithForm("#popup-new-place", {
       .then((newCardData) => {
         cardSection.renderItem(newCardData);
         popupNewCard.restoreButtonName();
+        popupNewCard.close();
       })
       .catch((error) => {
         console.log(error);
@@ -77,6 +79,7 @@ const popupUserInfo = new PopupWithForm("#popup-edit-job", {
       .then((newUserData) => {
         userInfo.setUserInfo(newUserData);
         popupUserInfo.restoreButtonName();
+        popupUserInfo.close();
       })
       .catch((error) => {
         console.log(error);
