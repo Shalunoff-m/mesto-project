@@ -33,13 +33,15 @@ const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
   formName: "popup-avatar",
   handler: (data) => {
     popupAvatarEdit.setButtonName("Сохранение...");
-    api.saveAvatar(data).then((newProfileData) => {
-      userInfo.setUserInfo(newProfileData);
-      popupAvatarEdit.restoreButtonName();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    api
+      .saveAvatar(data)
+      .then((newProfileData) => {
+        userInfo.setUserInfo(newProfileData);
+        popupAvatarEdit.restoreButtonName();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(data);
   },
 });
@@ -50,13 +52,15 @@ const popupNewCard = new PopupWithForm("#popup-new-place", {
   formName: "popupNewPlace",
   handler: (data) => {
     popupNewCard.setButtonName("Сохранение...");
-    api.saveNewCard(data).then((newCardData) => {
-      cardSection.renderItem(newCardData);
-      popupNewCard.restoreButtonName();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    api
+      .saveNewCard(data)
+      .then((newCardData) => {
+        cardSection.renderItem(newCardData);
+        popupNewCard.restoreButtonName();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(data);
   },
 });
@@ -67,13 +71,15 @@ const popupUserInfo = new PopupWithForm("#popup-edit-job", {
   formName: "popupEditForm",
   handler: (data) => {
     popupUserInfo.setButtonName("Сохранение...");
-    api.saveUserdata(data).then((newUserData) => {
-      userInfo.setUserInfo(newUserData);
-      popupUserInfo.restoreButtonName();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    api
+      .saveUserdata(data)
+      .then((newUserData) => {
+        userInfo.setUserInfo(newUserData);
+        popupUserInfo.restoreButtonName();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(data);
   },
 });
@@ -121,35 +127,38 @@ const cardSection = new Section(
             //console.log("Была попытка просмотра изображений");
           },
           onlike: (id) => {
-            api.addLike(id)
-            .then((newData) => {
-              card.setCounter(newData.likes);
-              card.toggleLike();
-              //console.log("Был успешный лайк");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            api
+              .addLike(id)
+              .then((newData) => {
+                card.setCounter(newData.likes);
+                card.toggleLike();
+                //console.log("Был успешный лайк");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           },
           onDislike: (id) => {
-            api.removeLike(id)
-            .then((newData) => {
-              card.setCounter(newData.likes);
-              card.toggleLike();
-              //console.log("Был успешный дизлайк");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            api
+              .removeLike(id)
+              .then((newData) => {
+                card.setCounter(newData.likes);
+                card.toggleLike();
+                //console.log("Был успешный дизлайк");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           },
           onDelete: (id) => {
-            api.deleteCard(id)
-            .then(() => {
-              card.deleteCard();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            api
+              .deleteCard(id)
+              .then(() => {
+                card.deleteCard();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           },
         }
       );
@@ -161,14 +170,16 @@ const cardSection = new Section(
 );
 
 // Забираем с сервера предварительные данные для работы
-Promise.all([api.getProfileData(), api.getCards()]).then(
-  ([profileData, cards]) => {
+Promise.all([api.getProfileData(), api.getCards()])
+  .then(([profileData, cards]) => {
     userInfo.setUserInfo(profileData);
     cardSection.renderItems(cards);
 
     // const card = new Card();
-  }
-);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 //Валидация
 const editProfileValidator = new FormValidator(settings, popupEditProfile);
