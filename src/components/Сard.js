@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(
     { data, template, id },
     { onClick, onlike, onDislike, onDelete } // onImageClick, // onDeleteCard, // setLike, // removeLike

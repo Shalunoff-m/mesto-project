@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
     this._formElement = formElement;
@@ -61,16 +61,16 @@ export class FormValidator {
     // debugger;
     const formError = this._formElement.querySelector(`.${input.id}-error`);
     // console.log(formError);
-    input.classList.add(this._settings.inputError.slice(1));
-    formError.classList.add(this._settings.labelError.slice(1));
+    input.classList.add(this._settings.inputError);
+    formError.classList.add(this._settings.labelError);
     formError.textContent = error;
   }
 
   _hideInputError(input) {
     // debugger;
     const formError = this._formElement.querySelector(`.${input.id}-error`);
-    input.classList.remove(this._settings.inputError.slice(1));
-    formError.classList.remove(this._settings.labelError.slice(1));
+    input.classList.remove(this._settings.inputError);
+    formError.classList.remove(this._settings.labelError);
     formError.textContent = "Информация";
   }
 

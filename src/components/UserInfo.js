@@ -1,4 +1,4 @@
-export class UserInfo {
+export default class UserInfo {
   // 'селектор элемента имени пользователя','селектор информации о себе'
   constructor({ name, job, photo }) {
     this._nameElement = document.querySelector(`.${name}`);

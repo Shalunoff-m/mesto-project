@@ -1,4 +1,4 @@
-export class Api {
+export default class Api {
   static token = "269e9438-b227-400f-84a0-3e13cb6c82c5";
   static group = "plus-cohort-16";
   static address = "https://nomoreparties.co";
