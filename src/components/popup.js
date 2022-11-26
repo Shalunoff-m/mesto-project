@@ -1,4 +1,4 @@
-export class Popup {
+export default class Popup {
   static closeBtnSelector = "popup__close";
   static showPopupSelector = "popup_opened";
 
@@ -51,86 +51,5 @@ export class Popup {
 
   setEventListeners() {
     this._modal.addEventListener("mousedown", this._handleClose);
-  }
-}
-
-// Попап с картинкой -----------------------------------------------
-export class PopupWithImage extends Popup {
-  static imageSelector = ".popup__image";
-  static textSelector = ".popup__imageName";
-
-  constructor(selector) {
-    super(selector);
-    this._image = this._modal.querySelector(this.constructor.imageSelector);
-    this._text = this._modal.querySelector(this.constructor.textSelector);
-  }
-
-  open({ src, text }) {
-    this._image.setAttribute("src", src);
-    this._image.setAttribute("alt", text);
-    this._text.textContent = text;
-    super.open();
-  }
-}
-
-// Попап с формой -----------------------------------------------
-export class PopupWithForm extends Popup {
-  static submitButton = "popup__submit";
-
-  constructor(selector, { formName, handler }) {
-    super(selector);
-    this._formHandler = handler;
-    this._form = document.forms[formName];
-    this._submitButton = this._form.querySelector(
-      `.${this.constructor.submitButton}`
-    );
-    this._buttonName = this._submitButton.textContent;
-  }
-
-  // Установка нового текста на кнопке
-  setButtonName(text) {
-    this._submitButton.textContent = text;
-  }
-
-  // Восстановление названия кнопки из хранилища
-  restoreButtonName() {
-    this._submitButton.textContent = this._buttonName;
-  }
-
-  _getInputValues() {
-    const data = {};
-    Array.from(this._form.querySelectorAll("input")).forEach((element) => {
-      data[element.name] = element.value;
-      // console.log(element);
-    });
-    return data;
-  }
-
-  setEventListeners() {
-    super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._formHandler(this._getInputValues());
-      this._handleClose(evt);
-    });
-  }
-
-  open(data) {
-    if (data) {
-      this._setFormData(data);
-    }
-    super.open();
-  }
-
-  _setFormData(data) {
-    // debugger;
-    Array.from(this._form.elements).forEach((element) => {
-      element.value = data[element.name];
-    });
-  }
-
-  close() {
-    super.close();
-    this._form.reset();
   }
 }

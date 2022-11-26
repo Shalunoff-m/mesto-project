@@ -4,11 +4,12 @@ import "./index.css";
 //  ----------------------------------
 // импорт js модулей
 // BM js/ глобальное подключение модулей
-import { Api } from "./../components/api";
-import { Card } from "./../components/card";
-import { Section } from "../components/section";
-import { FormValidator } from "./../components/FormValidator";
-import { PopupWithImage, PopupWithForm } from "../components/popup";
+import Api from "../components/Api";
+import Card from "../components/Сard";
+import Section from "../components/Section";
+import FormValidator from "../components/FormValidator";
+import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
 import {
   settings,
   activeElement,
@@ -17,7 +18,7 @@ import {
   popupEditAvatar,
   popupEditProfile,
 } from "./../components/utils/constants";
-import { UserInfo } from "../components/UserInfo";
+import UserInfo from "../components/UserInfo";
 //  ----------------------------------
 // Основной код
 
