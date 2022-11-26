@@ -9,115 +9,141 @@ import { Card } from "./../components/card";
 import { Section } from "../components/section";
 import { FormValidator } from "./../components/FormValidator";
 import { Popup, PopupWithImage, PopupWithForm } from "../components/popup";
-import { settings } from "./../components/utils/constants";
+import {
+  settings,
+  activeElement,
+  UIButtons,
+} from "./../components/utils/constants";
 import { UserInfo } from "../components/UserInfo";
 //  ----------------------------------
 // Основной код
 
-// BM js/ Основной js код
-
-// Проверка перенастройки сервера
-// Api.setParametr({
-//   token: "269e9438-b227-400f-84a0-3e13cb6c82c577777",
-//   group: "plus-cohort-20",
-//   address: "https://nomorepartiesawdawd.co",
-// });
-
-// Создаем инстанс для работы с апи
+// Активация апи
 const api = new Api();
+
+// Создание и активация окна просмотра изображений
+const popupPhotoShow = new PopupWithImage("#view-image");
+popupPhotoShow.setEventListeners();
+
+// Создание и активация окна аватара
+const popupAvatarEdit = new PopupWithForm("#popup-avatar", {
+  formName: "popup-avatar",
+  handler: (data) => {
+    popupAvatarEdit.setButtonName("Сохранение...");
+    api.saveAvatar(data).then((newProfileData) => {
+      userInfo.setUserInfo(newProfileData);
+      popupAvatarEdit.restoreButtonName();
+    });
+    console.log(data);
+  },
+});
+popupAvatarEdit.setEventListeners();
+
+// Создание и активация окна новой карточки
+const popupNewCard = new PopupWithForm("#popup-new-place", {
+  formName: "popupNewPlace",
+  handler: (data) => {
+    popupNewCard.setButtonName("Сохранение...");
+    api.saveNewCard(data).then((newCardData) => {
+      cardSection.renderItem(newCardData);
+      popupNewCard.restoreButtonName();
+    });
+    console.log(data);
+  },
+});
+popupNewCard.setEventListeners();
+
+// Создание и активация окна профиля
+const popupUserInfo = new PopupWithForm("#popup-edit-job", {
+  formName: "popupEditForm",
+  handler: (data) => {
+    popupUserInfo.setButtonName("Сохранение...");
+    api.saveUserdata(data).then((newUserData) => {
+      userInfo.setUserInfo(newUserData);
+      popupUserInfo.restoreButtonName();
+    });
+    console.log(data);
+  },
+});
+popupUserInfo.setEventListeners();
+
+// Активация кнопок интерфейса
+activeElement({
+  selector: UIButtons.addCard,
+  handler: () => {
+    popupNewCard.open();
+  },
+});
+activeElement({
+  selector: UIButtons.editInfo,
+  handler: () => {
+    popupUserInfo.open(userInfo.getUserInfo());
+  },
+});
+activeElement({
+  selector: UIButtons.changeAvatar,
+  handler: () => {
+    // console.log("Click ava");
+    popupAvatarEdit.open(userInfo.getUserInfo());
+  },
+});
+
 const userInfo = new UserInfo({
   name: "profile__name",
   job: "profile__job",
   photo: "profile__photo",
 });
-
-// TODO Решить как лучше внедрять Api, непосредственно передать сам метод Апи, или все таки вызывать метод из индекса, а его данные передавать методу.
-api.getProfileData().then((data) => {
-  userInfo.setUserInfo(data);
-  // console.log();
-});
-
-const popupAvatar = new PopupWithForm("#popup-avatar", {
-  formName: "popup-avatar-form",
-  handler: (data) => {
-    // console.log(data);
-    api.saveAvatar(data).then((newData) => {
-      userInfo.setUserInfo(newData);
-    });
-  },
-});
-popupAvatar.setEventListeners();
-
-document
-  .querySelector(".profile__add-button")
-  .addEventListener("click", (evt) => {
-    popupAvatar.open(userInfo.getUserInfo());
-  });
-
-// Запрос параметров соединения с сервером
-// api.getInfo();
-
-// Создание новой карточки
-const insertCard = (data) => {
-  const card = new Card({
-    data: data,
-    cardSelector: "#card",
-    userId: userId,
-    handleCardClick: (name, link) => {
-      PopupWithImage.open(name, link);
-    },
-    onDeleteCard: (id) => {},
-    setLike: (id) => {
-      api
-        .addLike(id)
-        .then((data) => {
-          card.handleCardLike(data);
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    },
-    removeLike: (id) => {
-      api
-        .removeLike(id)
-        .then((data) => {
-          card.handleCardLike(data);
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    },
-  });
-  const cardElement = card.getCard();
-  return cardElement;
-};
-
-// Инстанс секции
-const section = new Section(
+const cardSection = new Section(
   {
-    items: api.getCards(),
-    renderer: (card) => {
-      section.addItem(insertCard(card));
+    renderer: ({ item, position }) => {
+      const card = new Card(
+        {
+          // Параметры создания карты
+          data: item,
+          template: "#card",
+          id: userInfo.getUserInfo().id,
+        },
+        {
+          onClick: (opt) => {
+            popupPhotoShow.open(opt);
+            console.log("Была попытка просмотра изображений");
+          },
+          onlike: (id) => {
+            api.addLike(id).then((newData) => {
+              card.setCounter(newData.likes);
+              card.toggleLike();
+              console.log("Был успешный лайк");
+            });
+          },
+          onDislike: (id) => {
+            api.removeLike(id).then((newData) => {
+              card.setCounter(newData.likes);
+              card.toggleLike();
+              console.log("Был успешный дизлайк");
+            });
+          },
+          onDelete: (id) => {
+            api.deleteCard(id).then(() => {
+              card.deleteCard();
+            });
+
+            console.log("Была попытка удаления");
+          },
+        }
+      );
+      const cardElement = card.getCard();
+      cardSection.addItem(cardElement, position);
     },
   },
-  ".content__elements"
+  ".elements__list"
 );
 
-// Проверка на просмотр карточки
-/* const popupImage = new PopupWithImage("#view-image");
-document
-  .querySelector(".profile__add-button")
-  .addEventListener("click", (evt) => {
-    // popupNewPlace.open();
-    popupImage.open({
-      src: "https://images.unsplash.com/photo-1669023030485-573b6a75ab64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
-      text: "Какой-то дом",
-    });
-  }); */
+// Забираем с сервера предварительные данные для работы
+Promise.all([api.getProfileData(), api.getCards()]).then(
+  ([profileData, cards]) => {
+    userInfo.setUserInfo(profileData);
+    cardSection.renderItems(cards);
 
-// Проверка модалки формы
-
-// PopupWithForm.reset({
-//   closeBtnSelector: "popup__close2",
-//   showPopupSelector: "popup2_opened",
-// });
+    // const card = new Card();
+  }
+);

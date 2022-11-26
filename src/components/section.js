@@ -1,16 +1,26 @@
 export class Section {
-  constructor({ items, renderer }, cardSelector) {
-    this._items = items;
+  constructor({ renderer }, containerSelector) {
     this._renderer = renderer;
-    this._container = document.querySelector(cardSelector);
+    this._container = document.querySelector(containerSelector);
   }
 
-  renderItems() {
-    this._items.forEach(this._renderer);
+  renderItems(items) {
+    this._items = items;
+    this._items.forEach((item) => {
+      this._renderer({ item: item, position: "end" });
+    });
   }
 
-  // FIXME Скорее всего здесь не хватает аргумента при передаче
-  addItem() {
-    this._container.prepend(element);
+  renderItem(item) {
+    this._renderer({ item: item, position: "start" });
+  }
+
+  addItem(element, type) {
+    if (type === "start") {
+      this._container.prepend(element);
+    }
+    if (type === "end") {
+      this._container.append(element);
+    }
   }
 }
