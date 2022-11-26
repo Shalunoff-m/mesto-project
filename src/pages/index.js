@@ -109,28 +109,38 @@ const cardSection = new Section(
         {
           onClick: (opt) => {
             popupPhotoShow.open(opt);
-            console.log("Была попытка просмотра изображений");
+            //console.log("Была попытка просмотра изображений");
           },
           onlike: (id) => {
-            api.addLike(id).then((newData) => {
+            api.addLike(id)
+            .then((newData) => {
               card.setCounter(newData.likes);
               card.toggleLike();
-              console.log("Был успешный лайк");
+              //console.log("Был успешный лайк");
+            })
+            .catch((error) => {
+              console.log(error);
             });
           },
           onDislike: (id) => {
-            api.removeLike(id).then((newData) => {
+            api.removeLike(id)
+            .then((newData) => {
               card.setCounter(newData.likes);
               card.toggleLike();
-              console.log("Был успешный дизлайк");
+              //console.log("Был успешный дизлайк");
+            })
+            .catch((error) => {
+              console.log(error);
             });
           },
           onDelete: (id) => {
-            api.deleteCard(id).then(() => {
+            api.deleteCard(id)
+            .then(() => {
               card.deleteCard();
+            })
+            .catch((error) => {
+              console.log(error);
             });
-
-            console.log("Была попытка удаления");
           },
         }
       );
